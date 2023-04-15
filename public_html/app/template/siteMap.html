@@ -1,0 +1,47 @@
+<div class="eaContent">
+  <div class="container-fluid">
+    <div>    
+        <h1>SiteMap
+            <button ng-show="getUrlParam()==='Admin'" type="button" ng-click="downloadSiteMaps()" class="btn btn-light">
+                <i class="bi-download" style="font-size: 1.6rem; color: #21a828;"></i>
+            </button>
+        </h1>
+        <ul class="sitemap">    
+          <spam ng-repeat="nav in naviList">  
+            <li class="sitemap-item"
+                ng-show="nav.subm.length===0">
+                <a  class="sitemap" 
+                    ng-href="{{nav.href}}">{{nav.label}}</a>
+            </li>       
+            <li ng-show="nav.subm.length>0"
+                class="sitemap-item">      
+                <a class="sitemap dropdown-toggle" 
+                    ng-href="{{nav.href}}" id="{{nav.id}}">{{nav.label}}</a>                
+                <ul class="sitemap-menu">                        
+                    <spam ng-repeat="submenu in nav.subm"> 
+                        <li class="sitemap-item"
+                            ng-show="submenu.subm===undefined" >
+                            <a class="sitemap" 
+                                ng-href="{{submenu.href}}">{{submenu.label}}</a> 
+                        </li>
+                        <li class="sitemap-item"
+                            ng-show="submenu.subm!==undefined"> 
+                            <a class="sitemap dropdown-toggle" 
+                                ng-href="{{submenu.href}}" id="{{submenu.id}}">{{submenu.label}}</a>                
+                            <ul class="sitemap-menu">
+                                <spam ng-repeat="sb in submenu.subm">
+                                    <li ng-show="sb.subm===undefined">
+                                        <a class="sitemap-item"
+                                            ng-href="{{sb.href}}">{{sb.label}}</a> 
+                                    </li>
+                                </spam>
+                            </ul>
+                        </li>
+                    </spam> 
+                </ul>                
+            </li>
+          </spam> 
+        </ul>
+    </div>
+  </div>
+</div>

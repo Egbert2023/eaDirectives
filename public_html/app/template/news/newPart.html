@@ -1,0 +1,54 @@
+<div>
+    <h2>{{title}}</h2>
+    <div ng-repeat="n in news">
+        <a class='eaNoDeco' href='' ng-click='setVisible(this)'>
+            <h3>{{n.title}} 
+                <span class='eaSwitch' ng-show='vis_{{$index+1}}'>-</span>
+                <span class='eaSwitch' ng-show='!vis_{{$index+1}}'>+</span>
+            </h3>
+        </a>
+        <div ng-show='!vis_{{$index+1}}'>{{n.txtShort}}</div>
+        <div ng-show='vis_{{$index+1}}'>
+            <div class="eaLinkPath">{{n.newFrom}}</div>
+
+            <div ng-show='n.body.length !== 0 && n.img.length !== 0' >
+                <div ng-repeat="nn in n.body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div>
+                                <div ea-img  data-img="{{n.img[$index]}}" data-alt="{{n.imgBody[$index]}}"></div>
+                            </div>                                
+                            <div id="new_{{$index}}" class="eaImgBody">
+                                {{n.imgBody[$index]}}
+                            </div>                        
+                        </div>    
+                        <div class="col-lg-6">
+                            {{nn}}
+                        </div>
+                    </div>
+                </div>
+            </div>                
+
+            <div ng-show='n.body.length === 0 && n.img.length !== 0' >
+                <div ng-repeat="p in n.img">
+                    <div ea-img  data-img="{{p}}" data-alt="{{n.imgBody[$index]}}"></div>
+                    <div class="eaImgBody">
+                        {{n.imgBody[$index]}}
+                    </div>                        
+                </div>
+            </div>
+
+            <div ng-show='n.body.length !== 0 && n.img.length === 0'>
+                <div ng-repeat="b in n.body">
+                    {{b}}
+                </div>
+            </div>
+
+            <div ng-show="n.href !== ''" >
+                <br />
+                <div ea-add-html="{{n.href}}"></div> 
+            </div>
+        </div>
+        <hr />                
+    </div>    
+</div>

@@ -1,0 +1,24 @@
+<div id="modalCookies" style="display: none;" class="modal">
+<!--<div id="modalCookies" ng-show="showCookies" class="modal">-->
+    <div class="eaCard">
+        <div class="modal-inner" style="padding-left: 2px; padding-right: 2px">
+            <h1>{{title}}</h1>
+            <div>
+                {{body}}
+            </div>
+            
+            <div class="row" id="eaInnerCookies"></div>
+                    
+            <hr />
+            
+            <div class="d-grid gap-2 d-md-block">
+                <button type="button" class="btn btn-outline-success" ng-click="saveCurrentCookies('delete')">Alle abwählen</button>
+                <button type="button" class="btn btn-outline-success" ng-click="saveCurrentCookies('current')">Auswahl bestätigen</button>
+                <button type="button" class="btn btn-success" ng-click="saveCurrentCookies('all')">Alle Bestätigen</button>
+            </div>
+            
+            <div class="row" id="eaInnerCookiesLinks"></div>
+            
+        </div>
+    </div>
+</div>

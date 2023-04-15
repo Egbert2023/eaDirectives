@@ -1,0 +1,11 @@
+<div class="eaLinkPath eaContent">
+    <span ng-repeat="o in currLink">
+        <a ng-show="{{currLink.length}}>{{$index+1}}"
+            style="color: #222" 
+            href="{{o.href}}">{{o.label}}
+        </a><span ng-show="{{currLink.length}}>{{$index+1}}"> 
+            <i class="bi-arrow-return-right"></i>
+        </span><span ng-show="{{currLink.length}}==={{$index+1}}">{{o.label}}
+        </span>
+    </span>    
+</div>
