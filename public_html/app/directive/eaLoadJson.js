@@ -1,6 +1,6 @@
 'use strict';
 
-var eaLoadParams = function ( $rootScope, $http ) {
+var eaLoadJson = function ( $rootScope, $http ) {
     return {
         restrict: 'E',
         replace: true,
@@ -10,10 +10,8 @@ var eaLoadParams = function ( $rootScope, $http ) {
 
         controller: function($scope) {
             
-            $scope.scope_eaLoadParams_Controller = $scope.url;    
-            
             $scope.getParamObject = function(folder, paramName, rootScope, http) {
-                var url = folder + "json/" + paramName + ".json";
+                var url = folder + paramName + ".json";
                 rootScope["isLoaded_" + paramName] = false;
 
                 let callback = function(paramName, rootScope, json) {
@@ -50,16 +48,12 @@ var eaLoadParams = function ( $rootScope, $http ) {
         
         link: function (scope, ele, attrs) {      
             $rootScope.contentFolder = attrs.contentFolder;
-            scope.$parent.footerUrl = attrs.contentFolder + "html/footer.html";
-            
-            let folder = $rootScope.contentFolder;
-            scope.getParamObject(folder, "naviList", $rootScope, $http);
-            scope.getParamObject(folder, "objBg", $rootScope, $http);
-            scope.getParamObject(folder, "imgBoxList", $rootScope, $http);
-            scope.getParamObject(folder, "newsList", $rootScope, $http);
-            scope.getParamObject(folder, "paramsApp", $rootScope, $http);
-            
+            let cf = $rootScope.contentFolder;
+            let jsonFolder = attrs.jsonFolder;
+            let jsonFiles = attrs.jsonFiles;
+            jsonFiles = jsonFiles.split(",");
+            jsonFiles.forEach(o => {scope.getParamObject(cf + "/" + jsonFolder + "/", o.trim(), $rootScope, $http);});
         }
     };  // return
-};   // eaLoadParams()
+};   // eaLoadJson()
 

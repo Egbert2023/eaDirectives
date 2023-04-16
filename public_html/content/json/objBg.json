@@ -1,30 +1,18 @@
 {"entries":
     [
         { 
-            "comment": "you can use püictures ('url(content/...') or colors ('#??????' only in Hex style) for background."
+            "comment": "you can use pictures ('url(content/...') or colors ('#??????' only in Hex style) for background."
         },
        {
            "key": "home",
-           "pic": "url(content/aleks/pictures/travel/Schwerin/Schwerin-Schloss.jpg)"
+           "pic": "url(content/Schwerin-2022-Schloss-mit-Kreuzkanal.jpg)"
        },
 
-        {
-           "key": "new",
-           "pic": "url(content/aleks/pictures/travel/Ostsee/Prerow-Seebrücke.jpg)"
-       },
        {
            "key": "srv",
-           "pic": "url(content/aleks/pictures/travel/Lissabon/Lissabon-Brücke.jpg)"
-       },
-
-       {
-           "key": "trav",
-           "pic": "url(content/aleks/pictures/travel/Lissabon/Lissabon-Praca-do-Comercio-vom-Wasser.jpg)"
-       },
-       {
-           "key": "hobby",
            "pic": "#f2ffe6"
        },
+      
        {
            "key": "prog",
            "pic": "#dae9f7"
