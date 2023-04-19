@@ -5,7 +5,7 @@
         },
        {
            "key": "home",
-           "pic": "url(content/Schwerin-2022-Schloss-mit-Kreuzkanal.jpg)"
+           "pic": "url(content/pictures/Schwerin-2022-Schloss-mit-Kreuzkanal.jpg)"
        },
 
        {
@@ -14,7 +14,7 @@
        },
       
        {
-           "key": "prog",
+           "key": "dirc",
            "pic": "#dae9f7"
        }
     ]
