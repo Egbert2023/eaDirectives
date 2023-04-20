@@ -1,8 +1,25 @@
 'use strict';
 
-// https://stackoverflow.com/questions/27675321/angular-js-nesting-custom-directives
+// see: https://stackoverflow.com/questions/27675321/angular-js-nesting-custom-directives
 
-var eaAccCoat = function ($compile, $rootScope) {
+// call this directives
+// <ea-acc-coat data-acc-title="Title of accordeon">
+//      <ea-acc-key data-title="Sub title 1 of accordeon"
+//                  data-txt-len="200">
+//          --- Html code for the first section ---
+//      </ea-acc-key>
+//      <ea-acc-key data-title="Sub title 2 of accordeon"
+//                  data-txt-len="200">
+//          --- Html code for the second section ---
+//      </ea-acc-key>
+//      ...
+//      <ea-acc-key data-title="Sub title n-th of accordeon"
+//                  data-txt-len="200">
+//          --- ... ---
+//      </ea-acc-key>
+// </ea-acc-coat>
+
+var eaAccCoat = function ($rootScope) {
     return {
         restrict: 'E',
         transclude: true,
@@ -10,19 +27,12 @@ var eaAccCoat = function ($compile, $rootScope) {
                     '<h1>{{accTitle}}</h1>' + 
                     '<ng-transclude></ng-transclude>' +
                   '</div>',
-
         // local scope 
         scope: true,
 
         controller: function($scope, $rootScope) {
             $scope.accIdx = 0;
             $scope.vis_1 = true;
-            
-//            if($rootScope.globalArcIdx) {
-//                $scope.accIdx = $rootScope.globalArcIdx;
-//                $scope.vis_1 = false;
-//            }
-            
             $scope.scope_eaAccCoat_controller = 0;
             
             var getInnerFromTag = function(html, tag) {
@@ -42,6 +52,7 @@ var eaAccCoat = function ($compile, $rootScope) {
                 let htmlKey = "";
                 let len = 0;
                 let end = 0;
+                
             // Get all innerHtml's from the original Html code, 
             // push it into the $scope.accKeysHtm array
                 do{
@@ -52,7 +63,6 @@ var eaAccCoat = function ($compile, $rootScope) {
                        // '<ea-acc-key data-title="...">'.length + len + '</ea-acc-key>'.length
                        end = htmlAll.indexOf("</ea-acc-key") + 13;
                        htmlAll = htmlAll.substring(end);
-                       //htmlAll = htmlAll.substring(len);
                     }
                 } while (len > 0);
                 return false;
@@ -65,8 +75,6 @@ var eaAccCoat = function ($compile, $rootScope) {
         
         link: function (scope, ele, attrs) {      
             scope.accTitle = attrs.accTitle;
-            
-//            $rootScope.globalArcIdx = undefined;
         }  // link
     };  // return
 };   // eaAccCoat()
@@ -97,19 +105,17 @@ var eaAccKey = function ($compile, $rootScope) {
             if(idx===1) {
                 $scope["vis_1"] = true;
             };            
-            
             $scope.scope_eaAccKey_controller = idx;
             
             $rootScope.$on("setVisibleToNo", function(evt, opt) {
                 if(opt!==idx) {
                     $scope["vis_" + idx.toString()] = false;
-                }                
+                }
             });
             
             $scope.setVisible = function(t) {
                 let idx = t.accIdx;
                 let varName = "vis_";
-                //let ret = "";
                 if($scope[varName + idx.toString()]===true) {
                    $scope[varName + idx.toString()]=false; 
                 } else {
