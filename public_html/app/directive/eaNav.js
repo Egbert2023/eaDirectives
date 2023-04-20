@@ -89,7 +89,7 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile, eaNavSr
             // manage Logo
             let navLogo = attr.navLogo;
             if(navLogo) {
-                navLogo = scope.$parent.contentFolder + navLogo;
+                navLogo = scope.$parent.contentFolder + "/" + navLogo;
             } else {
                 navLogo = '';
             }

@@ -1,68 +1,20 @@
-{"params" : {"baseDoman" : "www.aleksander.de",
-              "startFile" : "index.html",
-              "vdoNo" : "Ihr Browser kann dieses Video nicht wiedergeben.",
-              "cookies" : { "title": "Ihre Cookie Einstellungen",
-                            "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
-                            "types": [{"id": "ess", 
-                                        "def": "true", 
-                                        "dis": "true", 
-                                        "title": "Essentiell", 
-                                        "body": "Essentielle Cookies sind für das Funktionieren der Webanwendung erforderlich."},
-                                      {"id": "ana", 
-                                        "def": "false", 
-                                        "dis": "false", 
-                                        "title": "Analyse", 
-                                        "body": "Analyse Cookies dienen der Auswertung des Verhaltens der Nutzer. Mit ihrer Hilfe kann die Applikation anwenderfreundlicher gestaltet werden. So können z.B. Suchhilfen oder Querversweise in der Anwendung ergänzt werden, wenn Nutzer bestimmte Seiten überproportional häufig aufrufen."},
-                                      {"id": "ext", 
-                                        "def": "false",
-                                        "dis": "false", 
-                                        "title": "Marketing", 
-                                        "body": "Externe Cookies entstehen, wenn man z.B. die Buttons von Facebook, Instagrm u.ä. einsetzt. Diese setzen Ihrerseits Cookies um personalisierte Werbung bereitzustellen." }],
-                            "links": [{"title": "Impressum", 
-                                       "key": "imp", 
-                                       "url": "content/aleks/html/impressum.html"},
-                                      {"title": "Datenschutzerklärung", 
-                                       "key": "ds", 
-                                       "url": "content/aleks/html/Datenschutz2.html"}]}},
- "entries":
+{"entries":
     [
-        {"id":"navStart", "label": "Home", "href": "#!/home", "url": "content/aleks/html/home.html", "imgKey": "",
+        {"id":"navStart", "label": "Home", "href": "#!/home", "url": "content/html/home.html", "imgKey": "",
             "subm": []},
  
-        {"id":"navTravel", "label": "Reisen", "href": "#!/trav",  "url": "content/aleks/html/reisen.html", "imgKey": "Reisen",
-            "subm": [ {"label": "Deutschland", "href": "#!/trav/de", "url": "content/aleks/html/De/Deutschland.html", "imgKey": "DE",
-                        "subm": [{"label": "Landschaften", "href": "#!/trav/de/l", "url": "content/aleks/html/De/Landschaften.html", "imgKey": "DE-Landschaft"},
-                         {"label": "Nordsee", "href": "#!/trav/de/n", "url": "content/aleks/html/De/Nordsee.html", "imgKey": "DE-Nordsee"},
-                         {"label": "Ostsee", "href": "#!/trav/de/o", "url": "content/aleks/html/De/Ostsee.html", "imgKey": "DE-Ostsee"}]
-                 },
-                    {"label": "Europa", "href": "#!/trav/eu", "url": "content/aleks/html/Eu/Europa.html", "imgKey": "EU",
-                        "subm": [{"label": "Amsterdam", "href": "#!/trav/eu/am", "url": "content/aleks/html/Eu/Amsterdam.html", "imgKey": "Amsterdam"},
-                         {"label": "Barcelona", "href": "#!/trav/eu/ba", "url": "content/aleks/html/Eu/Barcelona.html", "imgKey": "Barca"},
-                         {"label": "Lissabon", "href": "#!/trav/eu/lb", "url": "content/aleks/html/Eu/Lissabon.html", "imgKey": "Lissabon"},
-                         {"label": "Paris", "href": "#!/trav/eu/pa", "url": "content/aleks/html/Eu/Paris.html", "imgKey": "Paris"},
-                         {"label": "Rom", "href": "#!/trav/eu/ro", "url": "content/aleks/html/Eu/Rom.html", "imgKey": "Rom"},
-                         {"label": "Tour Mittelmeer", "href": "#!/trav/Mittelmeer/tmm", "url": "content/aleks/html/Eu/Tour-Mittelmeer.html", "imgKey": "TourMM"},
-                         {"label": "Tour Norwegen", "href": "#!/trav/eu/tn", "url": "content/aleks/html/Eu/Tour-Norwegen.html", "imgKey": "TNorge"},
-                         {"label": "Tour Ostsee", "href": "#!/trav/eu/to", "url": "content/aleks/html/Eu/Tour-Ostsee.html", "imgKey": "OTour"}]
-                 }]},
-         
-        {"id":"navHoby", "label": "Hobbies", "href": "#!/prog", "url": "content/aleks/html/Hobbies.html", "imgKey": "Hobby",
-            "subm": [ {"label": "Programmieren", "href": "#!/prog/p", "url": "content/aleks/html/prog.html", "imgKey": "prog"},
-                      {"label": "Mathematik", "href": "#!/prog/m", "url": "content/aleks/html/Mathe.html", "imgKey": "math"},
-                      {"label": "Sport", "href": "#!/prog/sp", "url": "content/aleks/html/Sport.html", "imgKey": "sport"},
-                      {"label": "Garten", "href": "#!/hobby/garten", "url": "content/aleks/html/Garten.html", "imgKey": "Garten"}]},
-                                           
-        {"id":"navNews", "label": "News", "href": "#!/new", "url": "app/template/news/news.html", "imgKey": "",
-            "subm": [ {"label": "Archiv", "href": "#!/new/1", "url": "app/template/news/newArchiv.html", "imgKey": ""}]},
+        {"id":"navDir", "label": "Directives", "href": "#!/dirc",  "url": "content/html/dirAll.html", "imgKey": "",
+            "subm": [ {"label": "eaAccording", "href": "#!/dirc/ac", "url": "content/html/dirAcc.html", "imgKey": ""},
+                      {"label": "eaAddHtml", "href": "#!/dirc/ah", "url": "content/html/dirAddHtml.html", "imgKey": ""},
+                      {"label": "eaLoadJson", "href": "#!/dirc/lj", "url": "content/html/dirLoadJson.html", "imgKey": ""},
+                      {"label": "eaImgBox", "href": "#!/dirc/ib", "url": "content/html/dirImgBox.html", "imgKey": ""}]},
         
-        {"id":"navService", "label": "Service", "href": "#!/srv", "url": "content/aleks/html/service.html", "imgKey": "",
+        {"id":"navService", "label": "Service", "href": "#!/srv", "url": "content/html/service.html", "imgKey": "",
             "subm": [ {"label": "SiteMap", "href": "#!/srv/smap", "url": "app/template/siteMap2.html", "imgKey": ""}, 
-                    {"label": "Cookie Richtlinie", "href": "#!/srv/cookies", "url": "content/aleks/html/CookiesNotRequired.html", "imgKey": ""}, 
-                    {"label": "Impressum", "href": "#!/srv/imp", "url": "content/aleks/html/impressum.html", "imgKey": ""}, 
-                    {"label": "Datenschutz", "href": "#!/srv/ds", "url": "content/aleks/html/datenschutz2.html", "imgKey": ""}, 
-                    {"label": "Hintergrund Bilder", "href": "#!/srv/pic", "url": "content/aleks/html/srv/backGround.html", "imgKey": "Back"},
-                    {"label": "Software-Lizenzen", "href": "#!/prog/license", "url": "LICENSE.html", "imgKey": ""}
-                    
+                    {"label": "Cookie Richtlinie", "href": "#!/srv/cookies", "url": "content/html/CookiesNotRequired.html", "imgKey": ""}, 
+                    {"label": "Impressum", "href": "#!/srv/imp", "url": "content/html/impressum.html", "imgKey": ""}, 
+                    {"label": "Datenschutz", "href": "#!/srv/ds", "url": "content/html/datenschutz2.html", "imgKey": ""}, 
+                    {"label": "Software-Lizenzen", "href": "#!/srv/license", "url": "LICENSE.html", "imgKey": ""}
             ]}                                              
     ]
 }

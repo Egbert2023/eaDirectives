@@ -1,6 +1,6 @@
 'use strict';
 
-var webInfoController =  function($rootScope, $scope, navSrv) {
+var eaDirController =  function($rootScope, $scope, navSrv) {
     $scope.navSrv = navSrv;
     $scope.scope_webInfoController = $scope.url;
         

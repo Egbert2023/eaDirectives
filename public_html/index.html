@@ -17,7 +17,7 @@
         <link href="fw/bootstrap/css/bootstrap-icons.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/main.css">
         <script src="fw/boilerPlate/js/vendor/modernizr-2.8.3.min.js" type="text/javascript"></script>
-        
+        <link href="css/navDropdown.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <body ng-app="eaDir" ng-controller="eaDirController">
@@ -26,47 +26,55 @@
     <![endif]-->
     
     <!-- Add your site or application content here -->
-        <!--<ea-load-params data-content-folder="content/fegh/"></ea-load-params>-->
-        <ea-load-params data-content-folder="content/"></ea-load-params>
-        
+        <ea-load-json data-content-folder="content" 
+                      data-json-folder="json" 
+                      data-json-files="naviList, paramsApp, objBg">
+        </ea-load-json>
         <ea-navi data-nav-logo="pictures/navLogo.jpg" data-nav-mode="menu"></ea-navi>
     
-        <div ea-img-box></div>
-        
+        <!--
+        <div ea-img-box></div>        
         <ea-cookies data-cookies-used="false"></ea-cookies>
+        -->
         
         <div class="eaGlassMorph" id="ng-view">
             <div ng-view autoscroll="true"></div>
         </div>        
         
+        <!--
         <ea-footer></ea-footer>
+        -->
         
         <script src="fw/boilerPlate/js/plugins.js"></script>        
         <script src="fw/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>        
         <script src="fw/angularJs/angular.min.js" type="text/javascript"></script>
         <script src="fw/angularJs/angular-route.min.js" type="text/javascript"></script>
                 
-        <script src="fw/angularJs/angular-cookies.min.js" type="text/javascript"></script>
-
         <script src="app/service/eaConfigSrv.js" type="text/javascript"></script>
         <script src="app/service/eaNavSrv.js" type="text/javascript"></script>
            
-        <script src="app/directive/eaLoadParams.js" type="text/javascript"></script>
+        <script src="app/directive/eaLoadJson.js" type="text/javascript"></script>
         <script src="app/directive/eaNav.js" type="text/javascript"></script>
+        
         <script src="app/directive/eaAddHtml.js" type="text/javascript"></script>
         <script src="app/directive/eaPathLink.js" type="text/javascript"></script>
+        <script src="app/directive/eaAccordeon.js" type="text/javascript"></script>
+        
+        <!--
+        <script src="fw/angularJs/angular-cookies.min.js" type="text/javascript"></script>
+                
         <script src="app/directive/eaFooter.js" type="text/javascript"></script>
         <script src="app/directive/eaImgBox.js" type="text/javascript"></script>
         <script src="app/directive/eaImg.js" type="text/javascript"></script>
-        <script src="app/directive/eaAccordeon.js" type="text/javascript"></script>
+        
         <script src="app/directive/eaNews.js" type="text/javascript"></script>
         <script src="app/directive/eaVideo.js" type="text/javascript"></script>
         <script src="app/directive/eaCookies.js" type="text/javascript"></script>
+       
+        -->
         
-        <script src="app/controller/webInfoController.js" type="text/javascript"></script>
+        <script src="app/controller/eaDirController.js" type="text/javascript"></script>
         <script src="app/controller/eaNaviController.js" type="text/javascript"></script>
-        
-        
         <script src="app/app.js" type="text/javascript"></script>
 
     </body>

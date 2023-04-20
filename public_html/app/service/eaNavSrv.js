@@ -188,4 +188,4 @@ var computeSiteMaps = function(rootScope) {
     siteMaps.siteMap = sm;
     siteMaps.siteMapImg = smi;
     return siteMaps;
-};
+};  // computeSiteMaps
