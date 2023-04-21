@@ -1,9 +1,68 @@
 <div>
     <h1>Example for eaAddHtml</h1>
     <p>We add the page "Example of accordeon"</p>
+    
     <hr style="height: 10px;  background: linear-gradient(to right, red, 50%, blue);"/>
     
     <div ea-add-html = "content/html/dirAcc.html"></div>
     
-    <hr style="height: 10px;  background: linear-gradient(to right, red, 50%, blue);"/>
+    <hr style="height: 10px;  background: linear-gradient(to left, red, 50%, blue);"/>
+    
+    <h2>Annotation</h2>
+    <p>
+        The "eaAddHtml" directive is used to implement the separation of the design and content of an application.
+        This is realized by extending the Angular routing process in such a way that everything can be parameter-controlled.
+        All routing processes are directed to a fixed HTML page (computed.html), which loads the desired HTML page from server by the parameters from naviList.json.
+    </p>
+    see. 
+    <ul>
+        <li>
+            app.js 
+            <textarea readonly="readonly" style="width: 100%" rows="6">
+var eaDir = angular.module("eaDir", ["ngRoute"]);
+var configSrv = eaDir.service('eaConfigSrv', [function($routeProvider){
+    this.eaNavConfig = eaNavConfig;      
+}]);
+configSrv.$inject = ['$scope'];
+            </textarea>
+        </li>
+        <li>
+            eaNavConfig.js
+            <textarea readonly="readonly" style="width: 100%" rows="23">
+var eaNavConfig = function ($routeProvider) {
+    $routeProvider
+        .when('/:folder', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController',
+            resolve: 'folder'
+        })    
+        .when('/:folder/:id', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController'
+        })
+        .when('/:folder/:id/:id2', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController'
+        })
+        .otherwise({redirectTo: '/home',
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController',
+            resolve: 'home'
+        });
+    return $routeProvider;
+};
+            </textarea>
+        </li>
+        <li>
+            'app/template/computed.html'
+            <textarea readonly="readonly" style="width: 100%" rows="7">
+<div class="eaCard">
+    <ea-path-link></ea-path-link> 
+    <div class="eaContent">
+        <div ea-add-html = "{{url}}"></div>
+    </div>
+</div>                
+            </textarea>
+        </li>
+    </ul>
 </div>

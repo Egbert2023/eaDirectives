@@ -10,16 +10,11 @@ var eaNews = function ( $rootScope ) {
         scope: true,
 
         controller: function($scope) {
-            $scope.scope_eaNewsDirektive = $scope.url;    
-
             // get al params
             $scope.newsAll = $rootScope.newsList;
          
             var varName = "vis_";
-//            for(let i=0; i<$scope.news.length; i++) {
-//                $scope[varName + i]=false; 
-//            };
-                        
+                     
             $scope.setVisible = function(t) {
                 let idx = 0;   
                 idx = t.$index + 1;   
@@ -32,7 +27,11 @@ var eaNews = function ( $rootScope ) {
                 $scope[varName + idx]=(av)? false: true; 
 
                 return false;
-            };           
+            };   
+            
+            
+            
+            
         },   // controller
         
         // <ea-news data-news-title="News" 
