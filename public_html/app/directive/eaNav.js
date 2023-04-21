@@ -107,9 +107,9 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile, eaNavSr
                     element.append(htmLogo);
                 }
             }            
-            $rootScope.$on("$locationChangeSuccess", function(event, next, current) {            
-                scope.location = $location.path();
-            });
+//            $rootScope.$on("$locationChangeSuccess", function(event, next, current) {            
+//                scope.location = $location.path();
+//            });
         }            
      };
 };

@@ -121,23 +121,15 @@ textarea {
     background-size: cover;
     min-height: 150vh;
 }
-.eaMoveable {
-   position: absolute; 
-}
 .eaCard{
   position: relative;
-    
   margin-left: auto;
   margin-right: auto;
   margin-bottom: auto;
   margin-top: 5px;
   z-index: 2;
   min-height: 200px;
-  
-  /*left: 2%;*/
-  /*width: 96%;*/
   max-width: 950px;
-  
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -148,7 +140,6 @@ textarea {
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
   backdrop-filter: blur(5px);
 }
-
 .eaSwitch {
     border: 2px solid rgba(155, 155, 255, .25);
     border-radius: 10px;
@@ -159,27 +150,6 @@ textarea {
 .eaSwitch:hover {
     background-color: #f2ffe6;
 } 
-
-/*
-accordion
-http://jsfiddle.net/shanidkv/k8g5yehs/
-*/
-.accordion a{
-    padding: 5px;
-    text-decoration: none;    
-    margin-bottom: 1px;
-    
-    color: #21a828;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: rgba(255, 255, 255, .45);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, .25);
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
-    backdrop-filter: blur(5px);
-}
-
 .eaContent{
     border: 1px solid #ddd;
     padding: 5px;
@@ -195,14 +165,12 @@ http://jsfiddle.net/shanidkv/k8g5yehs/
     backdrop-filter: blur(5px);
 
 }
-
 .eaLogo {
   height: 80px;
   padding: 5px;
   padding-left: 20%;
   justify-content: space-between;
 }
-
 .eaLinkPath {
     display: block;
     font-size: smaller;
@@ -211,33 +179,28 @@ http://jsfiddle.net/shanidkv/k8g5yehs/
     display: block;
     font-size: small;
     padding-left: 5px;
-    
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, .25);
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
-    
-    
 }
-.eaTitle, h1 {
+h1 {
     color: #21a828;
     font-size: xx-large;
 }
-.eaSubTitle, h2 {
+h2 {
     color: #21a828;
     font-size: larger;
 }
-.eaSubSubTitle, h3 {
+h3 {
     color: #21a828;
     font-size: large;
 }
-
 .bold {
     font-weight:  bold;
 }
 .eaNoDeco{
     text-decoration: none;
 }
-
 body {
     margin-bottom: 30px; /* Margin bottom by footer height */
 }
@@ -246,8 +209,6 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 99;
-  /*height: 30px; /* Set the fixed height of the footer here */
-  /*line-height: 60px; /* Vertically center the text there */
 }
 .eaFooterContent, .eaFooterContent a {
     background-color: #d9ebd2;
@@ -260,9 +221,6 @@ body {
 .eaFooterContent {
     padding-left: 25px;
 }
-/*.nav-link {
-    z-index: 50;
-}*/
 
 /* ==========================================================================
    Helper classes
