@@ -19,7 +19,7 @@ var navSrv = eaDir.service('eaNavSrv', ['$q', function () {
 navSrv.$inject = ['$scope', '$rootScope'];
 
 eaDir.directive('eaLoadJson', ['$rootScope', '$http', eaLoadJson]).$inject = ['$scope'];
-eaDir.directive('eaNavi', ['$rootScope', '$http', '$location', 'eaNavSrv', '$compile', eaNavDynDirektive]).$inject = ['$scope'];
+eaDir.directive('eaNavi', ['$rootScope', '$http', '$location', '$compile', eaNavDynDirektive]).$inject = ['$scope'];
 
 eaDir.directive('eaAddHtml', ['$rootScope', '$compile', '$http', eaAddHtmlDirective]).$inject = ['$scope'];
 eaDir.directive('eaPathLink', ['$rootScope', '$location', 'eaNavSrv', eaPathLinkDirective]).$inject = ['$scope'];

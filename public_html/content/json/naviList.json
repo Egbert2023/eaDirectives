@@ -6,6 +6,7 @@
         {"id":"navDir", "label": "Directives", "href": "#!/dirc",  "url": "content/html/dirAll.html", "imgKey": "",
             "subm": [ {"label": "eaAccording", "href": "#!/dirc/ac", "url": "content/html/dirAcc.html", "imgKey": ""},
                 {"label": "eaPathLink", "href": "#!/dirc/pl", "url": "content/html/dirPathLink.html", "imgKey": ""},
+                {"label": "eaNavi", "href": "#!/dirc/nv", "url": "content/html/dirNavi.html", "imgKey": ""},
                       {"label": "eaAddHtml", "href": "#!/dirc/ah", "url": "content/html/dirAddHtml.html", "imgKey": ""},
                       {"label": "eaLoadJson", "href": "#!/dirc/lj", "url": "content/html/dirLoadJson.html", "imgKey": ""},
                       {"label": "eaImgBox", "href": "#!/dirc/ib", "url": "content/html/dirImgBox.html", "imgKey": ""}]},
