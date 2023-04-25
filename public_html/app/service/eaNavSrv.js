@@ -30,6 +30,7 @@ var getHtml = function($http, $compile, scope, ele, url, callback) {
     return htm;
 };
 
+// recursive call of the function getEntry() to generate HTML code for menu or sitemap
 var getEntry = function(inRt, objArr, sub, key, val, ret) {
 // https://stackoverflow.com/questions/2641347/short-circuit-array-foreach-like-calling-break
     let rt = inRt;

@@ -1,6 +1,6 @@
 'use strict';
 
-var eaNavDynDirektive = function($rootScope, $http, $location, $compile, eaNavSrv) {
+var eaNavDynDirektive = function($rootScope, $http, $location, $compile) {
     
     let tmplMenu ='<nav class="navbar navbar-expand-lg bg-light navbar-light sticky-top">' +
                   '\n\t<div class="container-fluid">' +
@@ -26,27 +26,42 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile, eaNavSr
     return {
         restrict: 'E',
         controller: function($rootScope, $scope, $compile) {
-            $scope.scope_eaNavDirektive_Controller = $scope.url;
             var html = '';
             
+            // recursive call of the function getEntry() to get the right entry from objArr
+            var getEntry = function(inRt, objArr, sub, key, val, ret) {
+            // https://stackoverflow.com/questions/2641347/short-circuit-array-foreach-like-calling-break
+                let rt = inRt;
+                let BreakException = {};
+                try{objArr.forEach(o => {
+                    if(rt !== "") {throw BreakException;};
+                    if(o[sub] !== undefined && o[sub].length>0) {
+                        rt = getEntry(rt, o[sub], sub, key, val, ret);
+                    };
+                    if(o[key] === val) {
+                        rt = o[ret];
+                        throw BreakException;
+                    }});
+                } catch(e){
+                    if (e !== BreakException) throw e;
+                };
+                return rt;
+            };
+            
+            // wait until the JSON file "naviList.json" has finished reading
             $rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
-                $scope.scope_eaNavDirektive_Controller = $scope.url;    
-                $scope.naviList = $rootScope.naviList;
-                
-                $scope.url = $scope.navSrv.getHtml4Id($rootScope, $location.path(), eaNavSrv);
+                $scope.url = getEntry("", $rootScope.naviList, "subm", "href", '#!' + $location.path(), "url");
                 $rootScope.$emit("ReadUrlIsReady", $scope.url);
-                
-                html = $scope.addMenu("nav", $scope.naviList, html);
+                html = $scope.addMenu("nav", $rootScope.naviList, html);
                 $scope.setMenuToTemplate('navbar-nav', html);                
             });
-            
+            // Helper function
             $scope.getMenuItem = function(cls, naItem, addToogle) {
                 let cl = (cls + '-link ' + addToogle).trim();
-                //let cc = (addToogle==='')? ' ng-click="toggleMenu()"':'';
                 let cc = ' ng-click="toggleMenu()"';
                 return '\n\t<li class="' + cls + '-item"><a' + cc + ' class="' + cl + '" href="' + naItem.href + '">' + naItem.label + '</a>';
             };
-            //eaInsertMenu
+            //Insert menu  into template html
             $scope.setMenuToTemplate = function(id, htm) {
                 //const doc = document.getElementById(id);
                 const doc = document.getElementsByClassName(id);
@@ -58,6 +73,7 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile, eaNavSr
                 return false;
             };
             
+            // recursive call of the function addMenu() to generate the complete menu
             $scope.addMenu = function(cls, naLi, htm) {
                 // {"id":"navStart", "label": "Home", "href": "#!/home", "url": "content/aleks/html/home.html", "imgKey": "",
                 //  "subm": []},
@@ -81,11 +97,11 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile, eaNavSr
                     };
                 }); 
                 return htm;
-            }; // addMenu()
-            
+            }; // addMenu()            
         },     // controller 
-        
+                
         link: function (scope, element, attr) {
+            
             // manage Logo
             let navLogo = attr.navLogo;
             if(navLogo) {
@@ -94,7 +110,7 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile, eaNavSr
                 navLogo = '';
             }
             
-            // sitemap | menu
+            // sitemap | menu by Html-attribute  "data-nav-mode"
             let mo = attr.navMode;
             if(mo) {
                 if(mo==='sitemap') {
@@ -107,9 +123,6 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile, eaNavSr
                     element.append(htmLogo);
                 }
             }            
-//            $rootScope.$on("$locationChangeSuccess", function(event, next, current) {            
-//                scope.location = $location.path();
-//            });
         }            
      };
 };
