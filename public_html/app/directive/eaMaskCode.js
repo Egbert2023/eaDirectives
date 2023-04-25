@@ -9,8 +9,7 @@ var eaMaskCode = function () {
     scope: true,
     
     controller: function($scope) {
-        // replace < > for all tags
-        $scope.myChange = function(htm) {
+        let rowChange = function(htm) {
             const lt = "<";
             const gt = ">";
             const bl = " ";
@@ -19,28 +18,41 @@ var eaMaskCode = function () {
             const spe = "</span>";
             let ret = htm.replaceAll(lt, '&lt;');
             ret = ret.replaceAll(gt, '&gt;');
-
-            // attribute values are green
-            const tag3 = /\s\w+=/g;
-
+            
+            // change all ' to "
+            const tag0 = /[']/g;
+            ret = ret.replace(tag0, o => '"');
+            
             // attributes are red
             const tag2 = /\s\w+=/g;
             //let test = ret.match(tag2);
             ret = ret.replace(tag2, o => "<span style='color:red;'>" + o + spe);
 
+            // attribute values are green
+            const tag3 = /"[\w: ]+"*/g;
+            ret = ret.replace(tag3, o => "<span style='color:green;'>" + o + spe);
+
             // Tags are blue
             const tag1 = /&lt;\w+|&gt;|&lt;[/]\w+&gt;/g;
             ret = spa + ret + spe;
             ret = ret.replace(tag1, o => spe + "<span style='color:blue;'>" + o + spe + spa);
-
             
+            return ret;
+        };
+        
+        // replace < > for all tags        
+        $scope.myChange = function(htm) {
             
-            
-            
-            
-            
-            //ret = ret.replaceAll(bl, '&nbsp;');
-            ret = ret.replaceAll(nl, '<br />');
+            // select rows
+            let rows = htm.split("\n");
+            let ret = "";
+            for(let i=0; i<rows.length; i++) {
+                // distance from left
+                let pttrn = /^\s*/;
+                let d = rows[i].match(pttrn)[0].length * 6;
+                
+                ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChange(rows[i]) + "</div>";
+            }
             return ret; 
         };
         $scope.changeInnerHtml = function(el, nh) {
