@@ -9,7 +9,7 @@ var eaMaskCode = function () {
     scope: true,
     
     controller: function($scope) {
-        let rowChange = function(htm) {
+        let rowChangeHtml = function(htm) {
             const lt = "<";
             const gt = ">";
             const bl = " ";
@@ -40,31 +40,49 @@ var eaMaskCode = function () {
             return ret;
         };
         
+        let rowChangeJs = function(code) {
+            
+        };
+        
+        let rowChangeJson = function(code) {
+            
+        };
+        
         // replace < > for all tags        
-        $scope.myChange = function(htm) {
+        $scope.myChange = function(code, codeType) {
             
             // select rows
-            let rows = htm.split("\n");
+            let rows = code.split("\n");
             let ret = "";
             for(let i=0; i<rows.length; i++) {
                 // distance from left
                 let pttrn = /^\s*/;
                 let d = rows[i].match(pttrn)[0].length * 6;
-                
-                ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChange(rows[i]) + "</div>";
+                    
+                switch(codeType) {
+                    case "html":
+                        ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChangeHtml(rows[i]) + "</div>";
+                        break;
+                    case "js":
+                        ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChangeJs(rows[i]) + "</div>";
+                        break;
+                    case "json":
+                        ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChangeJson(rows[i]) + "</div>";
+                        break;
+                    default:
+                        ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChangeHtml(rows[i]) + "</div>";
+                }                
             }
             return ret; 
         };
-        $scope.changeInnerHtml = function(el, nh) {
-            el.innerHTML = nh;
-            return false;
-        };        
     },
 
     link: function (scope, ele, attrs) {
         let iHtml = ele[0].innerHTML;
-        iHtml = scope.myChange(iHtml);
-        ele[0].innerHTML = iHtml;
+        let codeType = attrs.codeType;
+        iHtml = scope.myChange(iHtml, codeType);
+        let bt = '<div class="eaContent">\n<button type="button" style="float: right;" ng-click="copyToClipboard()" class="btn btn-light"><i class="bi-files" style="font-size: 1.0rem; color: #21a828;"></i></button>';
+        ele[0].innerHTML = bt + "\n" + iHtml + "\n</div>";
         
     }       
   };
