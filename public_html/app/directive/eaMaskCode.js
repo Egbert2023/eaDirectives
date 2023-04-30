@@ -81,7 +81,7 @@ var eaMaskCode = function () {
         let iHtml = ele[0].innerHTML;
         let codeType = attrs.codeType;
         iHtml = scope.myChange(iHtml, codeType);
-        let bt = '<div class="eaContent">\n<button type="button" style="float: right;" ng-click="copyToClipboard()" class="btn btn-light"><i class="bi-files" style="font-size: 1.0rem; color: #21a828;"></i></button>';
+        let bt = '<div class="eaContent">\n<i class="eaSwitch" style="width: fit-content" ng-click="copyToClipboard()">#</i>';
         ele[0].innerHTML = bt + "\n" + iHtml + "\n</div>";
         
     }       
