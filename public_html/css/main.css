@@ -149,6 +149,7 @@ textarea {
 }
 .eaSwitch:hover {
     background-color: #f2ffe6;
+    font-weight: 900;
 } 
 .eaContent{
     border: 1px solid #ddd;

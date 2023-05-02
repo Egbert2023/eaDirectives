@@ -28,7 +28,7 @@ eaDir.directive('eaPathLink', ['$rootScope', '$location', 'eaNavSrv', eaPathLink
 //eaDir.directive('eaImg', ['$rootScope', eaImg]).$inject = ['$scope'];
 eaDir.directive('eaAccCoat', ['$rootScope', eaAccCoat]).$inject = ['$scope'];
 eaDir.directive('eaAccKey', ['$compile', '$rootScope', eaAccKey]).$inject = ['$scope'];
-eaDir.directive('eaMaskCode', [eaMaskCode]).$inject = ['$scope'];
+eaDir.directive('eaMaskCode', ['$compile', eaMaskCode]).$inject = ['$scope'];
 
 //eaDir.directive('eaNews', ['$rootScope', eaNews]).$inject = ['$scope'];
 //eaDir.directive('eaVideo', ['$rootScope', eaVideo]).$inject = ['$scope'];
