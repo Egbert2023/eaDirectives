@@ -1,10 +1,10 @@
 'use strict';
 
-var eaMaskCode = function () {
+var eaMaskCode = function ($compile) {
   return {
     restrict: 'E',
-    replace: false,
-    
+    replace: true,
+        
     // local scope
     scope: true,
     
@@ -75,15 +75,22 @@ var eaMaskCode = function () {
             }
             return ret; 
         };
+        
+        $scope.copyToClipboard = function() {
+             navigator.clipboard.writeText($scope.iHtm);
+             //alert("Code is copy to Clipboard.");
+        };
+        
     },
 
     link: function (scope, ele, attrs) {
         let iHtml = ele[0].innerHTML;
+        scope.iHtm = iHtml;
         let codeType = attrs.codeType;
         iHtml = scope.myChange(iHtml, codeType);
-        let bt = '<div class="eaContent">\n<i class="eaSwitch" style="width: fit-content" ng-click="copyToClipboard()">#</i>';
+        let bt = '<div class="eaContent">\n<div class="eaSwitch" style="cursor: pointer; width: fit-content; position: fixed; right: 2px; color: lightgray" ng-click="copyToClipboard()">#</div>';
         ele[0].innerHTML = bt + "\n" + iHtml + "\n</div>";
-        
+        $compile(ele.contents())(scope);
     }       
   };
 };
