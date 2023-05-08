@@ -4,13 +4,132 @@
     </h1>
 
     <div>
-        <ea-mask-code data-code-type="html">
+        This directive is a helper for show code as developer know it from Developer Tools.
+        You can put the code '&lt;any-tag&gt;...&lt;/any-tag&gt;' into the tag:<br />
+        <strong>&nbsp;&lt;ea-mask-code data-code-type="html"&gt;</strong><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;any-tag&gt;...&lt;/any-tag&gt;<br />
+        <strong>&nbsp;&lt;/ea-mask-code&gt;</strong><br />
+
+        <div>
+            The field "data-code-type" in the tag can use different values. 
+            <ul>
+                <li><strong>html</strong> - for Html code</li>
+                <li><strong>js</strong> - for JavaScript code</li>
+                <li><strong>json</strong> - for JSON file</li>
+            </ul>
+        </div>
+        <div>
+In the right top corner is a copy button to put the code into the clipboard.
+        </div>
+            
+        <ea-acc-coat data-acc-title="">
+            <ea-acc-key data-title="example with html type">
+                <ea-mask-code data-code-type="html">
 <div class="eaContent">
-    <h2 class='bold' style='color: blueviolet'>Subtitle</h2>
+    <h2 class='bold' style='color: blueviolet; background-color: #f2ffe6;'>Subtitle</h2>
         <h3>Sub-Sub-Title</h3>
     <div> Test text</div>
-</div>        
-        </ea-mask-code>
-    </div>
+</div>      
+                </ea-mask-code>
+            </ea-acc-key>
 
+            <ea-acc-key data-title="example with JavaScript type">
+                <ea-mask-code data-code-type="js">
+'use strict';
+
+/**
+* This is a comment
+*/
+
+/*
+* This is a comment too
+*/
+
+// return
+
+var eaImg = function ( $rootScope ) {
+    return {
+        restrict: 'AE',
+        replace: true,
+        templateUrl: "app/template/imgTemplate.html",
+        
+        // local scope
+        scope: true,
+
+        controller: function($scope) {
+            $scope.scope_eaImgDirektive = $scope.url;    
+
+            // Open the Modal
+            $scope.openModal = function() {
+                var opt = {
+                    key: $scope.imgBoxKey,
+                    imgArr: $scope.imgArr,
+                    imgBodyArr: $scope.imgBodyArr,
+                    imgBoxIdx: $scope.imgBoxIdx
+                };
+                $rootScope.$emit("openModalImgBox", opt);
+            };
+            
+            // Test
+            let reg = /^[a]\w+/g;
+            
+        },   // controller
+        
+        link: function (scope, ele, attrs) {      
+            scope.imgBoxKey = attrs.imgBoxKey;
+            if(scope.imgBoxKey === undefined) {
+                scope.imgArr = [];
+                scope.imgArr.push(attrs.img);
+                scope.imgBodyArr = [];
+                scope.imgBodyArr.push(attrs.alt);
+                scope.imgBoxIdx = 1;
+                scope.imgBoxImg = scope.imgArr[0];
+                scope.imgBoxBody = "";
+            } else {
+                var obj = scope.imgBoxList.find(o => o.imgKey === scope.imgBoxKey); 
+                scope.imgArr = obj.imgList;
+                scope.imgBodyArr = obj.imgBodyList;
+                scope.imgBoxIdx = attrs.imgBoxIdx;            
+                scope.imgBoxImg = scope.imgArr[scope.imgBoxIdx-1];
+                scope.imgBoxBody = scope.imgBodyArr[scope.imgBoxIdx-1];
+            }
+        }
+    };  // return
+};   // eaImgBox()
+                </ea-mask-code>
+            </ea-acc-key>
+
+            <ea-acc-key data-title="example with JSON type">
+                <ea-mask-code data-code-type="json">
+{ "entries": {"baseDoman" : "www.aleksander.de",
+              "startFile" : "index.html",
+              "vdoNo" : "Ihr Browser kann dieses Video nicht wiedergeben.",
+              "cookies" : { "title": "Ihre Cookie Einstellungen",
+                            "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
+                            "types": [{"id": "ess", 
+                                        "def": "true", 
+                                        "dis": "true", 
+                                        "title": "Essentiell", 
+                                        "body": "Essentielle Cookies sind für das Funktionieren der Webanwendung erforderlich."},
+                                      {"id": "ana", 
+                                        "def": "false", 
+                                        "dis": "false", 
+                                        "title": "Analyse", 
+                                        "body": "Analyse Cookies dienen der Auswertung des Verhaltens der Nutzer. Mit ihrer Hilfe kann die Applikation anwenderfreundlicher gestaltet werden. So können z.B. Suchhilfen oder Querversweise in der Anwendung ergänzt werden, wenn Nutzer bestimmte Seiten überproportional häufig aufrufen."},
+                                      {"id": "ext", 
+                                        "def": "false",
+                                        "dis": "false", 
+                                        "title": "Marketing", 
+                                        "body": "Externe Cookies entstehen, wenn man z.B. die Buttons von Facebook, Instagrm u.ä. einsetzt. Diese setzen Ihrerseits Cookies um personalisierte Werbung bereitzustellen." }],
+                            "links": [{"title": "Impressum", 
+                                       "key": "imp", 
+                                       "url": "content/aleks/html/impressum.html"},
+                                      {"title": "Datenschutzerklärung", 
+                                       "key": "ds", 
+                                       "url": "content/aleks/html/Datenschutz2.html"}]}}
+}
+                </ea-mask-code>                
+            </ea-acc-key>
+        </ea-acc-coat>
+    </div>    
 </div>
