@@ -123,6 +123,98 @@ var eaMaskCode = function ($compile) {
             ret = ret.replace(tag2, o => "<span style='font-weight: bold;'>" + o + spe);
             return ret; 
         };
+
+        let deliFlag = false;
+        let bracketFlag = false;
+
+        let innerRowChangeCss = function(code) {
+            const spe = "</span>";
+            let ret = code;
+            
+            return ret; 
+        };
+
+        let rowChangeCss = function(code) {
+            const spe = "</span>";
+            let ret = code;
+            
+            // Rows with delimiter from /* to */are lightgrey
+            const start = /[\s]{0,1}[/][\*]/g;
+            const end = /[\*][/]/g;
+            let matchStart = code.match(start);
+            let matchEnd = code.match(end);
+                        
+            if(matchStart && matchEnd) {
+                deliFlag = false;
+                ret = "<span style='color: lightgrey;'>" + code + spe;
+                return ret; 
+            }
+            if(matchStart && !matchEnd) {
+                deliFlag = true;
+                ret = "<span style='color: lightgrey;'>" + code + spe;
+                return ret; 
+            }
+            if(!matchStart && matchEnd) {
+                deliFlag = false;
+                if(code.trim()!== "") {
+                    ret = "<span style='color: lightgrey;'>" + code + spe;
+                }
+                return ret; 
+            }
+            if(deliFlag) {
+                ret = "<span style='color: lightgrey;'>" + code + spe;
+                return ret; 
+            }
+            
+            // row is inner {}, code before '{' is blue
+            const bracketStart = /[{]/g;
+            const bracketEnd = /[}]/g;
+            matchStart = code.match(bracketStart);
+            matchEnd = code.match(bracketEnd);
+            const matchBetween = /(?<={)(.*?)(?=})/;
+            
+            if(matchStart && matchEnd) {
+                let tmp = code.match(matchBetween);
+                ret = "{" + rowChangeCss(tmp)+ "}";
+                return ret;
+            }
+            if(matchStart && !matchEnd) {
+                let row2 = code.split("{");
+                if(row2[0]) {
+                   ret = "<span style='color: blue;'>" + row2[0] + "{" + spe;
+                }
+                bracketFlag = true;
+                if(row2[1]) {
+                   ret = ret + "{" + rowChangeCss(row2[1]);
+                }
+                return ret;
+            }
+            if(!matchStart && matchEnd) {
+                let row2 = code.split("}");
+                if(row2[0]) {
+                   if(row2[0].trim() !== "") {
+                       ret = rowChangeCss(row2[0]) + "}";
+                   } 
+                }
+                bracketFlag = false;
+                if(row2[1]) {
+                    if(row2[1].trim() !== "") {
+                        ret = ret + innerRowChangeCss(row2[1]);
+                    }                    
+                }
+                return ret;
+            }
+            if(bracketFlag) {
+                ret = innerRowChangeCss(code);
+                return ret; 
+            }
+
+            // All texts outher {} are blue
+            if(code.trim()!=="") {
+                ret = "<span style='color: blue;'>" + code + spe;
+            }
+            return ret; 
+        };        
         
         // replace < > for all tags        
         $scope.myChange = function(code, codeType) {
@@ -144,6 +236,9 @@ var eaMaskCode = function ($compile) {
                         break;
                     case "json":
                         ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChangeJson(rows[i]) + "</div>";
+                        break;
+                    case "css":
+                        ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChangeCss(rows[i]) + "</div>";
                         break;
                     default:
                         ret = ret + "<div style='padding-left: " + d + "px;'>" + rowChangeHtml(rows[i]) + "</div>";
