@@ -7,7 +7,7 @@
         This directive is a helper for show code as developer know it from Developer Tools.
         You can put the code '&lt;any-tag&gt;...&lt;/any-tag&gt;' into the tag:<br />
         <strong>&nbsp;&lt;ea-mask-code data-code-type="html"&gt;</strong><br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&lt;any-tag&gt;...&lt;/any-tag&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;any-code<br />
         <strong>&nbsp;&lt;/ea-mask-code&gt;</strong><br />
 
         <div>
@@ -16,6 +16,7 @@
                 <li><strong>html</strong> - for Html code</li>
                 <li><strong>js</strong> - for JavaScript code</li>
                 <li><strong>json</strong> - for JSON file</li>
+                <li><strong>css</strong> - for CSS file</li>
             </ul>
         </div>
         <div>
@@ -135,25 +136,224 @@ var eaImg = function ( $rootScope ) {
                 <ea-mask-code data-code-type="css">
 /*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
 
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
 /* ==========================================================================
-   Base styles: opinionated defaults
+   Author's custom styles
+   ========================================================================== */
+/* ea for Egbert Aleksander */
+
+/* extern links*/
+.eaExtern {
+    color: red;
+    font-weight:  bold;
+}
+.eaImgBorderExtern {
+    border: 2px solid rgba(255, 1, 2, .99);
+    border-radius: 10px;
+    /*        o   r   u   l*/
+    padding: 3px 3px 3px 3px;
+    background-color: rgba(255, 1, 2, .99);
+}
+.eaGlassMorph{
+    color: #224;
+    /*background-image: url(../fotos/Solardach-mit-Blume.jpg);*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 150vh;
+}
+.eaCard{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: 5px;
+  z-index: 2;
+  min-height: 200px;
+  max-width: 950px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*background-color: rgba(255, 255, 255, .45);*/
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+  backdrop-filter: blur(5px);
+}
+.eaSwitch {
+    border: 2px solid rgba(155, 155, 255, .25);
+    border-radius: 10px;
+    float: right;
+    /*        o   r   u   l*/
+    padding: 0em 1em 0em 1em;
+}
+.eaSwitch:hover {
+    background-color: #f2ffe6;
+    font-weight: 900;
+} 
+.eaContent{
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin: 1px 0;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, .45);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+    backdrop-filter: blur(5px);
+
+}
+.eaLogo {
+  height: 80px;
+  padding: 5px;
+  padding-left: 20%;
+  justify-content: space-between;
+}
+.eaLinkPath {
+    display: block;
+    font-size: smaller;
+}
+.eaImgBody {
+    display: block;
+    font-size: small;
+    padding-left: 5px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+}
+h1 {
+    color: #21a828;
+    font-size: xx-large;
+}
+h2 {
+    color: #21a828;
+    font-size: larger;
+}
+h3 {
+    color: #21a828;
+    font-size: large;
+}
+.bold {
+    font-weight:  bold;
+}
+.eaNoDeco{
+    text-decoration: none;
+}
+body {
+    margin-bottom: 30px; /* Margin bottom by footer height */
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+}
+.eaFooterContent, .eaFooterContent a {
+    background-color: #d9ebd2;
+    font-size: .8em;
+    font-family: "Open Sans",sans-serif,"google";
+    line-height: 1.5;
+    color: #3e474c;
+    text-align: left;
+}
+.eaFooterContent {
+    padding-left: 25px;
+}
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
    ========================================================================== */
 
-html {
-    color: #222;
-    /*font-size: 1em;*/
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
 
-/*    font-family: "Open Sans",sans-serif,"google";
-    font-size: 16px;*/
+@media print,
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 1.25dppx),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
 
-    line-height: 1.4;
-    min-height: 100%;    
+@media print {
+    *,
+    *:before,
+    *:after,
+    *:first-letter,
+    *:first-line {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
 }
                 </ea-mask-code>
             </ea-acc-key>

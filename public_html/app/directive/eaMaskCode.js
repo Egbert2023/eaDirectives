@@ -127,14 +127,17 @@ var eaMaskCode = function ($compile) {
         let deliFlag = false;
         let bracketFlag = false;
 
-        let innerRowChangeCss = function(code) {
-            const spe = "</span>";
-            let ret = code;
-            
-            return ret; 
-        };
-
         let rowChangeCss = function(code) {
+            let innerRowChangeCss = function(code) {
+                const spe = "</span>";
+                let ret = code;
+
+                // Words ended with ":" are blue
+                const attri = /[\w-\*,]+[:,\s]/g;
+                ret = ret.replace(attri, o => "<span style='color: blue;'>" + o + spe);                
+                return ret; 
+            };
+
             const spe = "</span>";
             let ret = code;
             
@@ -146,7 +149,22 @@ var eaMaskCode = function ($compile) {
                         
             if(matchStart && matchEnd) {
                 deliFlag = false;
-                ret = "<span style='color: lightgrey;'>" + code + spe;
+                let reg = /\/\*/g;
+                let row2 = code.split(reg);
+                ret = "";
+                if(row2[0]) {
+                    if(row2[0].trim()!=="") {
+                        ret = innerRowChangeCss(row2[0]);
+                        
+                        if(row2[1]) {
+                            if(row2[1].trim()!=="") {
+                                ret = ret + "<span style='color: lightgrey;'>" + "/*" + row2[1] + spe;
+                                return ret;
+                            }
+                        }        
+                    }
+                }
+                ret = ret + "<span style='color: lightgrey;'>" + code + spe;
                 return ret; 
             }
             if(matchStart && !matchEnd) {
@@ -181,11 +199,12 @@ var eaMaskCode = function ($compile) {
             if(matchStart && !matchEnd) {
                 let row2 = code.split("{");
                 if(row2[0]) {
-                   ret = "<span style='color: blue;'>" + row2[0] + "{" + spe;
+                   ret = "<span style='color: green;'>" + row2[0] + "{" + spe;
                 }
                 bracketFlag = true;
                 if(row2[1]) {
-                   ret = ret + "{" + rowChangeCss(row2[1]);
+                   //ret = ret + "{" + rowChangeCss(row2[1]);
+                   ret = ret + "{" + innerRowChangeCss(row2[1]);
                 }
                 return ret;
             }
@@ -209,9 +228,9 @@ var eaMaskCode = function ($compile) {
                 return ret; 
             }
 
-            // All texts outher {} are blue
+            // All texts outher {} are green
             if(code.trim()!=="") {
-                ret = "<span style='color: blue;'>" + code + spe;
+                ret = "<span style='color: green;'>" + code + spe;
             }
             return ret; 
         };        
@@ -248,7 +267,9 @@ var eaMaskCode = function ($compile) {
         };
         
         $scope.copyToClipboard = function() {
-             navigator.clipboard.writeText($scope.iHtm);
+            let code = $scope.iHtm.replaceAll("&lt;", "<");
+            code = code.replaceAll("&gt;", ">");
+            navigator.clipboard.writeText(code);
         };        
     },
 
