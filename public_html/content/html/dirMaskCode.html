@@ -6,12 +6,12 @@
     <div>
         This directive is a helper for show code as developer know it from Developer Tools.
         You can put the code '&lt;any-tag&gt;...&lt;/any-tag&gt;' into the tag:<br />
-        <strong>&nbsp;&lt;ea-mask-code data-code-type="html"&gt;</strong><br />
+        <strong>&nbsp;&lt;ea-mask-code ea-mask-html&gt;</strong><br />
         &nbsp;&nbsp;&nbsp;&nbsp;any-code<br />
         <strong>&nbsp;&lt;/ea-mask-code&gt;</strong><br />
 
         <div>
-            The field "data-code-type" in the tag can use different values. 
+            The attribut "ea-mask-[type]" in the tag can use different values. 
             <ul>
                 <li><strong>html</strong> - for Html code</li>
                 <li><strong>js</strong> - for JavaScript code</li>
@@ -20,12 +20,48 @@
             </ul>
         </div>
         <div>
-In the right top corner is a copy button to put the code into the clipboard.
+        The attribute ea-mask-??? is an additional directive that adds exactly 
+        one function 'rowChange()' to the current scope. This function implements 
+        the necessary adjustments for the selected code type. 
+        If you need other code conversions than the existing ones, this can be 
+        done by additional directives.
         </div>
-            
+        <div>
+        Look at the examples and create your own directive (e.g. emmaMaskPhp). 
+        In order to integrate this directive, the corresponding file must be 
+        integrated in the index.html 
+        <p>
+        &lt;script src="app/directive/emmaMaskPhp.js" type="text/javascript">&lt;/script>  
+        </p>        
+        and the directive must be declared in the app.js file. 
+        <p>
+            eaDir.directive('emmaMaskPhp', [emmaMaskPhp]).$inject = ['$scope'];
+        </p>
+        Now you can add your directive as a new attribute in the 
+        tag &lt;ea-mask-code emma-mask-php> ...php code ... &lt;\ea-mask-code>
+        </div>
+        <br />
+        <div class='alert alert-warning'>
+            <p>
+            <strong>Note:</strong> If you want to display AngularJs directives 
+            as HTML code, it is imperative that you escape them. 
+            The internal Angular mechanism to implement this directive 
+            occurs before the masking takes place. That is why your code is 
+            modified before it can be prepared for display by the mask code. 
+            <br />The masking is done, for example, by replacing the first '&lt;' 
+            character of the tag with '&amp;lt;'. Angular can no longer recognize and 
+            manipulate  this tag.
+            </p>
+        </div>
+        
+        <div>            
+        In the right top corner is a copy button to put the code into the clipboard.
+        </div>
+        
+        
         <ea-acc-coat data-acc-title="">
             <ea-acc-key data-title="example with html type">
-                <ea-mask-code data-code-type="html">
+                <ea-mask-code ea-mask-html>
 <div class="eaContent">
     <h2 class='bold' style='color: blueviolet; background-color: #f2ffe6;'>Subtitle</h2>
         <h3>Sub-Sub-Title</h3>
@@ -35,7 +71,7 @@ In the right top corner is a copy button to put the code into the clipboard.
             </ea-acc-key>
 
             <ea-acc-key data-title="example with JavaScript type">
-                <ea-mask-code data-code-type="js">
+                <ea-mask-code ea-mask-js>
 'use strict';
 
 /**
@@ -101,7 +137,7 @@ var eaImg = function ( $rootScope ) {
             </ea-acc-key>
 
             <ea-acc-key data-title="example with JSON type">
-                <ea-mask-code data-code-type="json">
+                <ea-mask-code ea-mask-json>
 { "entries": {"baseDoman" : "www.aleksander.de",
               "startFile" : "index.html",
               "vdoNo" : "Ihr Browser kann dieses Video nicht wiedergeben.",
@@ -133,23 +169,22 @@ var eaImg = function ( $rootScope ) {
             </ea-acc-key>
             
             <ea-acc-key data-title="example with CSS type">
-                <ea-mask-code data-code-type="css">
+                <ea-mask-code ea-mask-css>
 /*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 /* ea for Egbert Aleksander */
 
 /* extern links*/
-.eaExtern {
+.eaExtern {         
     color: red;
     font-weight:  bold;
 }
 .eaImgBorderExtern {
     border: 2px solid rgba(255, 1, 2, .99);
     border-radius: 10px;
-    /*        o   r   u   l*/
+            /*o   r   u   l*/
     padding: 3px 3px 3px 3px;
     background-color: rgba(255, 1, 2, .99);
 }
@@ -184,7 +219,7 @@ var eaImg = function ( $rootScope ) {
     border: 2px solid rgba(155, 155, 255, .25);
     border-radius: 10px;
     float: right;
-    /*        o   r   u   l*/
+            /*o   r   u   l*/
     padding: 0em 1em 0em 1em;
 }
 .eaSwitch:hover {
@@ -291,7 +326,8 @@ body {
     *:first-letter,
     *:first-line {
         background: transparent !important;
-        color: #000 !important; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
+        color: #000 !important; /* Black prints 
+                                faster: http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
     }
