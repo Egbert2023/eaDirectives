@@ -27,7 +27,7 @@ var eaMaskHtml = function () {
             ret = ret.replace(tag2, o => "<span style='color:red;'>" + o + spe);
 
             // attribute values are green
-            const tag3 = /"[\w:,;\-# ]+"*/g;
+            const tag3 = /"[\w:,;\-# //.()%]+"*/g;
             ret = ret.replace(tag3, o => "<span style='color:green;'>" + o + spe);
 
             // Tags are blue
