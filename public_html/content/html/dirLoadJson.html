@@ -9,7 +9,7 @@
       Without a mask, they are manipulated by Angular before they are displayed. 
       It is sufficient to use the code "&amp;lt;" instead of the sign "<".
     </div>
-    <ea-mask-code data-code-type="html">            
+    <ea-mask-code ea-mask-html>            
 &lt;ea-load-json   
     data-content-folder="content"                    
     data-json-folder="json"                    
@@ -23,7 +23,7 @@
     <br />
     and an event "LoadJsonFile-[?]" is fired. You can whait for finish the loading 
     by the call e.g. for the file "naviList":
-    <ea-mask-code data-code-type="js">
+    <ea-mask-code ea-mask-js>
     $rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
         $scope.naviList = $rootScope.naviList;
     });

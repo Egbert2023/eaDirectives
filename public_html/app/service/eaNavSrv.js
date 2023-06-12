@@ -53,42 +53,31 @@ var getEntry = function(inRt, objArr, sub, key, val, ret) {
 var getCurrentLink = function(rootScope, path) {
     //var naviList = getNaviList();
     //var naviList = rootScope.naviList;
-    let obj = {};
+    //let obj = {};
     let ret = [];
+    let findLink = false;
     let naviList = rootScope.naviList;
 
-    let computeLink = function(naviList) {
-        naviList.forEach(o => {
-            if(o.href === '#!' + path) {
-                obj = {label: o.label, href: o.href};
-                ret.push(obj);
-            };
+    let computeLinkRec = function(naviList) {
+        // unshift() instead of push() - add array element to start of array
+        for (const o of naviList) {
+            let obj = {label: o.label, href: o.href};
 
-            o.subm.forEach(os => {
-                if(os.href === '#!' + path) {
-                    obj = {label: o.label, href: o.href};
-                    ret.push(obj);
-                    obj = {label: os.label, href: os.href};
-                    ret.push(obj);
+            if(!findLink) {
+                if(o.href === '#!' + path) {
+                    findLink = true;
                 };
-
-                if(os.subm !== undefined) {
-                    os.subm.forEach(oss => {
-                        if(oss.href === '#!' + path) {
-                            obj = {label: o.label, href: o.href};
-                            ret.push(obj);
-                            obj = {label: os.label, href: os.href};
-                            ret.push(obj);
-                            obj = {label: oss.label, href: oss.href};
-                            ret.push(obj);                    
-                        }
-                    });
+                if(o.subm !== undefined && !findLink) {
+                    computeLinkRec(o.subm);
                 }
-            });
-        });
-        return ret;
-    };    
-    ret = computeLink(naviList);
+            }            
+            if(findLink) {
+                ret.unshift(obj);
+                break;
+            }
+        }
+    };
+    computeLinkRec(naviList);
     return ret;
 };
 

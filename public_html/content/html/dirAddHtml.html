@@ -1,6 +1,12 @@
 <div>
     <h1>Example for eaAddHtml</h1>
-    <p>We add the page "Example of accordeon"</p>
+    <p>We add the page "Example of accordeon" between two collored lines.</p>
+    
+    <ea-mask-code ea-mask-html>
+&lt;hr style="height: 10px;  background: linear-gradient(to right, red, 50%, blue);"/>        
+    &lt;div ea-add-html = "content/html/dirAcc.html">&lt;/div>
+&lt;hr style="height: 10px;  background: linear-gradient(to left, red, 50%, blue);"/>
+    </ea-mask-code>
     
     <hr style="height: 10px;  background: linear-gradient(to right, red, 50%, blue);"/>
     
@@ -8,18 +14,19 @@
     
     <hr style="height: 10px;  background: linear-gradient(to left, red, 50%, blue);"/>
     
-    <h2>Annotation</h2>
-    <p>
-        The "eaAddHtml" directive is used to implement the separation of the design and content of an application.
+    
+    
+    <div class='alert alert-warning'>
+        <strong>Annotation: </strong>The "eaAddHtml" directive is used to implement the separation of the design and content of an application.
         This is realized by extending the Angular routing process in such a way that everything can be parameter-controlled.
         All routing processes are directed to a fixed HTML page (computed.html), which loads the desired HTML page from server by the parameters from naviList.json.
-    </p>
+    </div>
     see. 
     <ul>
         <li>
             app.js 
             
-            <ea-mask-code data-code-type="js">
+            <ea-mask-code ea-mask-js>
 var eaDir = angular.module("eaDir", ["ngRoute"]);
 var configSrv = eaDir.service('eaConfigSrv', [function($routeProvider){
     this.eaNavConfig = eaNavConfig;      
@@ -29,7 +36,7 @@ configSrv.$inject = ['$scope'];
         </li>
         <li>
             eaNavConfig.js
-            <ea-mask-code data-code-type="js">
+            <ea-mask-code ea-mask-js>
 var eaNavConfig = function ($routeProvider) {
     $routeProvider
         .when('/:folder', {
@@ -57,7 +64,7 @@ var eaNavConfig = function ($routeProvider) {
         </li>
         <li>
             'app/template/computed.html'
-        <ea-mask-code data-code-type="html">
+        <ea-mask-code ea-mask-html>
 <div class="eaCard">
     <ea-path-link></ea-path-link> 
     <div class="eaContent">
