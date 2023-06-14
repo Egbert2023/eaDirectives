@@ -4,8 +4,8 @@
     </h1>
 
     <div>
-        This directive is a helper for show code as developer know it from Developer Tools.
-        You can put the code '&lt;any-tag&gt;...&lt;/any-tag&gt;' into the tag:<br />
+        The directive is an aid to displaying code as developers expect it to.
+        You can put the e.g. Html code '&lt;any-tag&gt;...&lt;/any-tag&gt;' into the tag:<br />
         <strong>&nbsp;&lt;ea-mask-code ea-mask-html&gt;</strong><br />
         &nbsp;&nbsp;&nbsp;&nbsp;any-code<br />
         <strong>&nbsp;&lt;/ea-mask-code&gt;</strong><br />
@@ -20,44 +20,52 @@
             </ul>
         </div>
         <div>
-        The attribute ea-mask-??? is an additional directive that adds exactly 
-        one function 'rowChange()' to the current scope. This function implements 
-        the necessary adjustments for the selected code type. 
+        The attribute ea-mask-[type] is an additional directive that adds exactly 
+        one function 'rowChange()' to the current scope of directive 'eaMaskCode'. 
+        This function implements the necessary adjustments for the selected code type. 
         If you need other code conversions than the existing ones, this can be 
-        done by additional directives.
+        done by additional your own directives.
         </div>
         <div>
         Look at the examples and create your own directive (e.g. emmaMaskPhp). 
         In order to integrate this directive, the corresponding file must be 
-        integrated in the index.html 
-        <p>
-        &lt;script src="app/directive/emmaMaskPhp.js" type="text/javascript">&lt;/script>  
-        </p>        
-        and the directive must be declared in the app.js file. 
-        <p>
-            eaDir.directive('emmaMaskPhp', [emmaMaskPhp]).$inject = ['$scope'];
-        </p>
+        integrated in the <strong>index.html</strong>
+        <ea-mask-code ea-mask-html>
+&lt;script src="app/directive/emmaMaskPhp.js" type="text/javascript">&lt;/script>  
+        </ea-mask-code>
+        and the directive must be declared in the <strong>app.js</strong> file. 
+        <ea-mask-code ea-mask-js>            
+eaDir.directive('emmaMaskPhp', [emmaMaskPhp]).$inject = ['$scope'];
+        </ea-mask-code>
         Now you can add your directive as a new attribute in the 
-        tag &lt;ea-mask-code emma-mask-php> ...php code ... &lt;\ea-mask-code>
+        tag 
+        <ea-mask-code ea-mask-html>
+&lt;ea-mask-code emma-mask-php="emma-mask-php">
+    ...php code ... 
+&lt;\ea-mask-code>
+        </ea-mask-code>
         </div>
         <br />
-        <div class='alert alert-warning'>
+        <!-- <div class='alert alert-warning'> -->
+        <div class='alert alert-info'>
             <p>
             <strong>Note:</strong> If you want to display AngularJs directives 
-            as HTML code, it is imperative that you escape them. 
+            as HTML code or other html elements inner javascript, it is imperative that you escape them. 
             The internal Angular mechanism to implement this directive 
             occurs before the masking takes place. That is why your code is 
             modified before it can be prepared for display by the mask code. 
-            <br />The masking is done, for example, by replacing the first '&lt;' 
+            <br />The masking is done, for example, by replacing all '&lt;' 
             character of the tag with '&amp;lt;'. Angular can no longer recognize and 
-            manipulate  this tag.
+            manipulate this tag.<br />
+            If misrepresentation occurs, you may find all the characters &lt; 
+            by &amp;lt; have to replace. All div tags (opening and closing) should be escaped.
+            All Html syntax errors must be eliminated by masking.
             </p>
         </div>
         
         <div>            
         In the right top corner is a copy button to put the code into the clipboard.
-        </div>
-        
+        </div>        
         
         <ea-acc-coat data-acc-title="">
             <ea-acc-key data-title="example with html type">
@@ -74,191 +82,50 @@
                 <ea-mask-code ea-mask-js>
 'use strict';
 
-/**
-* This is a comment
-*/
-
-/*
-* This is a comment too
-*/
-
-// return
-
-var eaImg = function ( $rootScope ) {
-    return {
-        restrict: 'AE',
-        replace: true,
-        templateUrl: "app/template/imgTemplate.html",
-        
-        // local scope
-        scope: true,
-
-        controller: function($scope) {
-            $scope.scope_eaImgDirektive = $scope.url;    
-
-            // Open the Modal
-            $scope.openModal = function() {
-                var opt = {
-                    key: $scope.imgBoxKey,
-                    imgArr: $scope.imgArr,
-                    imgBodyArr: $scope.imgBodyArr,
-                    imgBoxIdx: $scope.imgBoxIdx
-                };
-                $rootScope.$emit("openModalImgBox", opt);
-            };
+var eaMaskHtml = function () {
+  return {
+    restrict: 'A',
+    // global scope, so will use the same $scope as the parent directive
+    scope: false,
+    
+    controller: function($scope) {
+        $scope.rowChange = function(htm) {
+            const lt = "<";
+            const gt = ">";
+            const bl = " ";
+            const nl = "\n";
+            const spa = "&lt;span>";
+            const spe = "&lt;/span>";
+            let ret = htm.replaceAll(lt, '&amp;lt;');
+            ret = ret.replaceAll(gt, '&amp;gt;');
             
-            // Test
-            let reg = /^[a]\w+/g;
+            // change all ' to "
+            const tag0 = /[']/g;
+            ret = ret.replace(tag0, o => '"');
             
-        },   // controller
-        
-        link: function (scope, ele, attrs) {      
-            scope.imgBoxKey = attrs.imgBoxKey;
-            if(scope.imgBoxKey === undefined) {
-                scope.imgArr = [];
-                scope.imgArr.push(attrs.img);
-                scope.imgBodyArr = [];
-                scope.imgBodyArr.push(attrs.alt);
-                scope.imgBoxIdx = 1;
-                scope.imgBoxImg = scope.imgArr[0];
-                scope.imgBoxBody = "";
-            } else {
-                var obj = scope.imgBoxList.find(o => o.imgKey === scope.imgBoxKey); 
-                scope.imgArr = obj.imgList;
-                scope.imgBodyArr = obj.imgBodyList;
-                scope.imgBoxIdx = attrs.imgBoxIdx;            
-                scope.imgBoxImg = scope.imgArr[scope.imgBoxIdx-1];
-                scope.imgBoxBody = scope.imgBodyArr[scope.imgBoxIdx-1];
-            }
-        }
-    };  // return
-};   // eaImgBox()
-                </ea-mask-code>
-            </ea-acc-key>
+            // attributes are red
+            const tag2 = /[\s][\w-]+[=>]/g;
+            ret = ret.replace(tag2, o => "&lt;span style='color:red;'>" + o + spe);
 
-            <ea-acc-key data-title="example with JSON type">
-                <ea-mask-code ea-mask-json>
-{ "entries": {"baseDoman" : "www.aleksander.de",
-              "startFile" : "index.html",
-              "vdoNo" : "Ihr Browser kann dieses Video nicht wiedergeben.",
-              "cookies" : { "title": "Ihre Cookie Einstellungen",
-                            "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
-                            "types": [{"id": "ess", 
-                                        "def": "true", 
-                                        "dis": "true", 
-                                        "title": "Essentiell", 
-                                        "body": "Essentielle Cookies sind für das Funktionieren der Webanwendung erforderlich."},
-                                      {"id": "ana", 
-                                        "def": "false", 
-                                        "dis": "false", 
-                                        "title": "Analyse", 
-                                        "body": "Analyse Cookies dienen der Auswertung des Verhaltens der Nutzer. Mit ihrer Hilfe kann die Applikation anwenderfreundlicher gestaltet werden. So können z.B. Suchhilfen oder Querversweise in der Anwendung ergänzt werden, wenn Nutzer bestimmte Seiten überproportional häufig aufrufen."},
-                                      {"id": "ext", 
-                                        "def": "false",
-                                        "dis": "false", 
-                                        "title": "Marketing", 
-                                        "body": "Externe Cookies entstehen, wenn man z.B. die Buttons von Facebook, Instagrm u.ä. einsetzt. Diese setzen Ihrerseits Cookies um personalisierte Werbung bereitzustellen." }],
-                            "links": [{"title": "Impressum", 
-                                       "key": "imp", 
-                                       "url": "content/aleks/html/impressum.html"},
-                                      {"title": "Datenschutzerklärung", 
-                                       "key": "ds", 
-                                       "url": "content/aleks/html/Datenschutz2.html"}]}}
-}
-                </ea-mask-code>                
+            // attribute values are green
+            const tag3 = /"[\w:,;\-# //.()%]+"*/g;
+            ret = ret.replace(tag3, o => "&lt;span style='color:green;'>" + o + spe);
+            
+            // Tags are blue
+            const tag1 = /&lt;[\w-\\]+|&gt;|&lt;[/][\w-]+&gt;/g;
+            ret = spa + ret + spe;
+            ret = ret.replace(tag1, o => spe + "&lt;span style='color:blue;'>" + o + spe + spa);
+            
+            return ret;
+        };
+    }
+  };
+};                </ea-mask-code>                
             </ea-acc-key>
             
             <ea-acc-key data-title="example with CSS type">
                 <ea-mask-code ea-mask-css>
-/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-/* ea for Egbert Aleksander */
-
-/* extern links*/
-.eaExtern {         
-    color: red;
-    font-weight:  bold;
-}
-.eaImgBorderExtern {
-    border: 2px solid rgba(255, 1, 2, .99);
-    border-radius: 10px;
-            /*o   r   u   l*/
-    padding: 3px 3px 3px 3px;
-    background-color: rgba(255, 1, 2, .99);
-}
-.eaGlassMorph{
-    color: #224;
-    /*background-image: url(../fotos/Solardach-mit-Blume.jpg);*/
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 150vh;
-}
-.eaCard{
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: auto;
-  margin-top: 5px;
-  z-index: 2;
-  min-height: 200px;
-  max-width: 950px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /*background-color: rgba(255, 255, 255, .45);*/
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, .25);
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
-  backdrop-filter: blur(5px);
-}
-.eaSwitch {
-    border: 2px solid rgba(155, 155, 255, .25);
-    border-radius: 10px;
-    float: right;
-            /*o   r   u   l*/
-    padding: 0em 1em 0em 1em;
-}
-.eaSwitch:hover {
-    background-color: #f2ffe6;
-    font-weight: 900;
-} 
-.eaContent{
-    border: 1px solid #ddd;
-    padding: 5px;
-    margin: 1px 0;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: rgba(255, 255, 255, .45);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, .25);
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
-    backdrop-filter: blur(5px);
-
-}
-.eaLogo {
-  height: 80px;
-  padding: 5px;
-  padding-left: 20%;
-  justify-content: space-between;
-}
-.eaLinkPath {
-    display: block;
-    font-size: smaller;
-}
-.eaImgBody {
-    display: block;
-    font-size: small;
-    padding-left: 5px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, .25);
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
-}
+/* Default customization */
 h1 {
     color: #21a828;
     font-size: xx-large;
@@ -271,12 +138,6 @@ h3 {
     color: #21a828;
     font-size: large;
 }
-.bold {
-    font-weight:  bold;
-}
-.eaNoDeco{
-    text-decoration: none;
-}
 body {
     margin-bottom: 30px; /* Margin bottom by footer height */
 }
@@ -286,110 +147,13 @@ body {
   width: 100%;
   z-index: 99;
 }
-.eaFooterContent, .eaFooterContent a {
-    background-color: #d9ebd2;
-    font-size: .8em;
-    font-family: "Open Sans",sans-serif,"google";
-    line-height: 1.5;
-    color: #3e474c;
-    text-align: left;
-}
-.eaFooterContent {
-    padding-left: 25px;
-}
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
 
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
-}
-
-@media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
-}
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   http://www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
-
-@media print {
-    *,
-    *:before,
-    *:after,
-    *:first-letter,
-    *:first-line {
-        background: transparent !important;
-        color: #000 !important; /* Black prints 
-                                faster: http://www.sanbeiji.com/archives/953 */
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
-
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
-
-    /*
-     * Don't show links that are fragment identifiers,
-     * or use the `javascript:` pseudo protocol
-     */
-
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
-        content: "";
-    }
-
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-
-    /*
-     * Printing Tables:
-     * http://css-discuss.incutio.com/wiki/Printing_Tables
-     */
-
-    thead {
-        display: table-header-group;
-    }
-
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
-    img {
-        max-width: 100% !important;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
+/* Bootstrap customization */
+.alert {
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+    backdrop-filter: blur(5px);    
 }
                 </ea-mask-code>
             </ea-acc-key>

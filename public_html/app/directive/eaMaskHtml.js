@@ -22,16 +22,16 @@ var eaMaskHtml = function () {
             ret = ret.replace(tag0, o => '"');
             
             // attributes are red
-            const tag2 = /[\s][\w-]+=/g;
+            const tag2 = /[\s][\w-]+[=>]/g;
             //let test = ret.match(tag2);
             ret = ret.replace(tag2, o => "<span style='color:red;'>" + o + spe);
 
-            // attribute values are green
+            // attribute values are green 
             const tag3 = /"[\w:,;\-# //.()%]+"*/g;
             ret = ret.replace(tag3, o => "<span style='color:green;'>" + o + spe);
 
             // Tags are blue
-            const tag1 = /&lt;[\w-]+|&gt;|&lt;[/][\w-]+&gt;/g;
+            const tag1 = /&lt;[\w-\\]+|&gt;|&lt;[/][\w-]+&gt;/g;
             ret = spa + ret + spe;
             ret = ret.replace(tag1, o => spe + "<span style='color:blue;'>" + o + spe + spa);
             

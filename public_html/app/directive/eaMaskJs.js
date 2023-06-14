@@ -18,10 +18,19 @@ var eaMaskJs = function () {
             const jsCommentStart = /\/\*|\/\*\*|\* |\*\//g;
             const jsCommentInner = /\/\//g;
             const jsCommentEnd = /\*\/*/g;
+            const jsRegExInner = /\/[\s\S]+\/g/g;
             
             // values in "" or '' are green
             const tag2 = /["'][\w \-,.:;#\+üöäß\/]+["']*/g;
             ret = ret.replace(tag2, o => "<span style='color:green;'>" + o + spe);
+                        
+//            let tagRegEx = code.match(jsCommentStart);
+//            if(tagRegEx) {
+//                 let tag0 = tagRegEx.split("=");
+//                 if(tag0.length>1) {
+//                    ret = tag0[0] + "<span style='color: blueviolet;'> " + tag0[1] + spe;
+//                 }
+//            }
             
             // commands are grey
             let tag1 = code.match(jsCommentStart);
