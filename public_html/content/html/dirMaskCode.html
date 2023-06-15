@@ -57,8 +57,9 @@ eaDir.directive('emmaMaskPhp', [emmaMaskPhp]).$inject = ['$scope'];
             <br />The masking is done, for example, by replacing all '&lt;' 
             character of the tag with '&amp;lt;'. Angular can no longer recognize and 
             manipulate this tag.<br />
-            If misrepresentation occurs, you may find all the characters &lt; 
-            by &amp;lt; have to replace. All div tags (opening and closing) should be escaped.
+            If there are display errors within the maskJs function, it is necessary 
+            to replace all characters &lt; by &amp;lt;. <br />
+            All div tags (opening and closing) should be escaped.<br />
             All Html syntax errors must be eliminated by masking.
             </p>
         </div>
@@ -90,14 +91,14 @@ var eaMaskHtml = function () {
     
     controller: function($scope) {
         $scope.rowChange = function(htm) {
-            const lt = "<";
-            const gt = ">";
+            const lt = String.fromCharCode(60);
+            const gt = String.fromCharCode(62);
             const bl = " ";
             const nl = "\n";
-            const spa = "&lt;span>";
-            const spe = "&lt;/span>";
-            let ret = htm.replaceAll(lt, '&amp;lt;');
-            ret = ret.replaceAll(gt, '&amp;gt;');
+            const spa = "<span>";
+            const spe = "</span>";
+            let ret = htm.replaceAll(lt, '&lt;');
+            ret = ret.replaceAll(gt, '&gt;');
             
             // change all ' to "
             const tag0 = /[']/g;
@@ -105,16 +106,17 @@ var eaMaskHtml = function () {
             
             // attributes are red
             const tag2 = /[\s][\w-]+[=>]/g;
-            ret = ret.replace(tag2, o => "&lt;span style='color:red;'>" + o + spe);
+            //let test = ret.match(tag2);
+            ret = ret.replace(tag2, o => "<span style='color:red;'>" + o + spe);
 
-            // attribute values are green
+            // attribute values are green 
             const tag3 = /"[\w:,;\-# //.()%]+"*/g;
-            ret = ret.replace(tag3, o => "&lt;span style='color:green;'>" + o + spe);
-            
+            ret = ret.replace(tag3, o => "<span style='color:green;'>" + o + spe);
+
             // Tags are blue
             const tag1 = /&lt;[\w-\\]+|&gt;|&lt;[/][\w-]+&gt;/g;
             ret = spa + ret + spe;
-            ret = ret.replace(tag1, o => spe + "&lt;span style='color:blue;'>" + o + spe + spa);
+            ret = ret.replace(tag1, o => spe + "<span style='color:blue;'>" + o + spe + spa);
             
             return ret;
         };

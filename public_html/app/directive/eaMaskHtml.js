@@ -8,8 +8,10 @@ var eaMaskHtml = function () {
     
     controller: function($scope) {
         $scope.rowChange = function(htm) {
-            const lt = "<";
-            const gt = ">";
+            //const lt = "<";
+            const lt = String.fromCharCode(60);
+            //const gt = ">";
+            const gt = String.fromCharCode(62);
             const bl = " ";
             const nl = "\n";
             const spa = "<span>";
