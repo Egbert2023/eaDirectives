@@ -113,9 +113,10 @@ textarea {
     padding: 3px 3px 3px 3px;
     background-color: rgba(255, 1, 2, .99);
 }
+
+/* my style for glasmorphism */
 .eaGlassMorph{
     color: #224;
-    /*background-image: url(../fotos/Solardach-mit-Blume.jpg);*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -154,8 +155,7 @@ textarea {
 .eaContent{
     border: 1px solid #ddd;
     padding: 5px;
-    margin: 1px 0;
-    
+    margin: 1px 0;    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -164,7 +164,6 @@ textarea {
     border: 1px solid rgba(255, 255, 255, .25);
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
     backdrop-filter: blur(5px);
-
 }
 .eaLogo {
   height: 80px;
@@ -184,6 +183,25 @@ textarea {
     border: 1px solid rgba(255, 255, 255, .25);
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
 }
+.bold {
+    font-weight:  bold;
+}
+.eaNoDeco{
+    text-decoration: none;
+}
+.eaFooterContent, .eaFooterContent a {
+    background-color: #d9ebd2;
+    font-size: .8em;
+    font-family: "Open Sans",sans-serif,"google";
+    line-height: 1.5;
+    color: #3e474c;
+    text-align: left;
+}
+.eaFooterContent {
+    padding-left: 25px;
+}
+
+/* Default customization */
 h1 {
     color: #21a828;
     font-size: xx-large;
@@ -196,12 +214,6 @@ h3 {
     color: #21a828;
     font-size: large;
 }
-.bold {
-    font-weight:  bold;
-}
-.eaNoDeco{
-    text-decoration: none;
-}
 body {
     margin-bottom: 30px; /* Margin bottom by footer height */
 }
@@ -211,16 +223,13 @@ body {
   width: 100%;
   z-index: 99;
 }
-.eaFooterContent, .eaFooterContent a {
-    background-color: #d9ebd2;
-    font-size: .8em;
-    font-family: "Open Sans",sans-serif,"google";
-    line-height: 1.5;
-    color: #3e474c;
-    text-align: left;
-}
-.eaFooterContent {
-    padding-left: 25px;
+
+/* Bootstrap customization */
+.alert {
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
+    backdrop-filter: blur(5px);    
 }
 
 /* ==========================================================================

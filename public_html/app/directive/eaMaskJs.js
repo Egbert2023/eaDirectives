@@ -13,15 +13,22 @@ var eaMaskJs = function () {
             const jsReservedWords = ["abstract", "arguments", "await", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "default", "delete", "do", "double", "else", "enum", "eval", "export", "extends", "false", "final", "finally", "float", "for", "function", "goto", "if", "implements", "import", "instanceof", "int", "interface", "let", "long", "native", "new", "null", "package", "private", "protected", "public", "return", "short", "static", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typeof", "var", "void", "volatile", "while", "with", "yield"];
             //const jsObjectsPropertiesMethods = ["Array", "Date", "eval", "function", "hasOwnProperty", "Infinity", "isFinite", "isNaN", "isPrototypeOf", "length", "Math", "NaN", "name", "Number", "Object", "prototype", "String", "toString", "undefined", "valueOf"];
             const jsObjectsPropertiesMethods = ["Array", "Date", "eval", "hasOwnProperty", "Infinity", "isFinite", "isNaN", "isPrototypeOf", "length", "Math", "NaN", "name", "Number", "Object", "prototype", "String", "toString", "undefined", "valueOf"];
-            const jsOtherReservedWords = ["alert", "all", "anchor", "anchors", "area", "assign", "blur", "button", "checkbox", "clearInterval", "clearTimeout", "clientInformation", "close", "closed", "confirm", "constructor", "crypto", "decodeURI", "decodeURIComponent", "defaultStatus", "document", "element", "elements", "embed", "embeds", "encodeURI", "encodeURIComponent", "escape", "event", "fileUpload", "focus", "form", "forms", "frame", "innerHeight", "innerWidth", "layer", "layers", "link", "location", "mimeTypes", "navigate", "navigator", "frames", "frameRate", "hidden", "history", "image", "images", "offscreenBuffering", "open", "opener", "option", "outerHeight", "outerWidth", "packages", "pageXOffset", "pageYOffset", "parent", "parseFloat", "parseInt", "password", "pkcs11", "plugin", "prompt", "propertyIsEnum", "radio", "reset", "screenX", "screenY", "scroll", "secure", "select", "self", "setInterval", "setTimeout", "status", "submit", "taint", "text", "textarea", "top", "unescape", "untaint", "window"];
+            //const jsOtherReservedWords = ["alert", "all", "anchor", "anchors", "area", "assign", "blur", "button", "checkbox", "clearInterval", "clearTimeout", "clientInformation", "close", "closed", "confirm", "constructor", "crypto", "decodeURI", "decodeURIComponent", "defaultStatus", "document", "element", "elements", "embed", "embeds", "encodeURI", "encodeURIComponent", "escape", "event", "fileUpload", "focus", "form", "forms", "frame", "innerHeight", "innerWidth", "layer", "layers", "link", "location", "mimeTypes", "navigate", "navigator", "frames", "frameRate", "hidden", "history", "image", "images", "offscreenBuffering", "open", "opener", "option", "outerHeight", "outerWidth", "packages", "pageXOffset", "pageYOffset", "parent", "parseFloat", "parseInt", "password", "pkcs11", "plugin", "prompt", "propertyIsEnum", "radio", "reset", "screenX", "screenY", "scroll", "secure", "select", "self", "setInterval", "setTimeout", "status", "submit", "taint", "text", "textarea", "top", "unescape", "untaint", "window"];
             const jsAngularReservedWords = ["$scope", "$rootScope", "$route", "$routeChangeSuccess", "$provide", "$watch", "$watchCollection", "$apply", "$digest", "$evalAsync", "controller:", "template:", "templateUrl:", "link:", "scope:", "factory", "directive", "filter", "restrict:", "replace:", "scope:", "transclude:", "$emit", "$on"];
+            const jsToChange = [["&lt;", "&amp;lt;"], ["<", "&lt;"], ["&gt;", ">"]];
             const jsCommentStart = /\/\*|\/\*\*|\* |\*\//g;
             const jsCommentInner = /\/\//g;
             const jsCommentEnd = /\*\/*/g;
+            const jsRegEx = /\/[\s\S]+\/[g]/g;
+            
+            // Change all jsToChange[]
+            for(let i=0; i<jsToChange.length; i++) {
+                ret = ret.replace(jsToChange[i][0], jsToChange[i][1]);
+            }
             
             // values in "" or '' are green
-            const tag2 = /["'][\w \-,.:;#\+üöäß\/]+["']*/g;
-            ret = ret.replace(tag2, o => "<span style='color:green;'>" + o + spe);
+            const tag2 = /["'][\w \-,.:;#\+üöäß\/]+["']/g;
+            ret = ret.replace(tag2, o => "<span style='color:green;'>" + o + spe);                        
             
             // commands are grey
             let tag1 = code.match(jsCommentStart);
@@ -64,15 +71,18 @@ var eaMaskJs = function () {
                     }
                 }
             }
-
+            
             // regular expressions are violet
-            const tag3 = /[\/][\w\^\[\]\\\+\*]+\/[g]{0,1};/g;
-            if (!ret.startsWith("<span style")) {
-                tag1 = ret.split(jsCommentInner);
-                if(tag1.length===1) {
-                    ret = ret.replace(tag3, o => "<span style='color:violet;'>" + o + spe);
-                }
+            let tagRegEx = code.match(jsRegEx);
+            if(tagRegEx) {
+                let pos = code.indexOf("=");
+                let lft = code.substring(0,pos);
+                ret = $scope.rowChange(lft);
+                if(pos>0) {
+                    ret = ret + "<span style='color: violet;'> " + code.substring(pos) + spe;
+                }                
             }
+
             return ret; 
         };
     }
