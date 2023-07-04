@@ -1,11 +1,148 @@
 <div>
     <h1>eaNavi</h1>
     <div>
+        <h2>This directive has the task of creating the complete menu and also provides a generated sitemap.</h2>
         <p>
-        This directive whaits to event "LoadJsonFile-naviList" is fired. This come from the directive "eaLoadJson".
+        It is waiting for event "LoadJsonFile-naviList" to fire.
+        This come from the directive <a target="_blank" href="#!/dirc/lj">"eaLoadJson"</a>.
         </p>
-        Then the filling of the menu starts.
+        In order to fully parameterize the menu, it was necessary to generalize 
+        the Angular routing. For this I use the routing provider with parameters
+        <br /><strong>eaNavConfig.js</strong>
+        <ea-mask-code ea-mask-js>
+var eaNavConfig = function ($routeProvider) {
+    $routeProvider
+        .when('/:folder', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController',
+            resolve: 'folder'
+        })    
+        .when('/:folder/:id', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController'
+        })
+        .when('/:folder/:id/:id2', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController'
+        })
+        .otherwise({redirectTo: '/home',
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController',
+            resolve: 'home'
+        });
+    return $routeProvider;
+};
+        </ea-mask-code>
+        <p>
+        and the <a target="_blank" href="#!/dirc/ah">"eaAddHtml"</a> directive.
+        </p>
+        <div class='alert alert-info'>
+            <strong>Annotation: </strong>
+            The provider is prepared for displaying menus with a maximum of 
+            three levels. However, this only affects the href component of the 
+            menu item, not the used structure depth of the menu.<br />
+        All routing processes are directed to a fixed HTML page (computed.html), 
+        which loads the desired HTML page from server by the parameters from naviList.json.    
+        </div>        
+   
+        <strong>computed.html</strong>
+        <ea-mask-code ea-mask-html>
+<div class="eaCard">
+    <ea-path-link></ea-path-link> 
+    <div class="eaContent">
+        &lt;div ea-add-html = "&lang;{url}}">&lt;/div>
+    </div>
+</div>            
+        </ea-mask-code>
+       
+        <div>
+            The following css file is used to display the menu.
+            <ea-mask-code ea-mask-css>
+/* EA - SiteMap*/
+.sitemap, .sitemap-item a {
+    text-decoration: none;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;    
+}
 
+ /* EA dynamic menu*/
+ /* original Bootstrap 767px */
+/*https://bootstrap-menu.com/detail-basic-hover.html   992px*/
+@media (max-width: 767px) {
+    .navbar .nav-item:hover > ul { display: block; }    
+}
+.navbar .nav-item:hover > ul { display: block; top: 28px; left: 10px;}
+ul:hover > li {position: relative;}
+.hoverdown-item:hover > ul { display: block; }
+
+.hoverdown-menu {
+    list-style: none;
+    display: none;  
+    position: absolute;
+    top:  20px;
+    left: 30px;    
+    z-index: 1001;
+    float: left;
+    min-width: 150px;
+    padding: 5px 0;    
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.hoverdown-menu >  li > a {
+  display: block;
+  padding: 3px 12px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+.hoverdown-menu > li > a:hover,
+.hoverdown-menu > li > a:focus {
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+.hoverdown-item, .hoverdown-link {
+    font-size: 14px;
+    text-align: left;
+    text-decoration: none;
+    background-color: #fff;    
+}                
+            </ea-mask-code>
+        </div>
+        
+        <div>
+            The sitemap is generated automatically using the following link. 
+            <a target="_blank" href="#!/srv/smap">"siteMap"</a>
+             
+            The link uses the following page 
+            <br /><strong>"siteMap2.html"</strong>
+            
+            <ea-mask-code ea-mask-html>
+&lt;div class="eaContent">
+    <h1>SiteMap
+        <button ng-show="getUrlParam()==='Admin'" type="button" ng-click="downloadSiteMaps()" class="btn btn-light">
+            <i class="bi-download" style="font-size: 1.6rem; color: #21a828;"></i>
+        </button>
+    </h1>
+    &lt;ea-navi data-nav-mode="sitemap">&lt;/ea-navi>
+&lt;/div>
+            </ea-mask-code>
+            
+            
+        </div>
+        
+        
     </div>
     
 </div>

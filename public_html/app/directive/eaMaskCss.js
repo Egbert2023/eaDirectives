@@ -12,6 +12,14 @@ var eaMaskCss = function () {
         let bracketFlag = false;    // Global bracked flag
 
         $scope.rowChange = function(code) {
+            // Rows with delimiter from /* to */are lightgrey
+            const start = /[\s]{0,1}[/][\*]/g;
+            const end = /[\*][/]/g;
+            const endComma = /[,]$/g;
+            let matchStart = code.match(start);
+            let matchEnd = code.match(end);
+            let reg = /\/\*/;
+            
             let innerRowChangeCss = function(code) {
                 const spe = "</span>";
                 let ret = code;
@@ -33,13 +41,6 @@ var eaMaskCss = function () {
             const spe = "</span>";
             let ret = code;
             
-            // Rows with delimiter from /* to */are lightgrey
-            const start = /[\s]{0,1}[/][\*]/g;
-            const end = /[\*][/]/g;
-            const endComma = /[,]$/g;
-            let matchStart = code.match(start);
-            let matchEnd = code.match(end);
-            let reg = /\/\*/;
                 
             if(matchStart && matchEnd) {
                 deliFlag = false;
@@ -99,8 +100,17 @@ var eaMaskCss = function () {
             const matchBetween = /(?<={)(.*?)(?=})/g;
             
             if(matchStart && matchEnd) {
+                ret = "";
+                let km = "";
                 let tmp = code.match(matchBetween);
-                ret = "{" + rowChangeCss(tmp)+ "}";
+                if(tmp) {
+                    ret = "{";
+                    for(let i=0;i<tmp.length;i++) {
+                        ret = ret + km + innerRowChangeCss(tmp[i]);
+                        km = ", ";
+                    }
+                    ret = ret + "}";
+                }                
                 return ret;
             }
             if(matchStart && !matchEnd) {
@@ -119,7 +129,7 @@ var eaMaskCss = function () {
                 let row2 = code.split("}");
                 if(row2[0]) {
                    if(row2[0].trim() !== "") {
-                       ret = rowChangeCss(row2[0]) + "}";
+                       ret = innerRowChangeCss(row2[0]) + "}";
                    } 
                 }
                 bracketFlag = false;
