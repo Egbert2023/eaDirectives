@@ -1,11 +1,182 @@
 <div>
     <h1>eaNavi</h1>
     <div>
+        <h2>This directive has the task of creating the complete menu and also 
+            provides a generated sitemap.</h2>
         <p>
-        This directive whaits to event "LoadJsonFile-naviList" is fired. This come from the directive "eaLoadJson".
+        It is waiting for event "LoadJsonFile-naviList" to fire.
+        This come from the directive <a target="_blank" href="#!/dirc/lj">"eaLoadJson"</a>.
         </p>
-        Then the filling of the menu starts.
+        <p>
+            The initialization of the menu or the sitemap is triggered with the following call.
+        </p>
+        <ea-mask-code ea-mask-HTML>
+<!-- for menu -->            
+&lt;ea-navi data-nav-logo="pictures/navLogo.jpg" data-nav-mode="menu">&lt;/ea-navi>
 
+<!-- for siteMap --> 
+&lt;ea-navi data-nav-mode="sitemap">&lt;/ea-navi>
+        </ea-mask-code>        
+        <hr />
+        In order to fully parameterize the menu, it was necessary to generalize 
+        the Angular routing. For this I use the routing provider with parameters, 
+        a fixed controller and a computed templateURL "computed.html". 
+        <br /><strong>eaNavConfig.js</strong>
+        <ea-mask-code ea-mask-js>
+var eaNavConfig = function ($routeProvider) {
+    $routeProvider
+        .when('/:folder', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController',
+            resolve: 'folder'
+        })    
+        .when('/:folder/:id', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController'
+        })
+        .when('/:folder/:id/:id2', {
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController'
+        })
+        .otherwise({redirectTo: '/home',
+            templateUrl: 'app/template/computed.html',
+            controller: 'eaNaviController',
+            resolve: 'home'
+        });
+    return $routeProvider;
+};
+        </ea-mask-code>
+        <br />
+        <p>
+        and the <a target="_blank" href="#!/dirc/ah">"eaAddHtml"</a> directive inner "computed.html".
+        </p>
+        <strong>computed.html</strong>
+        <ea-mask-code ea-mask-html>
+<div class="eaCard">
+    &lt;ea-path-link>&lt;/ea-path-link> 
+    <div class="eaContent">
+        &lt;div ea-add-html = "&lang;{url}}">&lt;/div>
+    </div>
+</div>            
+        </ea-mask-code>
+        <br />
+        <div class='alert alert-info'>
+            <strong>Annotation: </strong>
+            The provider is prepared for displaying menus with a maximum of 
+            three levels. However, this only affects the href component of the 
+            menu item, not the used structure depth of the menu.<br />
+        All routing processes are directed to a fixed HTML page (computed.html), 
+        which loads the desired HTML page from server by the parameters from naviList.json.    
+        </div>        
+        
+        <div>
+            The following css file is used to display the menu and the siteMap.
+            <ea-mask-code ea-mask-css>
+/* EA - SiteMap*/
+.sitemap, .sitemap-item a {
+    text-decoration: none;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;    
+}
+
+ /* EA dynamic menu*/
+ /* original Bootstrap 767px */
+/*https://bootstrap-menu.com/detail-basic-hover.html   992px*/
+@media (max-width: 767px) {
+    .navbar .nav-item:hover > ul { display: block; }    
+}
+.navbar .nav-item:hover > ul { display: block; top: 28px; left: 10px;}
+ul:hover > li {position: relative;}
+.hoverdown-item:hover > ul { display: block; }
+
+.hoverdown-menu {
+    list-style: none;
+    display: none;  
+    position: absolute;
+    top:  20px;
+    left: 30px;    
+    z-index: 1001;
+    float: left;
+    min-width: 150px;
+    padding: 5px 0;    
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.hoverdown-menu >  li > a {
+  display: block;
+  padding: 3px 12px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+.hoverdown-menu > li > a:hover,
+.hoverdown-menu > li > a:focus {
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+.hoverdown-item, .hoverdown-link {
+    font-size: 14px;
+    text-align: left;
+    text-decoration: none;
+    background-color: #fff;    
+}                
+            </ea-mask-code>
+        </div>
+        
+        <div>
+            The sitemap is generated automatically using the following link. 
+            <a target="_blank" href="#!/srv/smap">"siteMap"</a>
+             
+            The link points to the following page:
+            <br /><strong>"siteMap2.html"</strong>
+            
+            <ea-mask-code ea-mask-html>
+&lt;div class="eaContent">
+    <h1>SiteMap
+        <button ng-show="getUrlParam()==='Admin'" type="button" ng-click="downloadSiteMaps()" class="btn btn-light">
+            <i class="bi-download" style="font-size: 1.6rem; color: #21a828;"></i>
+        </button>
+    </h1>
+    &lt;ea-navi data-nav-mode="sitemap">&lt;/ea-navi>
+&lt;/div>
+            </ea-mask-code>
+            A button can also be seen in the coding, which is initially not displayed.
+            This button calls up an export function for the two sitemap files 
+            "sitemap.xml" and "sitemapimages.xml". These two files are intended 
+            to support searches from all search engines.    
+            <br />
+            The button can be made visible with the following link: 
+            <a target="_blank" href="#!/srv/smap?Admin">SiteMap with export</a>
+        </div>
+        In order to tell the search engines which files contain the required 
+        information, the robots.txt file and the two sitemap files must be added to the root directory 
+        of the web application.
+        <br /><strong>Example of robots.txt</strong>
+        <ea-mask-code ea-mask-html>
+# www.robotstxt.org/
+
+# Allow crawling of all content
+User-agent: *
+Disallow:
+
+Sitemap: http://aleksander.de/sitemap.xml
+Sitemap: http://aleksander.de/sitemapimages.xml
+        </ea-mask-code>
+
+        
+        
     </div>
     
 </div>

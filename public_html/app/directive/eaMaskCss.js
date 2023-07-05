@@ -12,6 +12,14 @@ var eaMaskCss = function () {
         let bracketFlag = false;    // Global bracked flag
 
         $scope.rowChange = function(code) {
+            // Rows with delimiter from /* to */are lightgrey
+            const start = /[\s]{0,1}[/][\*]/g;
+            const end = /[\*][/]/g;
+            const endComma = /[,]$/g;
+            let matchStart = code.match(start);
+            let matchEnd = code.match(end);
+            let reg = /\/\*/;
+            
             let innerRowChangeCss = function(code) {
                 const spe = "</span>";
                 let ret = code;
@@ -30,16 +38,15 @@ var eaMaskCss = function () {
                 return ret; 
             };
 
+            let innerRowSetCollor = function (code, collor) {
+                const spe = "</span>";
+                let ret = code;
+                ret = "<span style='color: " + collor + ";'>" + code + spe;
+                return ret; 
+            };
+
             const spe = "</span>";
-            let ret = code;
-            
-            // Rows with delimiter from /* to */are lightgrey
-            const start = /[\s]{0,1}[/][\*]/g;
-            const end = /[\*][/]/g;
-            const endComma = /[,]$/g;
-            let matchStart = code.match(start);
-            let matchEnd = code.match(end);
-            let reg = /\/\*/;
+            let ret = code;            
                 
             if(matchStart && matchEnd) {
                 deliFlag = false;
@@ -94,16 +101,28 @@ var eaMaskCss = function () {
             // row is inner {}, code before '{' is blue
             const bracketStart = /[{]/g;
             const bracketEnd = /[}]/g;
-            matchStart = code.match(bracketStart);
-            matchEnd = code.match(bracketEnd);
+            let matchStartBr = code.match(bracketStart);
+            let matchEndBr = code.match(bracketEnd);
             const matchBetween = /(?<={)(.*?)(?=})/g;
             
-            if(matchStart && matchEnd) {
+            if(matchStartBr && matchEndBr) {
+                let ln = code.split(matchStartBr);
+                ret = innerRowSetCollor(ln[0], "green");
+                //ret = "";
+                let km = "";
                 let tmp = code.match(matchBetween);
-                ret = "{" + rowChangeCss(tmp)+ "}";
+                if(tmp) {
+                    ret = ret + "{";
+                    for(let i=0;i<tmp.length;i++) {
+                        ret = ret + km + innerRowChangeCss(tmp[i]);
+                        km = "}{";
+                    }
+                    ret = ret + "}";
+                }                
                 return ret;
             }
-            if(matchStart && !matchEnd) {
+            
+            if(matchStartBr && !matchEndBr) {
                 let row2 = code.split("{");
                 if(row2[0]) {
                    ret = "<span style='color: green;'>" + row2[0] + "{" + spe;
@@ -115,11 +134,11 @@ var eaMaskCss = function () {
                 }
                 return ret;
             }
-            if(!matchStart && matchEnd) {
+            if(!matchStartBr && matchEndBr) {
                 let row2 = code.split("}");
                 if(row2[0]) {
                    if(row2[0].trim() !== "") {
-                       ret = rowChangeCss(row2[0]) + "}";
+                       ret = innerRowChangeCss(row2[0]) + "}";
                    } 
                 }
                 bracketFlag = false;

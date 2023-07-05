@@ -1,75 +1,14 @@
 <div>
     <h1>Example for eaAddHtml</h1>
-    <p>We add the page "Example of accordeon" between two collored lines.</p>
-    
+    <p>We add the page "Example of accordeon" between two collored lines as a example for add Html.</p>
+    <p>The call is as follow:</p>
     <ea-mask-code ea-mask-html>
 &lt;div ea-add-html = "content/html/dirAcc.html">&lt;/div>
     </ea-mask-code>
-    
+    <p>The result is as follow:</p>
     <hr style="height: 10px;  background: linear-gradient(to right, red, 50%, blue);"/>
     
     <div ea-add-html = "content/html/dirAcc.html"></div>
     
     <hr style="height: 10px;  background: linear-gradient(to left, red, 50%, blue);"/>
-    
-    
-    
-    <div class='alert alert-warning'>
-        <strong>Annotation: </strong>The "eaAddHtml" directive is used to implement the separation of the design and content of an application.
-        This is realized by extending the Angular routing process in such a way that everything can be parameter-controlled.
-        All routing processes are directed to a fixed HTML page (computed.html), which loads the desired HTML page from server by the parameters from naviList.json.
-    </div>
-    see. 
-    <ul>
-        <li>
-            app.js 
-            
-            <ea-mask-code ea-mask-js>
-var eaDir = angular.module("eaDir", ["ngRoute"]);
-var configSrv = eaDir.service('eaConfigSrv', [function($routeProvider){
-    this.eaNavConfig = eaNavConfig;      
-}]);
-configSrv.$inject = ['$scope'];
-            </ea-mask-code>
-        </li>
-        <li>
-            eaNavConfig.js
-            <ea-mask-code ea-mask-js>
-var eaNavConfig = function ($routeProvider) {
-    $routeProvider
-        .when('/:folder', {
-            templateUrl: 'app/template/computed.html',
-            controller: 'eaNaviController',
-            resolve: 'folder'
-        })    
-        .when('/:folder/:id', {
-            templateUrl: 'app/template/computed.html',
-            controller: 'eaNaviController'
-        })
-        .when('/:folder/:id/:id2', {
-            templateUrl: 'app/template/computed.html',
-            controller: 'eaNaviController'
-        })
-        .otherwise({redirectTo: '/home',
-            templateUrl: 'app/template/computed.html',
-            controller: 'eaNaviController',
-            resolve: 'home'
-        });
-    return $routeProvider;
-};
-            </ea-mask-code>
-            
-        </li>
-        <li>
-            'app/template/computed.html'
-        <ea-mask-code ea-mask-html>
-<div class="eaCard">
-    <ea-path-link></ea-path-link> 
-    <div class="eaContent">
-        <div ea-add-html = "{{url}}"></div>
-    </div>
-</div>                
-            </ea-mask-code>
-        </li>
-    </ul>
 </div>
