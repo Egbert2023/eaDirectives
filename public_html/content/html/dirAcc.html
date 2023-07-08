@@ -1,15 +1,17 @@
 <div>
-    <h1>eaAccordeon</h1>
-    <div>
+    <ea-acc-coat data-acc-title="eaAccordeon">
+        <ea-acc-key data-title="Summary and applay the functionality"
+                    data-txt-len="255">
+            <div>
         The accordion functionality consists of two directives.
         One shell and any sections. The shell &lt;ea-acc-coat ...> set the 
         title in a 'h1' tag.
         The sections &lt;ea-acc-key ...> set subtitles in a 'h2' tag and set a 
         limit to display text in the collapsed state.
-        <p>
+                <p>
         You can call this directive as follows:
-        </p>
-        <ea-mask-code ea-mask-html>
+                </p>
+                <ea-mask-code ea-mask-html>
 &lt;ea-acc-coat data-acc-title="Example of accordeon">
     &lt;ea-acc-key data-title="Sub title 1 of accordeon"
               data-txt-len="20">
@@ -22,22 +24,26 @@
 
     &lt;ea-acc-key data-title="Sub title n-th of accordeon"
               data-txt-len="10">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">First col</div>
-            <div class="col-lg-4 col-md-6 col-sm-12">Second col</div>
-            <div class="col-lg-4 col-md-6 col-sm-12">Third col</div>
-        </div>
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">First col</div>
+    <div class="col-lg-4 col-md-6 col-sm-12">Second col</div>
+    <div class="col-lg-4 col-md-6 col-sm-12">Third col</div>
+</div>
     &lt;/ea-acc-key>
 &lt;/ea-acc-coat>            
-        </ea-mask-code>
+                </ea-mask-code>        
+            </div>    
+        </ea-acc-key>    
         
-    </div>
-    
-    <ea-acc-coat data-acc-title="Example of accordeon">
+        
+        <hr style="height: 10px;  background: linear-gradient(to right, red, 50%, blue);"/>
+        <h1>Example of accordeon</h1>
+        
         <ea-acc-key data-title="Sub title 1 of accordeon"
                   data-txt-len="20">
           --- Html code for the first section ---
         </ea-acc-key>
+        
         <ea-acc-key data-title="Sub title 2 of accordeon"
                   data-txt-len="10">
           --- Html code for the second section ---
@@ -50,6 +56,8 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">Second col</div>
                 <div class="col-lg-4 col-md-6 col-sm-12">Third col</div>
             </div>
-        </ea-acc-key>
+        </ea-acc-key>   
+        <hr style="height: 10px;  background: linear-gradient(to left, red, 50%, blue);"/>
+        
     </ea-acc-coat>
 </div>

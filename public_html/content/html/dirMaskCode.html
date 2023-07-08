@@ -1,75 +1,84 @@
 <div class='eaContent'>
-    <h1>
-        eaMaskCode
-    </h1>
-
     <div>
-        The directive is an aid to displaying code as developers expect it to.
-        You can put the e.g. Html code '&lt;any-tag&gt;...&lt;/any-tag&gt;' into the tag:<br />
-        <strong>&nbsp;&lt;ea-mask-code ea-mask-html&gt;</strong><br />
-        &nbsp;&nbsp;&nbsp;&nbsp;any-code<br />
-        <strong>&nbsp;&lt;/ea-mask-code&gt;</strong><br />
+        <ea-acc-coat data-acc-title="eaMaskCode">
+            <ea-acc-key data-title="Summary">
+The directive is an aid to displaying code as developers expect it to.
+You can put the e.g. Html code 'any-html-code' into the tag:<br />
+<strong>&nbsp;&lt;ea-mask-code ea-mask-html&gt;</strong><br />
+&nbsp;&nbsp;&nbsp;&nbsp;any-html-code<br />
+<strong>&nbsp;&lt;/ea-mask-code&gt;</strong><br />
 
-        <div>
-            The attribut "ea-mask-[type]" in the tag can use different values. 
-            <ul>
-                <li><strong>html</strong> - for Html code</li>
-                <li><strong>js</strong> - for JavaScript code</li>
-                <li><strong>json</strong> - for JSON file</li>
-                <li><strong>css</strong> - for CSS file</li>
-            </ul>
-        </div>
-        <div>
-        The attribute ea-mask-[type] is an additional directive that adds exactly 
-        one function 'rowChange()' to the current scope of directive 'eaMaskCode'. 
-        This function implements the necessary adjustments for the selected code type. 
-        If you need other code conversions than the existing ones, this can be 
-        done by additional your own directives.
-        </div>
-        <div>
+                <div>
+The attribut "ea-mask-[type]" in the tag can use different values. 
+                    <ul>
+                        <li><strong>html</strong> - for Html code</li>
+                        <li><strong>js</strong> - for JavaScript code</li>
+                        <li><strong>json</strong> - for JSON file</li>
+                        <li><strong>css</strong> - for CSS file</li>
+                    </ul>
+                </div>
+                <div>        
+The attribute ea-mask-[type] is an additional directive that adds exactly 
+one function 'rowChange(row)' to the current scope of directive 'eaMaskCode'. 
+This function implements the necessary adjustments for the selected code type. 
+                </div>
+        
+        
+            </ea-acc-key>
+            <ea-acc-key data-title="Expanded">
+If you need other code conversions than the existing ones, this can be 
+done by additional your own directives.
+        
+                <div>
         Look at the examples and create your own directive (e.g. emmaMaskPhp). 
         In order to integrate this directive, the corresponding file must be 
         integrated in the <strong>index.html</strong>
-        <ea-mask-code ea-mask-html>
+                    <ea-mask-code ea-mask-html>
 &lt;script src="app/directive/emmaMaskPhp.js" type="text/javascript">&lt;/script>  
-        </ea-mask-code>
+                    </ea-mask-code>
         and the directive must be declared in the <strong>app.js</strong> file. 
-        <ea-mask-code ea-mask-js>            
+                    <ea-mask-code ea-mask-js>            
 eaDir.directive('emmaMaskPhp', [emmaMaskPhp]).$inject = ['$scope'];
-        </ea-mask-code>
+                    </ea-mask-code>
         Now you can add your directive as a new attribute in the 
         tag 
-        <ea-mask-code ea-mask-html>
+                    <ea-mask-code ea-mask-html>
 &lt;ea-mask-code emma-mask-php="emma-mask-php">
     ...php code ... 
 &lt;\ea-mask-code>
-        </ea-mask-code>
-        </div>
-        <br />
+                    </ea-mask-code>
+                </div>
+            </ea-acc-key> 
+            <ea-acc-key data-title="Apply the functionality">
+                <div>
+The code to be displayed is to be embedded in the following Html tags.
+                    <ea-mask-code ea-mask-html>
+&lt;ea-mask-code ea-mask-[type]>
+    -- code of type = [type] to be displayed -- 
+&lt;/ea-mask-code>
+                    </ea-mask-code>
+                </div>
         <!-- <div class='alert alert-warning'> -->
-        <div class='alert alert-info'>
-            <p>
-            <strong>Note:</strong> If you want to display AngularJs directives 
-            as HTML code or other html elements inner javascript, it is imperative that you escape them. 
-            The internal Angular mechanism to implement this directive 
-            occurs before the masking takes place. That is why your code is 
-            modified before it can be prepared for display by the mask code. 
-            <br />The masking is done, for example, by replacing all '&lt;' 
-            character of the tag with '&amp;lt;'. Angular can no longer recognize and 
-            manipulate this tag.<br />
-            If there are display errors within the maskJs function, it is necessary 
-            to replace all characters &lt; by &amp;lt;. <br />
-            All div tags (opening and closing) should be escaped.<br />
-            All Html syntax errors must be eliminated by masking.
-            </p>
-        </div>
+                <div class='alert alert-info'>
+<strong>Note:</strong> If you want to display AngularJs directives 
+as HTML code or other html elements inner javascript, it is imperative that you escape them. 
+The internal Angular mechanism to implement this directive 
+occurs before the masking takes place. That is why your code is 
+modified before it can be prepared for display by the mask code. 
+<br />The masking is done, for example, by replacing all '&lt;' 
+character of the tag with '&amp;lt;'. Angular can no longer recognize and 
+manipulate this tag.<br />
+If there are display errors within the maskJs function, it is necessary 
+to replace all characters &lt; by &amp;lt;. <br />
+All div tags (opening and closing) should be escaped.<br />
+All Html syntax errors must be eliminated by masking.
+                </div>        
+                <div>            
+In the right top corner is a copy button to put the code into the clipboard.
+                </div>        
+            </ea-acc-key> 
         
-        <div>            
-        In the right top corner is a copy button to put the code into the clipboard.
-        </div>        
-        
-        <ea-acc-coat data-acc-title="">
-            <ea-acc-key data-title="example with html type">
+            <ea-acc-key data-title="Example with html type">
                 <ea-mask-code ea-mask-html>
 <div class="eaContent">
     <h2 class='bold' style='color: blueviolet; background-color: #f2ffe6;'>Subtitle</h2>
@@ -79,7 +88,7 @@ eaDir.directive('emmaMaskPhp', [emmaMaskPhp]).$inject = ['$scope'];
                 </ea-mask-code>
             </ea-acc-key>
 
-            <ea-acc-key data-title="example with JavaScript type">
+            <ea-acc-key data-title="Example with JavaScript type">
                 <ea-mask-code ea-mask-js>
 'use strict';
 
@@ -125,7 +134,7 @@ var eaMaskHtml = function () {
 };                </ea-mask-code>                
             </ea-acc-key>
             
-            <ea-acc-key data-title="example with CSS type">
+            <ea-acc-key data-title="Example with CSS type">
                 <ea-mask-code ea-mask-css>
 /* Default customization */
 h1 {

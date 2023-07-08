@@ -1,28 +1,58 @@
 <div>
-    <h1>eaNavi</h1>
-    <div>
-        <h2>This directive has the task of creating the complete menu and also 
-            provides a generated sitemap.</h2>
-        <p>
+    <ea-acc-coat data-acc-title="eaNavi">
+        <ea-acc-key data-title="Summary"
+                    data-txt-len="200">
+            <p>
+This directive has the task of creating the complete menu and also provides a generated sitemap.
+            </p>        
         It is waiting for event "LoadJsonFile-naviList" to fire.
         This come from the directive <a target="_blank" href="#!/dirc/lj">"eaLoadJson"</a>.
-        </p>
-        <p>
-            The initialization of the menu or the sitemap is triggered with the following call.
-        </p>
-        <ea-mask-code ea-mask-HTML>
+            
+        </ea-acc-key>
+        <ea-acc-key data-title="Applay the functionality"
+                    data-txt-len="200">
+            
+The parameters used are stored in the naviList.json file with the following structure:
+            <ea-mask-code ea-mask-json>       
+{ {"id":"navStart", "label": "Home", "href": "#!/home", "url": "content/html/home.html", "imgKey": "",
+    "subm": []},
+
+ {"id":"navDir", "label": "Directives", "href": "#!/dirc",  "url": "content/html/dirAll.html", "imgKey": "",
+    "subm": [ {"label": "eaMaskCode", "href": "#!/dirc/mc", "url": "content/html/dirMaskCode.html", "imgKey": ""},
+        {"label": "eaAccording", "href": "#!/dirc/ac", "url": "content/html/dirAcc.html", "imgKey": ""},
+        {"label": "eaPathLink", "href": "#!/dirc/pl", "url": "content/html/dirPathLink.html", "imgKey": ""},
+        {"label": "eaNavi", "href": "#!/dirc/nv", "url": "content/html/dirNavi.html", "imgKey": ""},
+        {"label": "eaAddHtml", "href": "#!/dirc/ah", "url": "content/html/dirAddHtml.html", "imgKey": ""},
+        {"label": "eaLoadJson", "href": "#!/dirc/lj", "url": "content/html/dirLoadJson.html", "imgKey": ""},
+        {"label": "eaImgBox", "href": "#!/dirc/ib", "url": "content/html/dirImgBox.html", "imgKey": ""}]},
+
+ {"id":"navService", "label": "Service", "href": "#!/srv", "url": "content/html/service.html", "imgKey": "",
+    "subm": [ {"label": "SiteMap", "href": "#!/srv/smap", "url": "app/template/siteMap2.html", "imgKey": ""}, 
+        {"label": "Cookie Richtlinie", "href": "#!/srv/cookies", "url": "content/html/CookiesNotRequired.html", "imgKey": ""}, 
+        {"label": "Impressum", "href": "#!/srv/imp", "url": "content/html/impressum.html", "imgKey": ""}, 
+        {"label": "Datenschutz", "href": "#!/srv/ds", "url": "content/html/datenschutz2.html", "imgKey": ""}, 
+        {"label": "Software-Lizenzen", "href": "#!/srv/license", "url": "LICENSE.html", "imgKey": ""}
+ ]}}
+            </ea-mask-code>
+            <p>
+The initialization of the menu or the sitemap is triggered with the following call.
+            </p>
+            <ea-mask-code ea-mask-html>
 <!-- for menu -->            
 &lt;ea-navi data-nav-logo="pictures/navLogo.jpg" data-nav-mode="menu">&lt;/ea-navi>
 
 <!-- for siteMap --> 
 &lt;ea-navi data-nav-mode="sitemap">&lt;/ea-navi>
-        </ea-mask-code>        
-        <hr />
+            </ea-mask-code>   
+        </ea-acc-key>
+        
+        <ea-acc-key data-title="Technical implementation"
+                    data-txt-len="200">
         In order to fully parameterize the menu, it was necessary to generalize 
         the Angular routing. For this I use the routing provider with parameters, 
         a fixed controller and a computed templateURL "computed.html". 
-        <br /><strong>eaNavConfig.js</strong>
-        <ea-mask-code ea-mask-js>
+            <br /><strong>eaNavConfig.js</strong>
+            <ea-mask-code ea-mask-js>
 var eaNavConfig = function ($routeProvider) {
     $routeProvider
         .when('/:folder', {
@@ -45,33 +75,32 @@ var eaNavConfig = function ($routeProvider) {
         });
     return $routeProvider;
 };
-        </ea-mask-code>
-        <br />
-        <p>
-        and the <a target="_blank" href="#!/dirc/ah">"eaAddHtml"</a> directive inner "computed.html".
-        </p>
-        <strong>computed.html</strong>
-        <ea-mask-code ea-mask-html>
+            </ea-mask-code>
+            <br />
+            <p>
+and the <a target="_blank" href="#!/dirc/ah">"eaAddHtml"</a> directive inner "computed.html".
+            </p>
+            <strong>computed.html</strong>
+            <ea-mask-code ea-mask-html>
 <div class="eaCard">
     &lt;ea-path-link>&lt;/ea-path-link> 
     <div class="eaContent">
         &lt;div ea-add-html = "&lang;{url}}">&lt;/div>
     </div>
 </div>            
-        </ea-mask-code>
-        <br />
-        <div class='alert alert-info'>
-            <strong>Annotation: </strong>
-            The provider is prepared for displaying menus with a maximum of 
-            three levels. However, this only affects the href component of the 
-            menu item, not the used structure depth of the menu.<br />
-        All routing processes are directed to a fixed HTML page (computed.html), 
-        which loads the desired HTML page from server by the parameters from naviList.json.    
-        </div>        
-        
-        <div>
-            The following css file is used to display the menu and the siteMap.
-            <ea-mask-code ea-mask-css>
+            </ea-mask-code>
+            <br />
+            <div class='alert alert-info'>
+<strong>Annotation: </strong>
+The provider is prepared for displaying menus with a maximum of 
+three levels. However, this only affects the href component of the 
+menu item, not the used structure depth of the menu.<br />
+All routing processes are directed to a fixed HTML page (computed.html), 
+which loads the desired HTML page from server by the parameters from naviList.json.    
+            </div>        
+            <div>
+The following css file is used to display the menu and the siteMap.
+                <ea-mask-code ea-mask-css>
 /* EA - SiteMap*/
 .sitemap, .sitemap-item a {
     text-decoration: none;
@@ -132,17 +161,14 @@ ul:hover > li {position: relative;}
     text-decoration: none;
     background-color: #fff;    
 }                
-            </ea-mask-code>
-        </div>
-        
-        <div>
-            The sitemap is generated automatically using the following link. 
-            <a target="_blank" href="#!/srv/smap">"siteMap"</a>
-             
-            The link points to the following page:
-            <br /><strong>"siteMap2.html"</strong>
-            
-            <ea-mask-code ea-mask-html>
+                </ea-mask-code>
+            </div>        
+            <div>
+The sitemap is generated automatically using the following link. 
+<a target="_blank" href="#!/srv/smap">"siteMap"</a>
+The link points to the following page:
+                <br /><strong>"siteMap2.html"</strong>
+                <ea-mask-code ea-mask-html>
 &lt;div class="eaContent">
     <h1>SiteMap
         <button ng-show="getUrlParam()==='Admin'" type="button" ng-click="downloadSiteMaps()" class="btn btn-light">
@@ -151,20 +177,20 @@ ul:hover > li {position: relative;}
     </h1>
     &lt;ea-navi data-nav-mode="sitemap">&lt;/ea-navi>
 &lt;/div>
-            </ea-mask-code>
-            A button can also be seen in the coding, which is initially not displayed.
-            This button calls up an export function for the two sitemap files 
-            "sitemap.xml" and "sitemapimages.xml". These two files are intended 
-            to support searches from all search engines.    
-            <br />
-            The button can be made visible with the following link: 
-            <a target="_blank" href="#!/srv/smap?Admin">SiteMap with export</a>
-        </div>
-        In order to tell the search engines which files contain the required 
-        information, the robots.txt file and the two sitemap files must be added to the root directory 
-        of the web application.
-        <br /><strong>Example of robots.txt</strong>
-        <ea-mask-code ea-mask-html>
+                </ea-mask-code>
+A button can also be seen in the coding, which is initially not displayed.
+This button calls up an export function for the two sitemap files 
+"sitemap.xml" and "sitemapimages.xml". These two files are intended 
+to support searches from all search engines.    
+                <br />
+The button can be made visible with the following link: 
+<a target="_blank" href="#!/srv/smap?Admin">SiteMap with export</a>
+            </div>
+In order to tell the search engines which files contain the required 
+information, the robots.txt file and the two sitemap files must be added to the root directory 
+of the web application.
+<br /><strong>Example of robots.txt</strong>
+            <ea-mask-code ea-mask-html>
 # www.robotstxt.org/
 
 # Allow crawling of all content
@@ -173,10 +199,7 @@ Disallow:
 
 Sitemap: http://aleksander.de/sitemap.xml
 Sitemap: http://aleksander.de/sitemapimages.xml
-        </ea-mask-code>
-
-        
-        
-    </div>
-    
+            </ea-mask-code>
+        </ea-acc-key>
+    </ea-acc-coat>
 </div>
