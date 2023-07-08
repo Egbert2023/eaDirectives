@@ -1,26 +1,30 @@
 <div>
-    <h1>eaPathLink</h1>
-    <div>
-        The eaPathLink functionality is automatically used at the beginning of each HTML page
-        <p>
-        The WebInfo application uses this directive when calling up the 
-        Html pages in the menu in a parameterized manner as TemplateUrl 
-        'computed.html'. 
-        </p>
-        <ea-mask-code ea-mask-html>
+    <ea-acc-coat data-acc-title="eaPathLink">
+        <ea-acc-key data-title="Summary and applay the functionality"
+                    data-txt-len="200">
+            <div>
+The eaPathLink functionality is automatically used at the beginning of each HTML page
+                <p>
+The WebInfo application uses this directive when calling up the 
+Html pages in the menu in a parameterized manner as TemplateUrl 
+                </p>
+                <strong>'computed.html'</strong>. 
+                <ea-mask-code ea-mask-html>
 <div class="eaCard">
     <ea-path-link></ea-path-link> 
     <div class="eaContent">
         &lt;div ea-add-html = "&lang;{url}}">&lt;/div>
     </div>
 </div>
-        </ea-mask-code>
-        
-        You can see the result at the top of every html page.
-    </div>    
-    <div>
+                </ea-mask-code>
+You can see the result at the top of every html page.
+            </div>   
+        </ea-acc-key>
+        <ea-acc-key data-title="Technical implementation"
+                    data-txt-len="40">
+            <div>
         The directive uses the following coding
-        <ea-mask-code ea-mask-js>
+                <ea-mask-code ea-mask-js>
 'use strict';
 var eaPathLinkDirective = function ($rootScope, $location, navSrv) {
   return {
@@ -49,14 +53,15 @@ var eaPathLinkDirective = function ($rootScope, $location, navSrv) {
         });
     }
   };
-};      </ea-mask-code>
-    </div>
-    
-    <div>
-        The templateUrl: "app/template/pathLink.html" looks like this.
-    </div>
+};          
+                </ea-mask-code>
+            </div>
+        
+            <div>
+The templateUrl: "app/template/pathLink.html" looks like this.
+            </div>
 
-    <ea-mask-code ea-mask-html>
+            <ea-mask-code ea-mask-html>
 &lt;div class="eaLinkPath eaContent">
     &lt;span ng-repeat="o in currLink">
         <a ng-show="{{currLink.length}}>{{$index+1}}"
@@ -68,5 +73,7 @@ var eaPathLinkDirective = function ($rootScope, $location, navSrv) {
         &lt;/span>
     &lt;/span>    
 &lt;/div>
-    </ea-mask-code>    
+            </ea-mask-code>    
+        </ea-acc-key>
+    </ea-acc-coat>            
 </div>
