@@ -1,14 +1,20 @@
 <div>
-    <h1>Example for eaAddHtml</h1>
-    <p>We add the page "Example of accordeon" between two collored lines as a example for add Html.</p>
-    <p>The call is as follow:</p>
-    <ea-mask-code ea-mask-html>
-&lt;div ea-add-html = "content/html/dirAcc.html">&lt;/div>
-    </ea-mask-code>
-    <p>The result is as follow:</p>
-    <hr style="height: 10px;  background: linear-gradient(to right, red, 50%, blue);"/>
-    
-    <div ea-add-html = "content/html/dirAcc.html"></div>
-    
-    <hr style="height: 10px;  background: linear-gradient(to left, red, 50%, blue);"/>
+    <h1>eaAddHtml</h1>
+    <h2>Summary</h2>
+    <div>
+    This directive integrates another html page into an existing one. It is used 
+    in the parameterization of the angular routing mechanism. 
+    But it can also be used within your own application.
+        
+        <h2>Applay the functionality</h2>
+        <p>We add the page "Example of dirPathLink" between two collored lines as a example for add Html.</p>
+        <p>The call is as follow:</p>
+        <ea-mask-code ea-mask-html>
+&lt;div ea-add-html = "content/html/dirPathLink.html">&lt;/div>
+        </ea-mask-code>
+        <p>The result is as follow:</p>
+        <hr style="height: 10px;  background: linear-gradient(to right, red, 50%, blue);"/>
+        <div ea-add-html = "content/html/dirPathLink.html"></div>
+        <hr style="height: 10px;  background: linear-gradient(to left, red, 50%, blue);"/>
+    </div>
 </div>

@@ -24,8 +24,8 @@ eaDir.directive('eaNavi', ['$rootScope', '$http', '$location', '$compile', eaNav
 eaDir.directive('eaAddHtml', ['$rootScope', '$compile', '$http', eaAddHtmlDirective]).$inject = ['$scope'];
 eaDir.directive('eaPathLink', ['$rootScope', '$location', 'eaNavSrv', eaPathLinkDirective]).$inject = ['$scope'];
 //eaDir.directive('eaFooter', ['$rootScope', eaFooterDirective]).$inject = ['$scope'];
-//eaDir.directive('eaImgBox', ['$compile', '$rootScope', eaImgBox]).$inject = ['$scope'];
-//eaDir.directive('eaImg', ['$rootScope', eaImg]).$inject = ['$scope'];
+eaDir.directive('eaImgBox', ['$compile', '$rootScope', eaImgBox]).$inject = ['$scope'];
+eaDir.directive('eaImg', ['$rootScope', eaImg]).$inject = ['$scope'];
 eaDir.directive('eaAccCoat', ['$rootScope', eaAccCoat]).$inject = ['$scope'];
 eaDir.directive('eaAccKey', ['$compile', '$rootScope', eaAccKey]).$inject = ['$scope'];
 eaDir.directive('eaMaskCode', ['$compile', eaMaskCode]).$inject = ['$scope'];
