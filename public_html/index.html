@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="fw/boilerPlate/js/vendor/modernizr-2.8.3.min.js" type="text/javascript"></script>
         <link href="css/navDropdown.css" rel="stylesheet" type="text/css"/>
+        <link href="css/imgBox.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body ng-app="eaDir" ng-controller="eaDirController">
     <!--[if lt IE 8]>
@@ -27,12 +29,12 @@
     <!-- Add your site or application content here -->    
         <ea-load-json data-content-folder="content" 
                       data-json-folder="json" 
-                      data-json-files="naviList, paramsApp, objBg">
+                      data-json-files="naviList, paramsApp, objBg, imgBoxList">
         </ea-load-json>
+        <div ea-img-box></div>
         <ea-navi data-nav-logo="pictures/navLogo.jpg" data-nav-mode="menu"></ea-navi>
-    
+        
         <!--
-        <div ea-img-box></div>        
         <ea-cookies data-cookies-used="false"></ea-cookies>
         -->
         
@@ -62,13 +64,14 @@
         <script src="app/directive/eaMaskCss.js" type="text/javascript"></script>
         <script src="app/directive/eaMaskJs.js" type="text/javascript"></script>
         <script src="app/directive/eaMaskJson.js" type="text/javascript"></script>
+
+        <script src="app/directive/eaImgBox.js" type="text/javascript"></script>
+        <script src="app/directive/eaImg.js" type="text/javascript"></script>
         
         <!--
         <script src="fw/angularJs/angular-cookies.min.js" type="text/javascript"></script>
                 
         <script src="app/directive/eaFooter.js" type="text/javascript"></script>
-        <script src="app/directive/eaImgBox.js" type="text/javascript"></script>
-        <script src="app/directive/eaImg.js" type="text/javascript"></script>
         
         <script src="app/directive/eaNews.js" type="text/javascript"></script>
         <script src="app/directive/eaVideo.js" type="text/javascript"></script>

@@ -1,17 +1,20 @@
 <div>
     <ea-acc-coat data-acc-title="eaNavi">
-        <ea-acc-key data-title="Summary"
-                    data-txt-len="200">
+        <ea-acc-key data-title="Summary" data-txt-len="200">
             <p>
 This directive has the task of creating the complete menu and also provides a generated sitemap.
             </p>        
-        It is waiting for event "LoadJsonFile-naviList" to fire.
-        This come from the directive <a target="_blank" href="#!/dirc/lj">"eaLoadJson"</a>.
-            
+To ensure the functionality, it is necessary to fill the internal object 
+'naviList' before the menu is created. This can be achieved by firing 
+an event that the process is waiting for after the corresponding JSON file 
+has been successfully loaded. Or you fill the object in the JavaScript code yourself.
+Within my application I read all JSON files with the 
+<a target="_blank" href="#!/dirc/lj">"eaLoadJson"</a> directive. 
+This fires the event "LoadJsonFile-naviList" after the file has been successfully loaded.
         </ea-acc-key>
+        
         <ea-acc-key data-title="Applay the functionality"
-                    data-txt-len="200">
-            
+                    data-txt-len="200">            
 The parameters used are stored in the naviList.json file with the following structure:
             <ea-mask-code ea-mask-json>       
 { {"id":"navStart", "label": "Home", "href": "#!/home", "url": "content/html/home.html", "imgKey": "",

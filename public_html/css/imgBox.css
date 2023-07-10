@@ -1,70 +1,21 @@
-<div>    
-    <ea-acc-coat data-acc-title="eaImgBox">
-        <ea-acc-key data-title="Summary" data-txt-len="200">
-The two directives "eaImg" and "eaImgBox" together with the JSON file 
-"imgBoxList.json" and the "imgBox.css" file  form a unit for the simple 
-representation of images. The mechanism contains the functions for displaying 
-in full screen mode and a scrolling mechanism through the images of a defined group.
-            <br />
-You start full-screen mode by clicking on the image.
-            <div class="row">    
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div ea-img data-img-box-idx="1" data-img-box-key = "DE"></div>        
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div ea-img data-img-box-idx="2" data-img-box-key = "DE"></div>
-                </div>
-            </div>
-        </ea-acc-key>
-        <ea-acc-key data-title="Applay the functionality" data-txt-len="200">
-To ensure full functionality, the eaImgBox directive must be added to the "index.html" file.
-            <ea-mask-code ea-mask-html>
-&lt;div ea-img-box>&lt;/div>
-            </ea-mask-code>
-The above display can be generated as follows. The JSON file "imgBox.json" 
-describes the images of the group "DE". This file is read with the 
-<a target="_blank" href="#!/dirc/lj">"eaLoadJson"</a> directive in the 
-"index.html" file. Alternatively, you can create an object of 
-the same structure yourself if you don't want to use this directive.
-            <ea-mask-code ea-mask-json>
-{"entries":
-    [
-        {   "imgKey": "DE",
-            "imgBodyList": ["A view across the Kreuzkanal to Schwerin Castle",
-                            "The landmarks of Warnemünde, the Teepott and the Lighthouse"],
-            "imgList": ["content/pictures/Schwerin-2022-Schloss-mit-Kreuzkanal.jpg",
-                        "content/pictures/Warnemünde-2018-Teepott.jpg"]
-        }
-    ]
-}    
-            </ea-mask-code>
-The html example uses the "eaImg" directive embedded in bootstrap elements
-            <ea-mask-code ea-mask-html>
-&lt;div class="row">    
-    &lt;div class="col-lg-6 col-md-6 col-sm-12">
-        &lt;div ea-img data-img-box-idx="1" data-img-box-key = "DE">&lt;/div>        
-    &lt;/div>
-    &lt;div class="col-lg-6 col-md-6 col-sm-12">
-        &lt;div ea-img data-img-box-idx="2" data-img-box-key = "DE">&lt;/div>
-    &lt;/div>
-&lt;/div>    
-            </ea-mask-code>
-The following css file "imgBox.css" is used to display the images.
-            <ea-mask-code ea-mask-css>
 /* https://www.w3schools.com/howto/howto_js_lightbox.asp */
+
 .row > .column {
   padding: 0 8px;
 }
+
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
+
 /* Create four equal columns that floats next to eachother */
 .columnImg {
   float: left;
   width: 25%;
 }
+
 /* The Modal (background) */
 .modal {
   display: none;
@@ -76,11 +27,14 @@ The following css file "imgBox.css" is used to display the images.
   width: 100%;
   height: 100%;
   overflow: auto;
-  /* EA  */
+  /*background-color: #c0c0c0;*/
+  
+/* EA  */
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, .25);
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
-  backdrop-filter: blur(5px);  
+  backdrop-filter: blur(5px);
+  
 }
 
 /* Modal Content */
@@ -115,6 +69,7 @@ The following css file "imgBox.css" is used to display the images.
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, .25);
     backdrop-filter: blur(5px);
 }
+
 /* The Close Button */
 .close {
   color: #c0c0c0;
@@ -125,16 +80,19 @@ The following css file "imgBox.css" is used to display the images.
   font-weight: bold;
   z-index: 1051;
 }
+
 .close:hover,
 .close:focus {
   color: #999;
   text-decoration: none;
   cursor: pointer;
 }
+
 /* Hide the slides by default */
 .mySlides {
     background-color: #ddd;
 }
+
 /* Next & previous buttons */
 .prev,
 .next {
@@ -157,29 +115,37 @@ The following css file "imgBox.css" is used to display the images.
 .prev {
     left: 0;
 }
+
 /* Position the "next button" to the right */
 .next {
   right: 0;
+/*  border-radius: 3px 0 0 3px;*/
 }
+
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
 /* Number text (1/3 etc) */
 .numbertext {
+    /*  #f2f2f2 */
   color: #21a828;
   font-size: 12px;
   padding: 8px 12px;
   position: absolute;
   top: -10px;
 }
+
 /* Caption text */
 .caption-container {
   text-align: center;
+/*  background-color: black;*/
   padding: 5px 16px;
   color: #ddd;
 }
+
 img.myImgControll {
   opacity: 0.6;
 }
@@ -187,22 +153,27 @@ img.myImgControll {
     display: none;
     width: auto;
     height: auto;
+  
+/*    justify-content: center; 
     align-items: center;*/
+
+/*    object-fit: cover;   */
     max-width: 100%;
     max-height: 750px;
+
+    
+    /*overflow: auto;*/
 }
+
 .active,
 .myImgControll:hover {
   opacity: 1;
 }
+
 img.hover-shadow {
   transition: 0.3s;
 }
+
 .hover-shadow:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}    
-            </ea-mask-code>
-            
-        </ea-acc-key>            
-    </ea-acc-coat>
-</div>
+}

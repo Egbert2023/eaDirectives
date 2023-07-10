@@ -1,13 +1,13 @@
 <div>
     <h1>eaLoadJson</h1>
-    With the following call in the index.html file, all 5 Json files are read 
-    and fill there into the objects with the same name on $rootScope.
+With the following call in the index.html file, all 5 Json files are read 
+and fill there into the objects with the same name on $rootScope.
     <br /><br />
     <div class='alert alert-info'>
-      <strong>Notice:</strong> When rendering Html tags handled by AngularJs it is 
-      advisable to mask the tags. 
-      Without a mask, they are manipulated by Angular before they are displayed. 
-      It is sufficient to use the code "&amp;lt;" instead of the sign "<".
+<strong>Notice:</strong> When rendering Html tags handled by AngularJs it is 
+advisable to mask the tags. 
+Without a mask, they are manipulated by Angular before they are displayed. 
+It is sufficient to use the code "&amp;lt;" instead of the sign "<".
     </div>
     <ea-mask-code ea-mask-html>            
 &lt;ea-load-json   
@@ -17,16 +17,16 @@
 &lt;/ea-load-json>        
     </ea-mask-code>
     <br />
-    Since reading the Json files is an asynchronous call, it must be ensured for safe further processing that the corresponding objects are also filled.
+Since reading the Json files is an asynchronous call, it must be ensured for safe further processing that the corresponding objects are also filled.
     <br />
-    When the list [?] is loaded, a parameter $rootScope.isLoaded_[?] is set to 'true' 
+When the list [?] is loaded, a parameter $rootScope.isLoaded_[?] is set to 'true' 
     <br />
-    and an event "LoadJsonFile-[?]" is fired. You can whait for finish the loading 
-    by the call e.g. for the file "naviList":
+and an event "LoadJsonFile-[?]" is fired. You can whait for finish the loading 
+by the call e.g. for the file "naviList":
     <ea-mask-code ea-mask-js>
-    $rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
-        $scope.naviList = $rootScope.naviList;
-    });
+$rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
+    $scope.naviList = $rootScope.naviList;
+});
     </ea-mask-code>
 
 </div>
