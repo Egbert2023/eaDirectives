@@ -60,3 +60,56 @@ You can call this directive as follows:
  </ea-acc-key>
 </ea-acc-coat>
 ```
+
+## eaPathLink
+The eaPathLink functionality is automatically used at the beginning of each HTML page
+The WebInfo application uses this directive when calling up the Html pages in the menu in a parameterized manner as TemplateUrl
+'computed.html'.
+```html
+<div class="eaCard">
+  <ea-path-link></ea-path-link>
+  <div class="eaContent">
+    <div ea-add-html = "⟨{url}}"></div>
+  </div>
+</div>
+```
+You can see the result in this application at the top of every html page.
+
+## eaNavi
+This directive has the task of creating the complete menu and also provides a generated sitemap.
+
+To ensure the functionality, it is necessary to fill the internal object 'naviList' before the menu is created. This can be achieved by firing an event that the process is waiting for after the corresponding JSON file has been successfully loaded. Or you fill the object in the JavaScript code yourself. Within my application I read all JSON files with the "eaLoadJson" directive. This fires the event "LoadJsonFile-naviList" after the file has been successfully loaded.
+
+## eaAddHtml
+This directive integrates another html page into an existing one. It is used in the parameterization of the angular routing mechanism. But it can also be used within your own application.
+### Applay the functionality
+We add the page "Example of dirPathLink".
+The call is as follow:
+```html
+<div ea-add-html = "content/html/dirPathLink.html"></div>
+```
+## eaLoadJson
+With the following call in the index.html file, all 5 Json files are read and fill there into the objects with the same name on $rootScope.
+
+**Notice:**
+```
+When rendering Html tags handled by AngularJs it is advisable to mask the tags. Without a mask,
+they are manipulated by Angular before they are displayed. It is sufficient to use the code "&lt;"
+instead of the sign "<".
+```
+
+```html
+<ea-load-json
+   data-content-folder="content"
+   data-json-folder="json"
+   data-json-files="naviList, paramsApp, objBg, imgBoxList, newsList">
+</ea-load-json>
+```
+Since reading the Json files is an asynchronous call, it must be ensured for safe further processing that the corresponding objects are also filled.
+When the list [?] is loaded, a parameter $rootScope.isLoaded_[?] is set to 'true'
+and an event "LoadJsonFile-[?]" is fired. You can whait for finish the loading by the call e.g. for the file "naviList":
+```javascript
+$rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
+   $scope.naviList = $rootScope.naviList;
+});
+```
