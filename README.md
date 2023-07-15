@@ -4,13 +4,17 @@ The application contains some directives for AngularJs that can be used for your
 Directives for AngularJs
 1. eaMaskCode
 2. eaAccordeon
-3. eaLoadParams - 
-4. eaNivi - 
-5. eaImgBox - 
-6. eaCookies - 
-7. eaPathLink - 
+3. eaPathLink 
+4. eaNivi
+5. eaAddHtml
+6. eaLoadJson
+7. eaImgBox
+8. eaNews
+9. eaVideo
+10. eaCookies 
 
-## eaMaskCode
+
+## 1. eaMaskCode
 The directive is an aid to displaying code as developers expect it to. You can put the e.g. Html code 'any-html-code' into the tag:
 ``html
  <ea-mask-code ea-mask-html>
@@ -40,7 +44,7 @@ Now you can add your directive as a new attribute in the tag
 ...php code ...
 <\ea-mask-code>
 ```
-## eaAccordeon
+## 2. eaAccordeon
 The accordion functionality consists of two directives. One shell and any sections. The shell <ea-acc-coat ...> set the title in a 'h1' tag. The sections <ea-acc-key ...> set subtitles in a 'h2' tag and set a limit to display text in the collapsed state.
 You can call this directive as follows:
 ```html
@@ -61,7 +65,7 @@ You can call this directive as follows:
 </ea-acc-coat>
 ```
 
-## eaPathLink
+## 3. eaPathLink
 The eaPathLink functionality is automatically used at the beginning of each HTML page
 The WebInfo application uses this directive when calling up the Html pages in the menu in a parameterized manner as TemplateUrl
 'computed.html'.
@@ -75,12 +79,13 @@ The WebInfo application uses this directive when calling up the Html pages in th
 ```
 You can see the result in this application at the top of every html page.
 
-## eaNavi
+## 4. eaNavi
 This directive has the task of creating the complete menu and also provides a generated sitemap.
 
 To ensure the functionality, it is necessary to fill the internal object 'naviList' before the menu is created. This can be achieved by firing an event that the process is waiting for after the corresponding JSON file has been successfully loaded. Or you fill the object in the JavaScript code yourself. Within my application I read all JSON files with the "eaLoadJson" directive. This fires the event "LoadJsonFile-naviList" after the file has been successfully loaded.
 
-## eaAddHtml
+## 5. eaAddHtml
+### Summary
 This directive integrates another html page into an existing one. It is used in the parameterization of the angular routing mechanism. But it can also be used within your own application.
 ### Applay the functionality
 We add the page "Example of dirPathLink".
@@ -88,7 +93,7 @@ The call is as follow:
 ```html
 <div ea-add-html = "content/html/dirPathLink.html"></div>
 ```
-## eaLoadJson
+## 6. eaLoadJson
 With the following call in the index.html file, all 5 Json files are read and fill there into the objects with the same name on $rootScope.
 
 **Notice:**
@@ -113,3 +118,43 @@ $rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
    $scope.naviList = $rootScope.naviList;
 });
 ```
+## 7. eaImgBox
+### Summary
+The two directives "eaImg" and "eaImgBox" together with the JSON file "imgBoxList.json" and the "imgBox.css" file form a unit for the simple representation of images. The mechanism contains the functions for displaying in full screen mode and a scrolling mechanism through the images of a defined group.
+You start full-screen mode by clicking on the image.
+
+### Applay the functionality
+To ensure full functionality, the eaImgBox directive must be added to the "index.html" file.
+```html
+<div ea-img-box></div>
+```
+The above display can be generated as follows. The JSON file "imgBox.json" describes the images of the group "DE". This file is read with the "eaLoadJson" directive in the "index.html" file. Alternatively, you can create an object of the same structure yourself if you don't want to use this directive.
+```json
+{"entries":
+  [
+    { "imgKey": "DE",
+      "imgBodyList": ["A view across the Kreuzkanal to Schwerin Castle",
+      "The landmarks of Warnemünde, the Teepott and the Lighthouse"],
+      "imgList": ["content/pictures/Schwerin-2022-Schloss-mit-Kreuzkanal.jpg",
+      "content/pictures/Warnemünde-2018-Teepott.jpg"]
+    }
+  ]
+}
+```
+The html example uses the "eaImg" directive embedded in bootstrap elements
+```html
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12">
+    <div ea-img data-img-box-idx="1" data-img-box-key = "DE"></div>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12">
+    <div ea-img data-img-box-idx="2" data-img-box-key = "DE"></div>
+  </div>
+</div>
+```
+
+## 8. eaNews
+
+## 9. eaVideo
+
+## 10. eaCookies
