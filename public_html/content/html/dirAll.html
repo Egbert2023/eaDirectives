@@ -1,20 +1,29 @@
 <div>
-    <h1>Übersicht der bereitgestellten Direktiven</h1>
+    <h1>Overview of the provided directives</h1>
     <ul>
-        <li><strong>eaAccCoat und eaAccKey</strong> - Die Akkordionfunktion (z.B wie diese Webseite) wird mit zwei Tag's unterstützt. (&lt;ea-acc-coat .../&gt; und &lt;ea-acc-key .../&gt;)<br />vgl. "Spezielle Funktionen" auf dieser Seite unten.</li>
-        <li><strong>eaAddHtml</strong> - Das Nachladen von Html Dateien wird für die Trennung von Applikation und Content benötigt.</li>
-        <li><strong>eaFooter</strong> - Stellt die Footer.html als fixen Footer dar.</li>
-        <li><strong>eaImg und eaImgBox</strong> - Darstellung von Bilder oder Gruppen von Bildern (vgl. imgBoxList.json) in eigenen Html Dateien sowie deren Vollbilddarstellung. <br />vgl. "Spezielle Funktionen" auf dieser Seite unten.</li>
-        <li><strong>eaLoadParams</strong> - Liest alle JSON Dateien ein und legt sie in Javascript Objekten ab. Damit stehen sie für die Applikation jeder Zeit zur Verfügung.</li>
-        <li><strong>eaNav</strong> - Stellt mit der Datei 'naviList.json' die komplette Navigation bereit und erzeugt das Navigationsmenü. Alternativ kann eine SiteMap generiert werden, die zur Anzeige in der Applikation verwendet wird.</li>
-        <li><strong>eaVideo</strong> - Diese Direktive vereinfacht das Einbinden kleiner Videos, die gemeinsam mit dem eigenen Content abgelegt sind.
-        <li><strong>eaCookies</strong> - Diese Direktive unterstützt die Verwaltung von Cookies. Der gesamte Inhalt des Cookie-Banners ist in Parametern in der JSON Datei 'paramsApp.json' abgelegt. 
-                                         Mit dem Parameter (data-cookies-used="false") kann die Verwendung der Cookies ausgeschaltet werden. (Wie in dieser Applikation)
-        <li><strong>eaPathLink</strong> - Diese Direktive befindet sich am Anfang jeder Html-Seite und stellt den Link zu der aktuellen Seite mit seinen übergeordneten Seite dar.
-            <br /><br />z.B. Die Seite SiteMap
+        <li><strong>eaMaskCode with eaMask-html|css|json|js</strong> - The directive 
+            is an aid to displaying code as developers expect it to. You can put 
+            the e.g. Html code 'any-html-code' into the tag.
+        <li><strong>eaAccording</strong> - The accordion function is supported with 
+                    two tags. (&lt;ea-acc-coat .../&gt; and &lt;ea-acc-key .../&gt;)    
+        
+        
+        <li><strong>eaPathLink</strong> - This directive is at the top of every html page and represents the link to the current page and its parent page.
+            <br /><br />e.g. The SiteMap page
             <div class='eaCard' style="display:inline; width: 350px; margin-left: 5px; min-height: 14px;">
                 <i style="text-decoration: underline">Service</i> <i class="bi-arrow-return-right"></i>SiteMap
             </div>                            
         </li>
+        <li><strong>eaNavi</strong> - Provides the complete navigation with the file 'naviList.json' and creates the navigation menu. Alternatively, a SiteMap can be generated, which is used for display in the application.</li>
+        <li><strong>eaAddHtml</strong> - The reloading of Html files is required for the separation of application and content.</li>
+        <li><strong>eaLoadJson</strong> - Reads all JSON files and stores them in Javascript objects. This means that they are available for the application at any time.</li>        
+        
+        <li><strong>eaImg und eaImgBox</strong> - Display of images or groups of images (see imgBoxList.json) in their own Html files and their full-screen display.</li>
+        <li><strong>eaNews</strong> - The reloading of Html files is required for the separation of application and content.</li>
+        <li><strong>eaVideo</strong> - This directive simplifies the integration of small videos that are stored together with your own content.</li>
+        
+        <li><strong>eaCookies</strong> - This directive supports the management of cookies. The entire content of the cookie banner is stored in parameters in the JSON file 'paramsApp.json'.
+                                         The use of cookies can be switched off with the parameter (data-cookies-used="false"). (As in this application)</li>
+        <li><strong>eaFooter</strong> - Displays the Footer.html as a fixed footer.</li>
     </ul>
 </div>

@@ -8,9 +8,12 @@
                 {"label": "eaAccording", "href": "#!/dirc/ac", "url": "content/html/dirAcc.html", "imgKey": ""},
                 {"label": "eaPathLink", "href": "#!/dirc/pl", "url": "content/html/dirPathLink.html", "imgKey": ""},
                 {"label": "eaNavi", "href": "#!/dirc/nv", "url": "content/html/dirNavi.html", "imgKey": ""},
-                    {"label": "eaAddHtml", "href": "#!/dirc/ah", "url": "content/html/dirAddHtml.html", "imgKey": ""},
-                    {"label": "eaLoadJson", "href": "#!/dirc/lj", "url": "content/html/dirLoadJson.html", "imgKey": ""},
-                    {"label": "eaImgBox", "href": "#!/dirc/ib", "url": "content/html/dirImgBox.html", "imgKey": ""}]},
+                {"label": "eaAddHtml", "href": "#!/dirc/ah", "url": "content/html/dirAddHtml.html", "imgKey": ""},
+                {"label": "eaLoadJson", "href": "#!/dirc/lj", "url": "content/html/dirLoadJson.html", "imgKey": ""},
+                {"label": "eaImgBox", "href": "#!/dirc/ib", "url": "content/html/dirImgBox.html", "imgKey": "DE"},
+                {"label": "eaNews", "href": "#!/dirc/ne", "url": "content/html/dirNews.html", "imgKey": ""},
+                {"label": "eaVideo", "href": "#!/dirc/vd", "url": "content/html/dirVideo.html", "imgKey": ""}
+            ]},
         
         {"id":"navService", "label": "Service", "href": "#!/srv", "url": "content/html/service.html", "imgKey": "",
             "subm": [ {"label": "SiteMap", "href": "#!/srv/smap", "url": "app/template/siteMap2.html", "imgKey": ""}, 
