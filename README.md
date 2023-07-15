@@ -40,26 +40,23 @@ Now you can add your directive as a new attribute in the tag
 ...php code ...
 <\ea-mask-code>
 ```
-##eaAccordeon
+## eaAccordeon
 The accordion functionality consists of two directives. One shell and any sections. The shell <ea-acc-coat ...> set the title in a 'h1' tag. The sections <ea-acc-key ...> set subtitles in a 'h2' tag and set a limit to display text in the collapsed state.
 You can call this directive as follows:
-'''html
+```html
 <ea-acc-coat data-acc-title="Example of accordeon">
-<ea-acc-key data-title="Sub title 1 of accordeon"
-data-txt-len="20">
---- Html code for the first section ---
-</ea-acc-key>
-<ea-acc-key data-title="Sub title 2 of accordeon"
-data-txt-len="10">
---- Html code for the second section ---
-</ea-acc-key>
-<ea-acc-key data-title="Sub title n-th of accordeon"
-data-txt-len="10">
-<div class="row">
-<div class="col-lg-4 col-md-6 col-sm-12">First col</div>
-<div class="col-lg-4 col-md-6 col-sm-12">Second col</div>
-<div class="col-lg-4 col-md-6 col-sm-12">Third col</div>
-</div>
-</ea-acc-key>
+ <ea-acc-key data-title="Sub title 1 of accordeon" data-txt-len="20">
+ --- Html code for the first section ---
+ </ea-acc-key>
+ <ea-acc-key data-title="Sub title 2 of accordeon" data-txt-len="10">
+ --- Html code for the second section ---
+ </ea-acc-key>
+ <ea-acc-key data-title="Sub title n-th of accordeon" data-txt-len="10">
+  <div class="row">
+   <div class="col-lg-4 col-md-6 col-sm-12">First col</div>
+   <div class="col-lg-4 col-md-6 col-sm-12">Second col</div>
+   <div class="col-lg-4 col-md-6 col-sm-12">Third col</div>
+  </div>
+ </ea-acc-key>
 </ea-acc-coat>
 ```
