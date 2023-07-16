@@ -64,12 +64,12 @@ The templateUrl: "app/template/pathLink.html" looks like this.
             <ea-mask-code ea-mask-html>
 &lt;div class="eaLinkPath eaContent">
     &lt;span ng-repeat="o in currLink">
-        <a ng-show="{{currLink.length}}>{{$index+1}}"
+        <a ng-show="&lang;{currLink.length}}>&lang;{$index+1}}"
             style="color: #222" 
-            href="{{o.href}}">{{o.label}}
-        </a>&lt;span ng-show="{{currLink.length}}>{{$index+1}}"> 
+            href="&lang;{o.href}}">&lang;{o.label}}
+        </a>&lt;span ng-show="&lang;{currLink.length}}>&lang;{$index+1}}"> 
             <i class="bi-arrow-return-right"></i>
-        &lt;/span>&lt;span ng-show="{{currLink.length}}==={{$index+1}}">{{o.label}}
+        &lt;/span>&lt;span ng-show="&lang;{currLink.length}}===&lang;{$index+1}}">&lang;{o.label}}
         &lt;/span>
     &lt;/span>    
 &lt;/div>
