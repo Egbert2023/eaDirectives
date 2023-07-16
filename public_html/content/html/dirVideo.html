@@ -1,3 +1,69 @@
 <div>
-    eaVideo
+    <ea-acc-coat data-acc-title="eaVideo">
+        <ea-acc-key data-title="Summary and applay the functionality"
+                    data-txt-len="200">
+            <div>
+This directive is used to display self-saved videos. The display is adapted to 
+the images of the eaImg and eaImgBox directives.
+<br />If the browser cannot display the video, a standard message is stored in 
+the parameters ("vdoNo"), which is displayed if required.
+<br />    
+<strong>Call the video 'Fehmarn-2021-Wing-Foil_Go.mp4'</strong>. 
+                <ea-mask-code ea-mask-html>
+&lt;ea-video data-vdo-src="content/video/Fehmarn-2021-Wing-Foil_Go.mp4"
+             data-vdo-body="The ride with a wing foil is shown.">
+&lt;/ea-video>   
+                </ea-mask-code>
+That is the result,
+                <ea-video data-vdo-src="content/video/Fehmarn-2021-Wing-Foil_Go.mp4"
+                          data-vdo-body="The ride with a wing foil is shown.">
+                </ea-video>   
+            </div>   
+        </ea-acc-key>
+
+        <ea-acc-key data-title="Technical implementation"
+                    data-txt-len="0">
+            <div>
+The directive uses the following HTML code:
+                <ea-mask-code ea-mask-html>
+&lt;div>
+    &lt;video class="img-fluid img-thumbnail" src="&lang;{vdoSrc}}" controls>
+        &lang;{vdoNo}}<br/>
+        &lang;{vdoBody}}
+    &lt;/video>   
+    &lt;div class="eaImgBody">
+        &lang;{vdoBody}}
+    &lt;/div>    
+&lt;/div>                
+                </ea-mask-code>
+The content, such as video source and display text, is provided in the coding 
+of the directive.             
+                <ea-mask-code ea-mask-js>
+'use strict';
+var eaVideo = function ( $rootScope ) {
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: "app/template/video.html",
+        
+        // local scope
+        scope: true,
+
+        controller: function($scope) {
+            $scope.scope_eaVideoDirektive = $scope.url;    
+
+            // get parameter vdoNo
+            $scope.vdoNo = $rootScope.paramsApp.vdoNo;
+        },   // controller
+        
+        link: function (scope, ele, attrs) {      
+            scope.vdoSrc = attrs.vdoSrc;
+            scope.vdoBody = attrs.vdoBody;
+        }
+    };  // return
+};   // eaVideo()
+                </ea-mask-code>
+            </div>
+        </ea-acc-key>
+    </ea-acc-coat>            
 </div>

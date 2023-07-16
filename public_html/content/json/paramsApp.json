@@ -1,6 +1,6 @@
 { "entries": {"baseDoman" : "www.aleksander.de",
               "startFile" : "index.html",
-              "vdoNo" : "Ihr Browser kann dieses Video nicht wiedergeben.",
+              "vdoNo" : "Your browser cannot play this video.",
               "cookies" : { "title": "Ihre Cookie Einstellungen",
                             "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
                             "types": [{"id": "ess", 
