@@ -140,7 +140,12 @@ var eaAccKey = function ($compile, $rootScope) {
             if(scope.txtLen){
                 let txt = el[0].innerText;
                 if(txt) {
-                    scope.txt = txt.substring(0, parseInt(scope.txtLen)) + " ...";
+                    if(scope.txtLen==="0") {
+                        scope.txt = "";
+                    } else {
+                        scope.txt = txt.substring(0, parseInt(scope.txtLen)) + " ...";
+                    }
+                    
                 }
             }
         }  // link
