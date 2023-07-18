@@ -1,3 +1,107 @@
 <div>
-    eaNews
+    <ea-acc-coat data-acc-title="eaNews">
+        <ea-acc-key data-title="Summary and applay the functionality"
+                    data-txt-len="200">
+            <div>
+The news mechanism is used to automatically generate a list of news. This is 
+provided with a date validity range and can, for example, make predefined 
+messages available on a time-controlled basis. On the other hand, messages 
+can be automatically moved to the archive when the time is up.
+<br />The news is displayed in the same way as with the accordion directive.
+<br /> The news directive can be embedded in any HTML page. Depending on the use, 
+different parameters are supported.
+                <ea-mask-code ea-mask-html>
+&lt;ea-news data-news-title="All my news"
+    data-news-mode="new"
+    data-news-limit="2"
+    data-news-txt-len="200"
+    data-news-init-idx="0"
+&lt;/ea-news>    
+                </ea-mask-code>
+The parameters have the following effect. The first "data-news-title" is the 
+heading and is displayed with the h1 tag.
+<br />The second "data-news-mode" can assume the following values.
+                <ul>
+                    <li>all - all entries for which the date 'newFrom' has been reached are displayed, regardless of the date 'newTo'.</li>
+                    <li>new - all entries are displayed for which the date 'newFrom' has been reached and 'newTo' has not yet passed.</li>
+                    <li>arc - all entries are displayed for which the date 'newFrom' has been reached and 'newTo' has already passed.</li>
+                </ul>
+The "data-news-limit" parameter determines the maximum number of news to be 
+displayed if more news meet the criteria for display than are desired at the 
+relevant point. (This can be of interest for a home page, for example.)
+<br />
+The parameter "data-news-txt-len" limits the number of characters displayed in 
+the collapsed state. If this value is 0, no preview text is displayed.
+<br />The parameter "data-news-init-idx" indicates which New is initially 
+expanded. If the value is 0, no New initial is opened.
+
+                <div class='alert alert-info'>
+                    <strong>Note:</strong>
+In order to display all entries recorded in the news JSON file, the author must 
+ensure that either the 'all' mode is used on at least one HTML page or that 
+'new' and 'arc' are used on two pages without restriction ('data -news-limit') 
+is selected.
+                </div>
+            </div>   
+        </ea-acc-key>
+
+        <ea-acc-key data-title="Technical implementation"
+                    data-txt-len="0">
+            <div>
+The JSON file <strong>"newsList.json"</strong> has the following structure:
+                <ea-mask-code ea-mask-json>
+{"entries":   
+    [
+        {
+            "newFrom": "2023-03-15",
+            "newTo": "2023-12-31",
+            "title": "A visit to Lisbon", 
+            "body": ["Finally we could start our trip to Lisbon after Corona."], 
+            "img": ["content/pictures/Lisbon-2023.jpg"],
+            "imgBody": ["A view of the Alfama"],
+            "href": "content/html/news/Lisbon-2023.html",
+            "imgKey": "PT"
+        },
+        {
+            "newFrom": "2023-06-15",
+            "newTo": "2023-12-31",
+            "title": "New Info 2", 
+            "body": [], 
+            "img": [],
+            "imgBody": [],
+            "href": "content/html/news/Schwerin-2023.html",
+            "imgKey": "DE"
+        },
+        {
+            "newFrom": "2023-07-12",
+            "newTo": "2023-12-31",
+            "title": "A newspaper article about my club", 
+            "body": [""], 
+            "img": ["content/pictures/newspaper-article-2023.jpg"],
+            "imgBody": [],
+            "href": "",
+            "imgKey": ""
+        }
+    ]
+ }
+                </ea-mask-code>
+
+The values ​​from the JSON file are processed according to the following rule:
+                <ul>
+                    <li>If both fields "body" and "img" are specified, the display will 
+                        automatically have two columns.</li>
+                    <li>If only one of the two fields is specified, it is displayed in one 
+                        column.</li>
+                    <li>The "imgBody" field is always displayed as a caption.</li>
+                    <li>If none of the two fields "body" and "img" are specified, this part of 
+                        the display is suppressed. Then there should be an "href" entry.</li>
+                    <li>In the "href" field, an optional HTML page can be specified, which is 
+                        attached to the part defined above. This may be necessary if, for 
+                        example, a link is to be displayed. Html code cannot be displayed in 
+                        the "body" field, only format-free text can be used here.</li>
+                </ul>
+
+            </div>
+        </ea-acc-key>
+    </ea-acc-coat>            
 </div>
