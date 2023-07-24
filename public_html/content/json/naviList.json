@@ -17,10 +17,10 @@
         
         {"id":"navService", "label": "Service", "href": "#!/srv", "url": "content/html/service.html", "imgKey": "",
             "subm": [ {"label": "SiteMap", "href": "#!/srv/smap", "url": "app/template/siteMap2.html", "imgKey": ""}, 
-                    {"label": "Cookie Richtlinie", "href": "#!/srv/cookies", "url": "content/html/CookiesNotRequired.html", "imgKey": ""}, 
-                    {"label": "Impressum", "href": "#!/srv/imp", "url": "content/html/impressum.html", "imgKey": ""}, 
-                    {"label": "Datenschutz", "href": "#!/srv/ds", "url": "content/html/datenschutz2.html", "imgKey": ""}, 
-                    {"label": "Software-Lizenzen", "href": "#!/srv/license", "url": "LICENSE.html", "imgKey": ""}
+                    {"label": "Cookie Policy", "href": "#!/srv/cookies", "url": "content/html/CookiesNotRequired.html", "imgKey": ""}, 
+                    {"label": "Imprint", "href": "#!/srv/imp", "url": "content/html/impressum.html", "imgKey": ""}, 
+                    {"label": "Data protection", "href": "#!/srv/ds", "url": "content/html/datenschutz2.html", "imgKey": ""}, 
+                    {"label": "License", "href": "#!/srv/license", "url": "LICENSE.html", "imgKey": ""}
             ]}                                              
     ]
 }
