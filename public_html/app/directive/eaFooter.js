@@ -1,17 +1,16 @@
 'use strict';
 
-//templateUrl: "app/template/footer.html",
+// <ea-footer data-footer-url="content/html/footer.html"></ea-footer>
 
 var eaFooterDirective = function ($rootScope) {
   return {
     restrict: 'E',
-    replace: false,
-    transclude: true,
-    template: '<div ea-add-html = "{{footerUrl}}"></div>',
+    scope: {
+         footerUrl: '@'
+      },
+    template: '<div ng-include = "footerUrl"></div>',
     link: function (scope, ele, attrs) {
-        
-        scope.scope_eaFooterDirective = scope.url;    
-       
+        scope.footerUrl = attrs.footerUrl;
     }       
   };
 };
