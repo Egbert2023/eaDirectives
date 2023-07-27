@@ -32,6 +32,8 @@ var eaMaskCode = function ($compile) {
         $scope.copyToClipboard = function() {
             let code = $scope.iHtm.replaceAll("&lt;", "<");
             code = code.replaceAll("&gt;", ">");
+            code = code.replaceAll("&lang;", "{");
+            code = code.replaceAll("⟨", "{");
             navigator.clipboard.writeText(code);
         };        
     },

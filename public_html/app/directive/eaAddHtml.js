@@ -11,7 +11,7 @@ var eaAddHtmlDirective = function ($rootScope, $compile, $http) {
     return {
         restrict: 'A',
         replace: true,
-        
+        scope: true,
         controller: function($scope, $http, $compile) {
             var getHtml = function($http, $compile, scope, ele, url, callback) {
                 let htm = "";
