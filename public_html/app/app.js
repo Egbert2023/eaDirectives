@@ -40,6 +40,6 @@ eaDir.directive('eaVideo', ['$rootScope', eaVideo]); //.$inject = ['$scope'];
 eaDir.config(['$routeProvider', eaNavConfig]);
 
 eaDir.controller('eaDirController', ['$rootScope', '$scope', 'eaNavSrv', eaDirController])
-        ; //.$inject = ['$scope'];
+        .$inject = ['$scope'];
 eaDir.controller('eaNaviController', ['$rootScope', '$scope', '$location', 'eaNavSrv', eaNaviController])
-        ; //.$inject = ['$scope'];
+        .$inject = ['$scope'];

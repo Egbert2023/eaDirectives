@@ -42,7 +42,7 @@ var eaMaskCode = function ($compile) {
         let iHtml = ele[0].innerHTML;
         scope.iHtm = iHtml;
         iHtml = scope.myChange(iHtml);
-        let bt = '<div class="eaContent">\n<div class="eaSwitch" style="cursor: pointer; width: fit-content; position: fixed; right: 2px; color: lightgray" ng-click="copyToClipboard()">#</div>';
+        let bt = '<div translate="no" class="eaContent">\n<div class="eaSwitch" style="cursor: pointer; width: fit-content; position: fixed; right: 2px; color: lightgray" ng-click="copyToClipboard()">#</div>';
         ele[0].innerHTML = bt + "\n" + iHtml + "\n</div>";
         $compile(ele.contents())(scope);
     }       
