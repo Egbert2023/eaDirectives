@@ -66,10 +66,10 @@ The internal Angular mechanism to implement this directive
 occurs before the masking takes place. That is why your code is 
 modified before it can be prepared for display by the mask code. 
 <br />The masking is done, for example, by replacing all '&lt;' 
-character of the tag with '&amp;lt;'. Angular can no longer recognize and 
+character of the tag with <spam translate="no"> "&amp;lt;"</spam>. Angular can no longer recognize and 
 manipulate this tag.<br />
 If there are display errors within the maskJs function, it is necessary 
-to replace all characters &lt; by &amp;lt;. <br />
+to replace all characters '&lt;' by <spam translate="no"> "&amp;lt;"</spam>. <br />
 All div tags (opening and closing) should be escaped.<br />
 All Html syntax errors must be eliminated by masking.
                 </div>        
