@@ -16,7 +16,7 @@ Directives for AngularJs
 
 ## 1. eaMaskCode
 The directive is an aid to displaying code as developers expect it to. You can put the e.g. Html code 'any-html-code' into the tag:
-``html
+```html
  <ea-mask-code ea-mask-html>
     any-html-code
  </ea-mask-code>
@@ -154,7 +154,38 @@ The html example uses the "eaImg" directive embedded in bootstrap elements
 ```
 
 ## 8. eaNews
+### Summary
+The news mechanism is used to automatically generate a list of news. This is provided with a date validity range and can, for example, make predefined messages available on a time-controlled basis. On the other hand, messages can be automatically moved to the archive when the time is up.
+The news is displayed in the same way as with the accordion directive.
+
+### Applay the functionality
+The news directive can be embedded in any HTML page. Depending on the use, different parameters are supported.
+```html
+<ea-news data-news-title="All my news"
+   data-news-mode="new"
+   data-news-limit="2"
+   data-news-txt-len="200"
+   data-news-init-idx="0"
+</ea-news>
+```
+
+The parameters have the following effect. The first "data-news-title" is the heading and is displayed with the h1 tag.
+The second "data-news-mode" can assume the following values.
+- all - all entries for which the date 'newFrom' has been reached are displayed, regardless of the date 'newTo'.
+- new - all entries are displayed for which the date 'newFrom' has been reached and 'newTo' has not yet passed.
+- arc - all entries are displayed for which the date 'newFrom' has been reached and 'newTo' has already passed.
+The "data-news-limit" parameter determines the maximum number of news to be displayed if more news meet the criteria for display than are desired at the relevant point. (This can be of interest for a home page, for example.)
+The parameter "data-news-txt-len" limits the number of characters displayed in the collapsed state. If this value is 0, no preview text is displayed.
+The parameter "data-news-init-idx" indicates which New is initially expanded. If the value is 0, no New initial is opened.
+Note: In order to display all entries recorded in the news JSON file, the author must ensure that either the 'all' mode is used on at least one HTML page or that 'new' and 'arc' are used on two pages without restriction ('data -news-limit') is selected.
 
 ## 9. eaVideo
-
+This directive is used to display self-saved videos. The display is adapted to the images of the eaImg and eaImgBox directives.
+If the browser cannot display the video, a standard message is stored in the parameters ("vdoNo"), which is displayed if required.
+Call the video 'Fehmarn-2021-Wing-Foil_Go.mp4'.
+```html
+<ea-video data-vdo-src="content/video/Fehmarn-2021-Wing-Foil_Go.mp4"
+data-vdo-body="The ride with a wing foil is shown.">
+</ea-video>
+```
 ## 10. eaCookies
