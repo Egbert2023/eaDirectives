@@ -85,7 +85,6 @@ var getCurrentLink = function(rootScope, path) {
 // read the imgBoxList.json file and creat a sitemapimage.xml into a variable siteMapImageXML.
 // exported to console.log().
 // put this files to site root
-
 var computeSiteMaps = function(rootScope) {
 // Exampel of sitemap with images
 //    <?xml version="1.0" encoding="UTF-8"?>

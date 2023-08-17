@@ -1,27 +1,40 @@
-{ "entries": {"baseDoman" : "www.aleksander.de",
-              "startFile" : "index.html",
-              "vdoNo" : "Your browser cannot play this video.",
-              "cookies" : { "title": "Ihre Cookie Einstellungen",
-                            "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
-                            "types": [{"id": "ess", 
-                                        "def": "true", 
-                                        "dis": "true", 
-                                        "title": "Essentiell", 
-                                        "body": "Essentielle Cookies sind für das Funktionieren der Webanwendung erforderlich."},
-                                      {"id": "ana", 
-                                        "def": "false", 
-                                        "dis": "false", 
-                                        "title": "Analyse", 
-                                        "body": "Analyse Cookies dienen der Auswertung des Verhaltens der Nutzer. Mit ihrer Hilfe kann die Applikation anwenderfreundlicher gestaltet werden. So können z.B. Suchhilfen oder Querversweise in der Anwendung ergänzt werden, wenn Nutzer bestimmte Seiten überproportional häufig aufrufen."},
-                                      {"id": "ext", 
-                                        "def": "false",
-                                        "dis": "false", 
-                                        "title": "Marketing", 
-                                        "body": "Externe Cookies entstehen, wenn man z.B. die Buttons von Facebook, Instagrm u.ä. einsetzt. Diese setzen Ihrerseits Cookies um personalisierte Werbung bereitzustellen." }],
-                            "links": [{"title": "Impressum", 
-                                       "key": "imp", 
-                                       "url": "content/aleks/html/impressum.html"},
-                                      {"title": "Datenschutzerklärung", 
-                                       "key": "ds", 
-                                       "url": "content/aleks/html/Datenschutz2.html"}]}}
+{  
+    "_comment": ["The parameters 'baseDoman' and 'startFile' used in SioteMap process.", 
+                "'vdoNo' is a message for problems with show a video.",
+                "The parameter 'cookies' are used for compilation the cookie banner."
+               ],
+    "entries": 
+    {  "baseDoman": "www.aleksander.de",
+       "startFile" : "index.html",
+       "vdoNo" : "Your browser cannot play this video.",
+       "cookies" : 
+            { "title": "Ihre Cookie Einstellungen",
+              "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
+              "types": 
+                    [{  "id": "ess", 
+                        "def": "true", 
+                        "dis": "true", 
+                        "title": "Essentiell", 
+                        "body": "Essentielle Cookies sind für das Funktionieren der Webanwendung erforderlich."},
+                    {   "id": "ana", 
+                        "def": "false", 
+                        "dis": "false", 
+                        "title": "Analyse", 
+                        "body": "Analyse Cookies dienen der Auswertung des Verhaltens der Nutzer. Mit ihrer Hilfe kann die Applikation anwenderfreundlicher gestaltet werden. So können z.B. Suchhilfen oder Querversweise in der Anwendung ergänzt werden, wenn Nutzer bestimmte Seiten überproportional häufig aufrufen."},
+                    {   "id": "ext", 
+                        "def": "false",
+                        "dis": "false", 
+                        "title": "Marketing", 
+                        "body": "Externe Cookies entstehen, wenn man z.B. die Buttons von Facebook, Instagrm u.ä. einsetzt. Diese setzen Ihrerseits Cookies um personalisierte Werbung bereitzustellen." }
+                    ],
+              "links": 
+                    [{  "title": "Impressum", 
+                        "key": "imp", 
+                        "url": "content/aleks/html/impressum.html"},
+                     {  "title": "Datenschutzerklärung", 
+                        "key": "ds", 
+                        "url": "content/aleks/html/Datenschutz2.html"}
+                    ]
+            }
+    }
 }

@@ -1,4 +1,7 @@
-{"entries":
+{   "_comment": ["The entries serve as a complete description of the menu or the site map.",
+                 "The 'imgKey' parameter is used when generating the sitemap.xml and sitemapimages.xml files"
+                ],
+    "entries":
     [
         {"id":"navStart", "label": "Home", "href": "#!/home", "url": "content/html/home.html", "imgKey": "",
             "subm": []},
