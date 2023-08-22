@@ -1,0 +1,24 @@
+{
+    "_comment": "All parametr for new DE Ticket",
+    "entries":
+    { 
+      "settings" : 
+        {
+            "types": [
+                {"key":"T", "period":"20", "price":"3,00"},
+                {"key":"W", "period":"164", "price":"14,00"},
+                {"key":"M", "period":"716", "price":"49,00"},
+                {"key":"Y", "period":"8636", "price":"565,00"}
+            ],
+            "personalKey":"Egbert-Aleksander-1955-12-11"
+        },
+      "tickets" : [
+            {"type": "T", "startDate": "2023-08-25", "startTime": "11:00", "endDate": "2023-08-26", "endTime": "07:00", "price": "3,00"},    
+            {"type": "T", "startDate": "2023-08-26", "startTime": "11:00", "endDate": "2023-08-27", "endTime": "07:00", "price": "3,00"},    
+            {"type": "T", "startDate": "2023-08-28", "startTime": "09:00", "endDate": "2023-08-29", "endTime": "05:00", "price": "3,00"},    
+            {"type": "T", "startDate": "2023-08-29", "startTime": "09:00", "endDate": "2023-08-30", "endTime": "05:00", "price": "3,00"},
+            {"type": "T", "startDate": "2023-08-30", "startTime": "10:00", "endDate": "2023-08-31", "endTime": "06:00", "price": "3,00"}
+        ],
+      "valid": {"date": "2023-08-30", "type": "W", "startDate": "2023-08-25", "startTime": "10:00", "endDate": "2023-09-01", "endTime": "06:00", "price": "15,00"}
+    }
+}
