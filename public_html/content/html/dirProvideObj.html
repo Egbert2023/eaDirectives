@@ -1,11 +1,73 @@
-<ea-provide-obj data-provide-obj="newDeTicket">
-    
-    <div class="ng-repeat">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12"></div>
-            <div class="col-lg-3 col-md-6 col-sm-12"></div>
-            <div class="col-lg-3 col-md-6 col-sm-12"></div>
-            <div class="col-lg-3 col-md-6 col-sm-12"></div>
-        </div>
-    </div>
-</ea-provide-obj>
+<div>
+    <ea-acc-coat data-acc-title="eaProvideObj">
+        <ea-acc-key data-title="Summary" data-txt-len="200">
+The directive is used to inject a data object into existing HTML code. The attribut "data-provide-obj" 
+is only the name of the object from $rootscope.
+<br />
+The html code is code of AngularJs objects. The directive assigns an object from 
+the $rootscope to the current scope at runtime and thus injects it.
+        </ea-acc-key>
+
+        <ea-acc-key data-title="Example" data-txt-len="0">
+The following JSON file "newDeTicket.json" is read in as an object. 
+The Array "tickets" from this object handed over for infiltration.
+            <ea-mask-code ea-mask-json>
+{
+    "_comment": "All parametr for new DE Ticket",
+    "entries":
+    { 
+      "settings" : 
+        {
+            "types": [
+                {"key":"T", "period":"20", "price":"3,00"},
+                {"key":"W", "period":"164", "price":"14,00"},
+                {"key":"M", "period":"716", "price":"49,00"},
+                {"key":"Y", "period":"8636", "price":"565,00"}
+            ],
+            "personalKey":"Egbert-Aleksander-1955-12-11"
+        },
+      "tickets" : [
+            {"type": "T", "startDate": "2023-08-25", "startTime": "11:00", "endDate": "2023-08-26", "endTime": "07:00", "price": "3,00"},    
+            {"type": "T", "startDate": "2023-08-26", "startTime": "11:00", "endDate": "2023-08-27", "endTime": "07:00", "price": "3,00"},    
+            {"type": "T", "startDate": "2023-08-28", "startTime": "09:00", "endDate": "2023-08-29", "endTime": "05:00", "price": "3,00"},    
+            {"type": "T", "startDate": "2023-08-29", "startTime": "09:00", "endDate": "2023-08-30", "endTime": "05:00", "price": "3,00"},
+            {"type": "T", "startDate": "2023-08-30", "startTime": "10:00", "endDate": "2023-08-31", "endTime": "06:00", "price": "3,00"}
+        ],
+      "valid": {"date": "2023-08-30", "type": "W", "startDate": "2023-08-25", "startTime": "10:00", "endDate": "2023-09-01", "endTime": "06:00", "price": "15,00"}
+    }
+}    
+            </ea-mask-code>
+<strong>This is the Result:</strong>
+            <ea-provide-obj data-provide-obj="newDeTicket">
+                <hr />
+                <div ng-repeat="ticket in provideObj.tickets">                    
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-12">Ticket type: {{ticket.type}}</div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">Start date>: {{ticket.startDate}}</div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">End time: {{ticket.endTime}}</div>
+                    </div>
+                    <hr />
+                </div>
+            </ea-provide-obj>            
+        </ea-acc-key>
+        
+        <ea-acc-key data-title="Apply the functionality" data-txt-len="0">
+            Your HTML Code with AngularJs Object is inner the Tag 'ea-provide-obj'.
+            <ea-mask-code ea-mask-html>
+&lt;ea-provide-obj data-provide-obj="newDeTicket">
+    &lt;hr />
+    &lt;div ng-repeat="ticket in provideObj.tickets">
+        &lt;div class="row">
+            &lt;div class="col-lg-3 col-md-6 col-sm-12">Ticket type: &lang;{ticket.type}}&lt;/div>
+            &lt;div class="col-lg-3 col-md-6 col-sm-12">Start date>: &lang;{ticket.startDate}}&lt;/div>
+            &lt;div class="col-lg-3 col-md-6 col-sm-12">End date: &lang;{ticket.endDate}}&lt;/div>
+            &lt;div class="col-lg-3 col-md-6 col-sm-12">End time: &lang;{ticket.endTime}}&lt;/div>
+        &lt;/div>
+        &lt;hr />
+    &lt;/div>
+&lt;/ea-provide-obj>                
+            </ea-mask-code>
+        </ea-acc-key>            
+    </ea-acc-coat>    
+</div>
