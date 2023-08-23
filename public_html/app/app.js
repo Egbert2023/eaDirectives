@@ -33,6 +33,8 @@ eaDir.directive('eaMaskJs', [eaMaskJs]); //.$inject = ['$scope'];
 eaDir.directive('eaMaskJson', [eaMaskJson]); //.$inject = ['$scope'];
 eaDir.directive('eaVideo', ['$rootScope', eaVideo]); //.$inject = ['$scope'];
 
+eaDir.directive('eaProvideObj', ['$rootScope', eaProvideObj]);
+
 //eaDir.directive('eaNews', ['$rootScope', eaNews]).$inject = ['$scope'];
 //eaDir.directive('eaCookies', ['$rootScope', '$cookies', '$compile', eaCookiesDirektive]).$inject = ['$scope'];
 

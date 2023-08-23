@@ -16,6 +16,7 @@
                 {"label": "eaImgBox", "href": "#!/dirc/ib", "url": "content/html/dirImgBox.html", "imgKey": "DE"},
                 {"label": "eaNews", "href": "#!/dirc/ne", "url": "content/html/dirNews.html", "imgKey": ""},
                 {"label": "eaVideo", "href": "#!/dirc/vd", "url": "content/html/dirVideo.html", "imgKey": ""},
+                {"label": "eaProvideObj", "href": "#!/dirc/po", "url": "content/html/dirProvideObj.html", "imgKey": ""},
                 {"label": "eaCookies", "href": "#!/dirc/cc", "url": "content/html/dirCookies.html", "imgKey": ""},
                 {"label": "eaFooter", "href": "#!/dirc/ft", "url": "content/html/dirFooter.html", "imgKey": ""}
             ]},
