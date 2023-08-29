@@ -38,12 +38,13 @@ The Array "tickets" from this object handed over for infiltration.
 }    
             </ea-mask-code>
 <strong>This is the Result:</strong>
-            <ea-provide-obj data-provide-obj="newDeTicket">
+            <ea-provide-obj data-provide-obj="newDeTicket" data-arr-name="tickets">
                 <hr />
-                <div ng-repeat="ticket in provideObj.tickets">                    
+                <!--<div ng-repeat="ticket in provideObj.tickets"> -->
+                <div ng-repeat="ticket in objNewArr">                                        
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-12">Ticket type: {{ticket.type}}</div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">Start date>: {{ticket.startDate}}</div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">Start date: {{ticket.startDate}}</div>
                         <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
                         <div class="col-lg-3 col-md-6 col-sm-12">End time: {{ticket.endTime}}</div>
                     </div>
@@ -57,7 +58,7 @@ The Array "tickets" from this object handed over for infiltration.
             <ea-mask-code ea-mask-html>
 &lt;ea-provide-obj data-provide-obj="newDeTicket">
     &lt;hr />
-    &lt;div ng-repeat="ticket in provideObj.tickets">
+    &lt;div ng-repeat="ticket in objNewArr">
         &lt;div class="row">
             &lt;div class="col-lg-3 col-md-6 col-sm-12">Ticket type: &lang;{ticket.type}}&lt;/div>
             &lt;div class="col-lg-3 col-md-6 col-sm-12">Start date>: &lang;{ticket.startDate}}&lt;/div>
