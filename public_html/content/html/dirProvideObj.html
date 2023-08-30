@@ -46,10 +46,21 @@ The Array "tickets" from this object handed over for infiltration.
                         <div class="col-lg-3 col-md-6 col-sm-12">Ticket type: {{ticket.type}}</div>
                         <div class="col-lg-3 col-md-6 col-sm-12">Start date: {{ticket.startDate}}</div>
                         <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">End time: {{ticket.endTime}}</div>
-                    </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            End time: {{ticket.endTime}} 
+                            <i class="bi bi-pencil-fill" style="font-size: 1.0rem; color: green;"></i>
+                            <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>
+                        </div>
+                    </div>                    
                     <hr />
+
                 </div>
+                <button type="button" class="btn btn-success" ng-click="addObjRow()">
+                    <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"></i>
+                </button>
+                <button type="button" class="btn btn-success" ng-click="saveObj()">
+                    <i class="bi bi-save" style="font-size: 1.6rem; color: white;"></i>
+                </button>
             </ea-provide-obj>            
         </ea-acc-key>
         
@@ -63,10 +74,20 @@ The Array "tickets" from this object handed over for infiltration.
             &lt;div class="col-lg-3 col-md-6 col-sm-12">Ticket type: &lang;{ticket.type}}&lt;/div>
             &lt;div class="col-lg-3 col-md-6 col-sm-12">Start date>: &lang;{ticket.startDate}}&lt;/div>
             &lt;div class="col-lg-3 col-md-6 col-sm-12">End date: &lang;{ticket.endDate}}&lt;/div>
-            &lt;div class="col-lg-3 col-md-6 col-sm-12">End time: &lang;{ticket.endTime}}&lt;/div>
+            &lt;div class="col-lg-3 col-md-6 col-sm-12">
+                End time: &lang;{ticket.endTime}}
+                <i class="bi bi-pencil-fill" style="font-size: 1.0rem; color: green;"></i>
+                <i class="bi bi-trash3-fill" style="font-size: 1.0rem; color: red;"></i>
+            &lt;/div>
         &lt;/div>
         &lt;hr />
     &lt;/div>
+    <button type="button" class="btn btn-success" ng-click="addObjRow()">
+        <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"></i>
+    </button>
+    <button type="button" class="btn btn-success" ng-click="saveObj()">
+        <i class="bi bi-save" style="font-size: 1.6rem; color: white;"></i>
+    </button>
 &lt;/ea-provide-obj>                
             </ea-mask-code>
         </ea-acc-key>            
