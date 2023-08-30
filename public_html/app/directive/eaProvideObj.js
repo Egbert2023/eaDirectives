@@ -38,12 +38,17 @@ var eaProvideObj = function ($rootScope) {
         };
         
         $scope.addObjRow = function() {
-            $scope.objNewArr.push($scope.objZero);
+            $scope.objNewArr.push($scope.objZero);            
         };
         
         $scope.deleteObjRow = function(idx) {
-            delete $scope.objNewArr[idx];
-            ($scope.objNewArr.length = 0)? $scope.objNewArr.push($scope.objZero) : "";
+            if(idx>0) {
+                $scope.objNewArr.splice(idx, 1);            
+                ($scope.objNewArr.length === 0)? $scope.objNewArr.push($scope.objZero) : "";
+            } else {
+                $scope.objNewArr.shift(); 
+                ($scope.objNewArr.length === 0)? $scope.objNewArr.push($scope.objZero) : "";
+            }
             return false;
         };
         
@@ -59,17 +64,17 @@ var eaProvideObj = function ($rootScope) {
         scope.provideObjArrName = attrs.arrName; 
         scope.initObj(scope.provideObj, scope.provideObjArrName);
         
-        // Test EA
-        // objNewArr is a clone of $rootScope[newDeTicket] a reference by value!
-        scope.objNewArr[0].type="W";
-        console.log($rootScope[attrs.provideObj]);
-        scope.addObjRow();
-        //scope.deleteObjRow(1);
-        scope.saveObj();
-        console.log("new");
-        console.log(scope.objNewArr);
-        console.log("alt");
-        console.log($rootScope[attrs.provideObj]);
+//        // Test EA
+//        // objNewArr is a clone of $rootScope[newDeTicket] a reference by value!
+//        scope.objNewArr[0].type="W";
+//        console.log($rootScope[attrs.provideObj]);
+//        scope.addObjRow();
+//        scope.deleteObjRow(1);
+//        scope.saveObj();
+//        console.log("new");
+//        console.log(scope.objNewArr);
+//        console.log("alt");
+//        console.log($rootScope[attrs.provideObj]);
     }       
     
     
