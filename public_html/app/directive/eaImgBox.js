@@ -22,7 +22,7 @@ var eaImgBox = function ($compile, $rootScope) {
                 // when opt.key is undefined then do not show scroll icons
                 $scope.canScroll = (opt.key)? true : false;
                 
-                // comput modal inner HTML 
+                // compute modal inner HTML 
                 let iHtml = $scope.getInnerHtml(opt);
                 
                 // init values
