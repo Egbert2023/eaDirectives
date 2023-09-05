@@ -37,7 +37,7 @@ The Array "tickets" from this object handed over for infiltration.
     }
 }    
             </ea-mask-code>
-<strong>This is the Result:</strong>
+<strong>This is the result with the example "New DE Ticket":</strong>
             <ea-provide-obj data-provide-obj="newDeTicket" 
                             data-arr-name="tickets" 
                             ea-de-ticket="myDeTicket">
@@ -45,19 +45,30 @@ The Array "tickets" from this object handed over for infiltration.
                 <!-- https://www.w3schools.com/howto/howto_js_lightbox.asp -->
                 <div id="myModalTicket" class="modal">
                     <div class="modal-inner text-center">
-                        <span class="close cursor" ng-click="closeModalTicket()">&times;</span>
                         <div class="modal-content">
-                            <div class="rounded">
+                            <div class="modal-header">
+                                &nbsp;<span class="close cursor" 
+                                      ng-click="closeModalTicket()">&times;</span>
+                            </div>
+                        
+                            <div class="rounded modal-body">
                                 <div class="row">
                                     <div class="col-6">
                                         Das ist der Typ:
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" ng-model="ticket.type"  />
+                                        <input type="text" 
+                                               class="name-input form-control" 
+                                               ng-model="ticket.type" />
                                     </div>
-                                </div>
-                                
+                                    <div class="col-6">
+                                        
+                                    </div>
+                                </div>                                
                            </div>
+                            <div class="modal-footer">
+                                Footer
+                            </div> 
                         </div>
                     </div>
                 </div>
