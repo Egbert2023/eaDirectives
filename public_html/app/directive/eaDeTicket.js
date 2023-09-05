@@ -7,25 +7,30 @@ var eaDeTicket = function ($compile, $rootScope) {
         scope: false,
 
         controller: function($scope) {
+            // https://github.com/sweetalert2/sweetalert2/issues/374
+            //angular.element().fn.modal.Constructor.prototype.enforceFocus = function () {};
+            
+            $scope.ticket = {};
             
             // Open the Modal
             $scope.openModalTicket = function(idx) {
-                
-                $scope.ticket = $scope.objNewArr[idx];
                 
                 let docModal = document.getElementById("myModalTicket");
                 let ele = {};
                 if(docModal !== null) {
                     docModal.style.display = "block";
+                            
+                    // fill data
+                    $scope.ticket = $scope.objNewArr[idx];
                     
+                            
                     // Preparing to close the modal window with the ESC key    
                     ele = angular.element(docModal);
-                    ele.bind("keydown keypress", function (event) {
-                        if (event.which === 27) {
-                            $scope.closeModal();  
-                        }
-                        event.preventDefault();
-                    }); 
+                    
+                    // https://github.com/sweetalert2/sweetalert2/issues/374
+                    // you can usually solve bootstrap modal focus issues by disabling the focus enforcement
+                    ele.fn.modal.Constructor.prototype.enforceFocus = function () {};
+                    
                 };     
                 
                 // Set focus to docModal 
@@ -51,6 +56,8 @@ var eaDeTicket = function ($compile, $rootScope) {
         
         link: function (scope, ele, attrs) {      
             let temp = attrs;
+            
+            //scope.closeModalTicket();
             
             // Test EA
             console.log("scope");
