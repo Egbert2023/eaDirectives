@@ -21,8 +21,8 @@ var eaDeTicket = function ($compile, $rootScope) {
                     docModal.style.display = "block";
                             
                     // fill data
-                    $scope.ticket = $scope.objNewArr[idx];
-                    
+                    //$scope.ticket = $scope.objNewArr[idx];
+                    $scope.ticket = $scope.cloneObj($scope.objNewArr[idx]);
                             
                     // Preparing to close the modal window with the ESC key    
                     ele = angular.element(docModal);
@@ -56,9 +56,7 @@ var eaDeTicket = function ($compile, $rootScope) {
         
         link: function (scope, ele, attrs) {      
             let temp = attrs;
-            
-            //scope.closeModalTicket();
-            
+                        
             // Test EA
             console.log("scope");
             console.log(scope);

@@ -13,6 +13,8 @@ var eaProvideObj = function ($rootScope) {
         $scope.objZero = {};
         $scope.objNewArr = [];
         
+        // The function completely clones the passed object and notes the name 
+        // of an existing array of objects within the object
         $scope.initObj = function(obj, arrName) {       
             const keys = Object.keys(obj[arrName][0]);
             let objRowZero = {};
@@ -52,11 +54,51 @@ var eaProvideObj = function ($rootScope) {
             return false;
         };
         
+        // the changed object is written back
+        // $scope.objNewArr --> $scope.provideObj[$scope.provideObjArrName]
         $scope.saveObj = function() {
-            $scope.provideObj[$scope.provideObjArrName] = $scope.objNewArr;
+            // Tickets have been deleted
+            if($scope.objNewArr.length < $scope.provideObj[$scope.provideObjArrName].length) {
+                for(let i=0; i<$scope.objNewArr.length; i++) {
+                    if($scope.provideObj[$scope.provideObjArrName][i]) {
+                        $scope.provideObj[$scope.provideObjArrName][i] = $scope.cloneObj($scope.objNewArr[i]);
+                    }
+                }    
+                for(let i=$scope.objNewArr.length+1; i<$scope.provideObj[$scope.provideObjArrName].length; i++) {
+                    $scope.provideObj[$scope.provideObjArrName].pop();
+                }
+            }
+            
+            // Existing tickets have been changed, the number has remained the same
+            if($scope.objNewArr.length === $scope.provideObj[$scope.provideObjArrName].length) {
+                for(let i=0; i<$scope.objNewArr.length; i++) {
+                    if($scope.provideObj[$scope.provideObjArrName][i]) {
+                        $scope.provideObj[$scope.provideObjArrName][i] = $scope.cloneObj($scope.objNewArr[i]);
+                    }
+                }    
+            };
+            
+            // The number of tickets has increased
+            if($scope.objNewArr.length > $scope.provideObj[$scope.provideObjArrName].length) {
+                for(let i=0; i<$scope.provideObj[$scope.provideObjArrName].length; i++) {
+                    if($scope.provideObj[$scope.provideObjArrName][i]) {
+                        $scope.provideObj[$scope.provideObjArrName][i] = $scope.cloneObj($scope.objNewArr[i]);
+                    }
+                }    
+                for(let i=$scope.provideObj[$scope.provideObjArrName].length+1; i<$scope.objNewArr.length; i++) {
+                    $scope.provideObj[$scope.provideObjArrName].push($scope.objNewArr[i]);
+                }
+            }            
+            //$scope.provideObj[$scope.provideObjArrName] = $scope.objNewArr;
+            
+            $scope.objNewArr = [];
             return false;
         };
         
+        $scope.cloneObj = function(objSource) {
+            const clO = Object.assign({}, objSource);
+            return clO;
+        };
     },
     
     link: function (scope, ele, attrs) {

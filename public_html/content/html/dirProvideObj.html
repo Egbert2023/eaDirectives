@@ -37,65 +37,11 @@ The Array "tickets" from this object handed over for infiltration.
     }
 }    
             </ea-mask-code>
-<strong>This is the result with the example "New DE Ticket":</strong>
-            <ea-provide-obj data-provide-obj="newDeTicket" 
-                            data-arr-name="tickets" 
-                            ea-de-ticket="myDeTicket">
-                
-                <!-- https://www.w3schools.com/howto/howto_js_lightbox.asp -->
-                <div id="myModalTicket" class="modal">
-                    <div class="modal-inner text-center">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                &nbsp;<span class="close cursor" 
-                                      ng-click="closeModalTicket()">&times;</span>
-                            </div>
-                        
-                            <div class="rounded modal-body">
-                                <div class="row">
-                                    <div class="col-6">
-                                        Das ist der Typ:
-                                    </div>
-                                    <div class="col-6">
-                                        <input type="text" 
-                                               class="name-input form-control" 
-                                               ng-model="ticket.type" />
-                                    </div>
-                                    <div class="col-6">
-                                        
-                                    </div>
-                                </div>                                
-                           </div>
-                            <div class="modal-footer">
-                                Footer
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-                
-                <hr />
-                <!--<div ng-repeat="ticket in provideObj.tickets"> -->
-                <div ng-repeat="ticket in objNewArr">                                        
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-12">Ticket type: {{ticket.type}}</div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">Start date: {{ticket.startDate}}</div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            End time: {{ticket.endTime}} 
-                            <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
-                            <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>
-                        </div>
-                    </div>                    
-                    <hr />
-
-                </div>
-                <button type="button" class="btn btn-success" ng-click="addObjRow()">
-                    <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"></i>
-                </button>
-                <button type="button" class="btn btn-success" ng-click="saveObj()">
-                    <i class="bi bi-save" style="font-size: 1.6rem; color: white;"></i>
-                </button>
-            </ea-provide-obj>            
+            <div>
+                <strong>You can see the result on the following page: </strong>
+                <br /><a target="_blank" href="#!/dirc/po/det">New DE Ticket</a>
+                <br /><a target="_blank" href="#!/dirc/po/pen">New DE Pension</a>
+            </div>
         </ea-acc-key>
         
         <ea-acc-key data-title="Apply the functionality" data-txt-len="0">
@@ -116,12 +62,12 @@ The Array "tickets" from this object handed over for infiltration.
         &lt;/div>
         &lt;hr />
     &lt;/div>
-    <button type="button" class="btn btn-success" ng-click="addObjRow()">
+    &lt;button type="button" class="btn btn-success" ng-click="addObjRow()">
         <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"></i>
-    </button>
-    <button type="button" class="btn btn-success" ng-click="saveObj()">
+    &lt;/button>
+    &lt;button type="button" class="btn btn-success" ng-click="saveObj()">
         <i class="bi bi-save" style="font-size: 1.6rem; color: white;"></i>
-    </button>
+    &lt;/button>
 &lt;/ea-provide-obj>                
             </ea-mask-code>
         </ea-acc-key>            

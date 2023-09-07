@@ -1,0 +1,84 @@
+<div>
+    
+    <ea-provide-obj data-provide-obj="newDeTicket" 
+                    data-arr-name="tickets" 
+                    ea-de-ticket="myDeTicket">
+
+        <!-- https://www.w3schools.com/howto/howto_js_lightbox.asp -->
+        <div id="myModalTicket" class="modal">
+            <div class="modal-inner text-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        &nbsp;<span class="close cursor" 
+                              ng-click="closeModalTicket()">&times;</span>
+                    </div>
+
+                    <div class="rounded modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="inputType">Type</label>
+                                <select name="inputType"
+                                        id="inputType"
+                                        class="name-input form-control" 
+                                        ng-model="ticket.type">
+                                    <option value="T">Day</option>
+                                    <option value="W">Week</option>
+                                    <option value="M">Month</option>
+                                    <option value="J">Year</option>                                    
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="inputStartDate">Start Date</label>
+                                <input id="inputStartDate"
+                                       type="date" 
+                                       class="name-input form-control" 
+                                       ng-model="ticket.startDate" />                                
+                            </div>
+                            <div class="col-6">
+                                <label for="inputStartTime">Start Time</label>
+                                <input id="inputStartTime"
+                                       type="time" 
+                                       class="name-input form-control" 
+                                       ng-model="ticket.startTime" />                                
+                            </div>
+                            <div class="col-6">
+                                End date and time: {{ticket.endDate}} - {{ticket.endime}}
+                            </div>
+                        </div>                                
+                   </div>
+                    <div class="modal-footer" style="font-size: 1.6rem;">
+                        <button type="button" class="btn btn-success" ng-click="saveObj(); closeModalTicket()">
+                            <i class="bi bi-save" style="font-size: 1.6rem; color: white;"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="closeModalTicket()">
+                            <i class="bi bi-x-square" style="font-size: 1.6rem; color: white;"></i>
+                        </button>                        
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <!--<div ng-repeat="ticket in provideObj.tickets"> -->
+        <div ng-repeat="ticket in objNewArr">                                        
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">Ticket type: {{ticket.type}}</div>
+                <div class="col-lg-3 col-md-6 col-sm-12">Start date: {{ticket.startDate}}</div>
+                <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    End time: {{ticket.endTime}} 
+                    <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
+                    <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>
+                </div>
+            </div>                    
+            <hr />
+
+        </div>
+        <button type="button" class="btn btn-success" ng-click="addObjRow()">
+            <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"></i>
+        </button>
+        <button type="button" class="btn btn-success" ng-click="saveObj()">
+            <i class="bi bi-save" style="font-size: 1.6rem; color: white;"></i>
+        </button>
+    </ea-provide-obj>            
+</div>
