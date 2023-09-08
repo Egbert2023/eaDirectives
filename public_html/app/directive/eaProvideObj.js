@@ -99,6 +99,25 @@ var eaProvideObj = function ($rootScope) {
             const clO = Object.assign({}, objSource);
             return clO;
         };
+
+        
+        let getFull= function(txt, n) {
+            let ret = txt.substring(txt.length-n);
+            return ret;
+        };            
+
+        $scope.getDateString = function(d) {
+            let ret = "";
+            ret = getFull(d.getFullYear(d), 4) + "-" + getFull(d.getMonth(d), 2) + "-" + getFull(d.getDay(d), 2);
+            return ret;
+        };
+        
+        $scope.getTimeString = function(d) {
+            let ret = "";
+            ret = getFull(d.getHours(d), 2) + ":" + getFull(d.getMinutes(d), 2);
+            return ret;
+        };
+        
     },
     
     link: function (scope, ele, attrs) {

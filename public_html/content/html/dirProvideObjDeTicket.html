@@ -4,7 +4,9 @@
                     data-arr-name="tickets" 
                     ea-de-ticket="myDeTicket">
 
-        <!-- https://www.w3schools.com/howto/howto_js_lightbox.asp -->
+        <!-- https://www.w3schools.com/howto/howto_js_lightbox.asp 
+            Modal window for edit one ticket
+        -->        
         <div id="myModalTicket" class="modal">
             <div class="modal-inner text-center">
                 <div class="modal-content">
@@ -15,8 +17,8 @@
 
                     <div class="rounded modal-body">
                         <div class="row">
-                            <div class="col-6">
-                                <label for="inputType">Type</label>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <label for="inputType" class="bold">Type</label>
                                 <select name="inputType"
                                         id="inputType"
                                         class="name-input form-control" 
@@ -27,39 +29,47 @@
                                     <option value="J">Year</option>                                    
                                 </select>
                             </div>
-                            <div class="col-6">
-                                <label for="inputStartDate">Start Date</label>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <label for="inputStartDate" class="bold">Start Date</label>
                                 <input id="inputStartDate"
                                        type="date" 
                                        class="name-input form-control" 
                                        ng-model="ticket.startDate" />                                
                             </div>
-                            <div class="col-6">
-                                <label for="inputStartTime">Start Time</label>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <label for="inputStartTime" class="bold">Start Time</label>
                                 <input id="inputStartTime"
                                        type="time" 
                                        class="name-input form-control" 
                                        ng-model="ticket.startTime" />                                
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
                                 End date and time: {{ticket.endDate}} - {{ticket.endime}}
                             </div>
                         </div>                                
                    </div>
                     <div class="modal-footer" style="font-size: 1.6rem;">
-                        <button type="button" class="btn btn-success" ng-click="saveObj(); closeModalTicket()">
-                            <i class="bi bi-save" style="font-size: 1.6rem; color: white;"></i>
+                        <button type="button" class="btn btn-success" ng-click="saveModalTicket()">
+                            <i class="bi bi-save" color: white;"></i>
                         </button>
                         <button type="button" class="btn btn-danger" ng-click="closeModalTicket()">
-                            <i class="bi bi-x-square" style="font-size: 1.6rem; color: white;"></i>
+                            <i class="bi bi-x-square" color: white;"></i>
                         </button>                        
                     </div> 
                 </div>
             </div>
         </div>
 
+        <!-- Header of ticket view -->
+        <div>
+            <h1>
+Overview of tickets for: {{provideObj.settings.personalKey}}
+            </h1>
+        </div>
+        
+        
         <hr />
-        <!--<div ng-repeat="ticket in provideObj.tickets"> -->
+        <!-- List of tickets -->
         <div ng-repeat="ticket in objNewArr">                                        
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-12">Ticket type: {{ticket.type}}</div>
