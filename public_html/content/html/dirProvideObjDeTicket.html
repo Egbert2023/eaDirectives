@@ -18,7 +18,7 @@
                     <div class="rounded modal-body">
                         <div class="row">
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <label for="inputType" class="bold">Type</label>
+                                <label for="inputType" class="bold">Type:</label>
                                 <select name="inputType"
                                         id="inputType"
                                         class="name-input form-control" 
@@ -30,21 +30,26 @@
                                 </select>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <label for="inputStartDate" class="bold">Start Date</label>
+                                <label for="inputStartDate" class="bold">Start Date:</label>
                                 <input id="inputStartDate"
                                        type="date" 
                                        class="name-input form-control" 
                                        ng-model="ticket.startDate" />                                
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <label for="inputStartTime" class="bold">Start Time</label>
+                                <label for="inputStartTime" class="bold">Start Time:</label>
                                 <input id="inputStartTime"
                                        type="time" 
                                        class="name-input form-control" 
                                        ng-model="ticket.startTime" />                                
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                End date and time: {{ticket.endDate}} - {{ticket.endime}}
+                                <label for="inputEndDateTime" class="bold">End date and time:</label>
+                                <input id="inputEndDateTime"
+                                       type="text" 
+                                       readonly="readonly"
+                                       class="name-input form-control" 
+                                       value="{{ticket.endDate}} - {{ticket.endTime}}" />                                
                             </div>
                         </div>                                
                    </div>
@@ -63,8 +68,17 @@
         <!-- Header of ticket view -->
         <div>
             <h1>
-Overview of tickets for: {{provideObj.settings.personalKey}}
+Overview of tickets for: {{settings.personalKey}}
             </h1>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label for="inputToday" class="bold">Demo today:</label>
+                        <input id="inputToday"
+                            type="date" 
+                            class="name-input form-control" 
+                            ng-model="demoToday" />                                
+                </div>   
+            </div>
         </div>
         
         
