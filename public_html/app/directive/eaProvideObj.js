@@ -101,20 +101,22 @@ var eaProvideObj = function ($rootScope) {
         };
 
         
-        let getFull= function(txt, n) {
-            let ret = txt.substring(txt.length-n);
+        var getZeroFull= function(txt, n) {
+            let zero = "0".repeat(n);
+            let oStr = new String(zero + txt);
+            let ret = oStr.substring((zero + txt).length-n);
             return ret;
         };            
 
         $scope.getDateString = function(d) {
             let ret = "";
-            ret = getFull(d.getFullYear(d), 4) + "-" + getFull(d.getMonth(d), 2) + "-" + getFull(d.getDay(d), 2);
+            ret = getZeroFull(d.getFullYear(d), 4) + "-" + getZeroFull(d.getMonth(d)+1, 2) + "-" + getZeroFull(d.getDate(d), 2);
             return ret;
         };
         
         $scope.getTimeString = function(d) {
             let ret = "";
-            ret = getFull(d.getHours(d), 2) + ":" + getFull(d.getMinutes(d), 2);
+            ret = getZeroFull(d.getHours(d), 2) + ":" + getZeroFull(d.getMinutes(d), 2);
             return ret;
         };
         
