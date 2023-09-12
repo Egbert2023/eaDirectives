@@ -98,7 +98,8 @@ var eaDeTicket = function ($compile, $rootScope) {
                     }        
                     
                     //$scope.demoToday = new Date($scope.settings.demoToday+"T"+$scope.ticket.startTime);
-                    $scope.settings.demoToday = $scope.getDateString($scope.demoToday);
+                    //$scope.settings.demoToday = $scope.getDateString($scope.demoToday);
+                    $scope.settings.demoToday = $scope.demoToday.toISOString();
                 }
                 cleanTicket();
                 $scope.closeModalTicket();
@@ -107,7 +108,7 @@ var eaDeTicket = function ($compile, $rootScope) {
         
         link: function (scope, ele, attrs) {      
             scope.settings = scope.provideObj.settings;
-            scope.demoToday = new Date(scope.settings.demoToday+"T08:00:00");          
+            scope.demoToday = new Date(scope.settings.demoToday);          
             
                         
 //            // Test EA
