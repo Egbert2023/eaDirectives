@@ -1,5 +1,5 @@
 {
-    "_comment": "All parametr for new DE Ticket, demoToday=ISO-String",
+    "_comment": "All parametr for new DE Ticket, demoToday=ISO-date-String Format: YYYY-MM-DDThh:mm:ss.000Z",
     "entries":
     { 
       "settings" : 
@@ -10,8 +10,8 @@
                 {"key":"M", "period":"716", "price":"49,00"},
                 {"key":"Y", "period":"8636", "price":"565,00"}
             ],
-            "personalKey":"Egbert-Aleksander-1955-12-11",
-            "demoToday" : "2023-08-30T10:00:00.000Z"
+            "personalKey":"Egbert-Aleksander",
+            "demoToday" : "2023-08-30T06:00:00.000Z"
         },
       "tickets" : [
             {"type": "T", "startDate": "2023-08-25", "startTime": "11:00", "endDate": "2023-08-26", "endTime": "07:00", "price": "3,00"},    

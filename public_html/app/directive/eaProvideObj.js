@@ -40,7 +40,7 @@ var eaProvideObj = function ($rootScope) {
         };
         
         $scope.addObjRow = function() {
-            $scope.objNewArr.push($scope.objZero);            
+            $scope.objNewArr.push($scope.cloneObj($scope.objZero));
         };
         
         $scope.deleteObjRow = function(idx) {
@@ -91,7 +91,7 @@ var eaProvideObj = function ($rootScope) {
             }            
             //$scope.provideObj[$scope.provideObjArrName] = $scope.objNewArr;
             
-            $scope.objNewArr = [];
+            //$scope.objNewArr = [];
             return false;
         };
         

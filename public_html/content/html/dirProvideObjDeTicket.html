@@ -22,6 +22,7 @@
                                 <select name="inputType"
                                         id="inputType"
                                         class="name-input form-control" 
+                                        ng-init="ticket.type || 'T'"
                                         ng-model="ticket.type">
                                     <option value="T">Day</option>
                                     <option value="W">Week</option>
@@ -40,6 +41,7 @@
                                 <label for="inputStartTime" class="bold">Start Time:</label>
                                 <input id="inputStartTime"
                                        type="time" 
+                                       step="3600000"
                                        class="name-input form-control" 
                                        ng-model="ticket.startTime" />                                
                             </div>
@@ -73,11 +75,16 @@ Overview of tickets for: {{settings.personalKey}}
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <label for="inputToday" class="bold">Demo today/now:</label>
-                        <input id="inputToday"
-                            type="datetime-local" 
-                            class="name-input form-control" 
-                            ng-model="demoToday" />                                
+                    <input id="inputToday"
+                        type="datetime-local" 
+                        class="name-input form-control" 
+                        ng-model="demoToday" />
                 </div>   
+                <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                <div class="col-lg-3 col-md-6 col-sm-12"></div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    {{demoToday}}
+                </div>
             </div>
         </div>
         
@@ -91,8 +98,11 @@ Overview of tickets for: {{settings.personalKey}}
                 <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     End time: {{ticket.endTime}} 
-                    <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
-                    <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>
+                    <span ng-show="isEdit(ticket.startDate, ticket.startTime)">
+                        <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
+                        <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>
+                        <br />{{isEdit(ticket.startDate, ticket.startTime)}}
+                    </span>
                 </div>
             </div>                    
             <hr />

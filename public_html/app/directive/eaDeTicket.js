@@ -37,6 +37,15 @@ var eaDeTicket = function ($compile, $rootScope) {
                 return ret;
             };
             
+            $scope.isEdit = function(sD, sT) {
+               let ret = false;
+               let td = $scope.getDateString($scope.demoToday) + $scope.getTimeString($scope.demoToday);
+               if(sD==="" || sT==="" || sD + sT >= td) {
+                   ret = true;
+               }                
+               return ret;
+            };
+            
             // Scope functions for using on html page
             // Open the Modal
             $scope.openModalTicket = function(idx) {
@@ -47,7 +56,11 @@ var eaDeTicket = function ($compile, $rootScope) {
                     docModal.style.display = "block";
                             
                     // fill data
-                    $scope.ticket = $scope.cloneObj($scope.objNewArr[idx]);
+                    $scope.ticket = $scope.cloneObj($scope.objNewArr[idx]);                    
+                    // Defaulting the select field: if type = "" -> type ="T"
+                    if($scope.ticket.type==="") {
+                        $scope.ticket.type="T";
+                    }
                     let sDate = new Date($scope.ticket.startDate+"T"+$scope.ticket.startTime);
                     let eDate = new Date($scope.ticket.endDate+"T"+$scope.ticket.endTime);
                     $scope.ticket.startDate = sDate;
@@ -85,14 +98,16 @@ var eaDeTicket = function ($compile, $rootScope) {
                 // $scope.actIdx
                 if($scope.actIdx>-1) {
                     //$scope.objNewArr[$scope.actIdx] = $scope.cloneObj($scope.ticket);
+                    $scope.objNewArr[$scope.actIdx].type = $scope.ticket.type;
                     $scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString($scope.ticket.startDate);
                     $scope.objNewArr[$scope.actIdx].startTime = $scope.getTimeString($scope.ticket.startTime);
                     
                     // compute endDate and endTime by type
                     if($scope.objNewArr[$scope.actIdx].startTime) {
-                        let eDate = $scope.ticket.startTime; 
+                        let sDate = $scope.ticket.startTime; 
                         let dif =  getPeriod($scope.ticket.type);
-                        eDate.setTime(eDate.getTime() + dif*60*60*1000);
+                        let eDate = new Date();
+                        eDate.setTime(sDate.getTime() + dif*60*60*1000);
                         $scope.objNewArr[$scope.actIdx].endDate = $scope.getDateString(eDate);
                         $scope.objNewArr[$scope.actIdx].endTime = $scope.getTimeString(eDate);
                     }        
