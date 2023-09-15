@@ -36,7 +36,15 @@ var eaDeTicket = function ($compile, $rootScope) {
                 }                
                 return ret;
             };
+            var setDefaultingTicket = function(ticket) {
+                ticket.type="T";
+                let tickets = $scope.provideObj.tickets;
+                let maxDate = new Date(Math.max.apply(null, tickets.map(e => new Date(e.startDate + "T" + e.startTime + ":00.000Z"))));
+                
+                let x = "";
+            };
             
+            // Scope functions for using on html pages
             $scope.isEdit = function(sD, sT) {
                let ret = false;
                let td = $scope.getDateString($scope.demoToday) + $scope.getTimeString($scope.demoToday);
@@ -44,9 +52,15 @@ var eaDeTicket = function ($compile, $rootScope) {
                    ret = true;
                }                
                return ret;
-            };
+            };            
             
-            // Scope functions for using on html page
+            $scope.addObjRow = function() {
+                let newTicket = $scope.cloneObj($scope.objZero);
+                setDefaultingTicket(newTicket);
+                $scope.objNewArr.push(newTicket);
+            };
+
+            
             // Open the Modal
             $scope.openModalTicket = function(idx) {
                 $scope.actIdx = idx;
@@ -57,10 +71,6 @@ var eaDeTicket = function ($compile, $rootScope) {
                             
                     // fill data
                     $scope.ticket = $scope.cloneObj($scope.objNewArr[idx]);                    
-                    // Defaulting the select field: if type = "" -> type ="T"
-                    if($scope.ticket.type==="") {
-                        $scope.ticket.type="T";
-                    }
                     let sDate = new Date($scope.ticket.startDate+"T"+$scope.ticket.startTime);
                     let eDate = new Date($scope.ticket.endDate+"T"+$scope.ticket.endTime);
                     $scope.ticket.startDate = sDate;
@@ -94,6 +104,7 @@ var eaDeTicket = function ($compile, $rootScope) {
                 return false;
             };
             
+            // Save and close the modal 
             $scope.saveModalTicket = function() {
                 // $scope.actIdx
                 if($scope.actIdx>-1) {

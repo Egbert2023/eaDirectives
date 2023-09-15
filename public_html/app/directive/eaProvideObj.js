@@ -39,9 +39,6 @@ var eaProvideObj = function ($rootScope) {
             return false;
         };
         
-        $scope.addObjRow = function() {
-            $scope.objNewArr.push($scope.cloneObj($scope.objZero));
-        };
         
         $scope.deleteObjRow = function(idx) {
             if(idx>0) {
