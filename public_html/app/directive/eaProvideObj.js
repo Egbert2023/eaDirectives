@@ -37,8 +37,7 @@ var eaProvideObj = function ($rootScope) {
                 $scope.objNewArr.push(objRow);
             }
             return false;
-        };
-        
+        };        
         
         $scope.deleteObjRow = function(idx) {
             if(idx>0) {
@@ -48,6 +47,7 @@ var eaProvideObj = function ($rootScope) {
                 $scope.objNewArr.shift(); 
                 ($scope.objNewArr.length === 0)? $scope.objNewArr.push($scope.objZero) : "";
             }
+            $scope.saveObj();
             return false;
         };
         
@@ -60,8 +60,9 @@ var eaProvideObj = function ($rootScope) {
                     if($scope.provideObj[$scope.provideObjArrName][i]) {
                         $scope.provideObj[$scope.provideObjArrName][i] = $scope.cloneObj($scope.objNewArr[i]);
                     }
-                }    
-                for(let i=$scope.objNewArr.length+1; i<$scope.provideObj[$scope.provideObjArrName].length; i++) {
+                } 
+                const len = $scope.provideObj[$scope.provideObjArrName].length;
+                for(let i=$scope.objNewArr.length+1; i<len; i++) {
                     $scope.provideObj[$scope.provideObjArrName].pop();
                 }
             }
@@ -81,8 +82,9 @@ var eaProvideObj = function ($rootScope) {
                     if($scope.provideObj[$scope.provideObjArrName][i]) {
                         $scope.provideObj[$scope.provideObjArrName][i] = $scope.cloneObj($scope.objNewArr[i]);
                     }
-                }    
-                for(let i=$scope.provideObj[$scope.provideObjArrName].length+1; i<$scope.objNewArr.length; i++) {
+                } 
+                const len = $scope.provideObj[$scope.provideObjArrName].length;
+                for(let i=len+1; i<$scope.objNewArr.length; i++) {
                     $scope.provideObj[$scope.provideObjArrName].push($scope.objNewArr[i]);
                 }
             }            
@@ -96,7 +98,6 @@ var eaProvideObj = function ($rootScope) {
             const clO = Object.assign({}, objSource);
             return clO;
         };
-
         
         var getZeroFull= function(txt, n) {
             let zero = "0".repeat(n);
