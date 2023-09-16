@@ -23,6 +23,7 @@ var eaDeTicket = function ($compile, $rootScope) {
                 $scope.ticket = {};
                 $scope.actIdx = -1;
             };
+            
             var getPeriod = function(type) {
                 let ret = "T";
                 let types = $scope.provideObj.settings.types;
@@ -36,12 +37,35 @@ var eaDeTicket = function ($compile, $rootScope) {
                 }                
                 return ret;
             };
+            
             var setDefaultingTicket = function(ticket) {
-                ticket.type="T";
-                let tickets = $scope.provideObj.tickets;
-                let maxDate = new Date(Math.max.apply(null, tickets.map(e => new Date(e.startDate + "T" + e.startTime + ":00.000Z"))));
+                ticket.type = $scope.provideObj.settings.defaultType;   
+                let idx = $scope.provideObj.settings.types.map(function(o) {return o.key;}).indexOf(ticket.type);
+                ticket.price = $scope.provideObj.settings.types[idx].price;
                 
-                let x = "";
+                let tickets = $scope.provideObj.tickets;
+                
+                // compute max date and time
+                let maxDate = new Date(Math.max.apply(null, tickets.map(e => new Date(e.endDate + "T" + e.startTime + ":00.000Z"))));
+                const myTimeOffset = maxDate.getTimezoneOffset();
+                maxDate.setMinutes(maxDate.getMinutes() +  myTimeOffset);
+                ticket.startDate = $scope.getDateString(maxDate);
+                ticket.startTime = $scope.getTimeString(maxDate);
+                                
+                // compute end date and time
+                let eDate = computeEndDateTime(maxDate, ticket.type);
+                ticket.endDate = $scope.getDateString(eDate);
+                ticket.endTime = $scope.getTimeString(eDate);
+                
+                return ticket;
+            };
+            
+            var computeEndDateTime = function(startDateTime, type) {
+                let sDate = startDateTime; 
+                let dif =  getPeriod(type);
+                let eDate = new Date();
+                eDate.setTime(sDate.getTime() + dif*60*60*1000);
+                return eDate;
             };
             
             // Scope functions for using on html pages
@@ -56,10 +80,12 @@ var eaDeTicket = function ($compile, $rootScope) {
             
             $scope.addObjRow = function() {
                 let newTicket = $scope.cloneObj($scope.objZero);
-                setDefaultingTicket(newTicket);
+                newTicket = setDefaultingTicket(newTicket);
                 $scope.objNewArr.push(newTicket);
+                $scope.saveObj();
+                
+                return false;
             };
-
             
             // Open the Modal
             $scope.openModalTicket = function(idx) {
@@ -114,11 +140,14 @@ var eaDeTicket = function ($compile, $rootScope) {
                     $scope.objNewArr[$scope.actIdx].startTime = $scope.getTimeString($scope.ticket.startTime);
                     
                     // compute endDate and endTime by type
-                    if($scope.objNewArr[$scope.actIdx].startTime) {
-                        let sDate = $scope.ticket.startTime; 
-                        let dif =  getPeriod($scope.ticket.type);
-                        let eDate = new Date();
-                        eDate.setTime(sDate.getTime() + dif*60*60*1000);
+                    if($scope.objNewArr[$scope.actIdx].startTime) {                        
+//                        let sDate = $scope.ticket.startTime; 
+//                        let dif =  getPeriod($scope.ticket.type);
+//                        let eDate = new Date();
+//                        eDate.setTime(sDate.getTime() + dif*60*60*1000);
+//                        
+                        let eDate = computeEndDateTime($scope.ticket.startTime, $scope.ticket.type);
+                        
                         $scope.objNewArr[$scope.actIdx].endDate = $scope.getDateString(eDate);
                         $scope.objNewArr[$scope.actIdx].endTime = $scope.getTimeString(eDate);
                     }        
