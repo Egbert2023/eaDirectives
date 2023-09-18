@@ -51,7 +51,7 @@ var eaProvideObj = function ($rootScope) {
             return false;
         };
         
-        // the changed object is written back
+        // the changed object is written back to source object
         // $scope.objNewArr --> $scope.provideObj[$scope.provideObjArrName]
         $scope.saveObj = function() {
             // Tickets have been deleted
@@ -88,9 +88,6 @@ var eaProvideObj = function ($rootScope) {
                     $scope.provideObj[$scope.provideObjArrName].push($scope.objNewArr[i]);
                 }
             }            
-            //$scope.provideObj[$scope.provideObjArrName] = $scope.objNewArr;
-            
-            //$scope.objNewArr = [];
             return false;
         };
         
@@ -116,29 +113,14 @@ var eaProvideObj = function ($rootScope) {
             let ret = "";
             ret = getZeroFull(d.getHours(d), 2) + ":" + getZeroFull(d.getMinutes(d), 2);
             return ret;
-        };
-        
+        };        
     },
     
     link: function (scope, ele, attrs) {
         scope.provideObj = $rootScope[attrs.provideObj]; 
         scope.provideObjArrName = attrs.arrName; 
         scope.initObj(scope.provideObj, scope.provideObjArrName);
-        
-//        // Test EA
-//        // objNewArr is a clone of $rootScope[newDeTicket] a reference by value!
-//        scope.objNewArr[0].type="W";
-//        console.log($rootScope[attrs.provideObj]);
-//        scope.addObjRow();
-//        scope.deleteObjRow(1);
-//        scope.saveObj();
-//        console.log("new");
-//        console.log(scope.objNewArr);
-//        console.log("alt");
-//        console.log($rootScope[attrs.provideObj]);
     }       
-    
-    
   };
 };
 

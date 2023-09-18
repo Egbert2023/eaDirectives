@@ -1,5 +1,4 @@
-<div>
-    
+<div>    
     <ea-provide-obj data-provide-obj="newDeTicket" 
                     data-arr-name="tickets" 
                     ea-de-ticket="myDeTicket">
@@ -22,12 +21,12 @@
                                 <select name="inputType"
                                         id="inputType"
                                         class="name-input form-control" 
-                                        ng-init="ticket.type || 'T'"
+                                        ng-init="ticket.type || 'd'"
                                         ng-model="ticket.type">
-                                    <option value="T">Day</option>
-                                    <option value="W">Week</option>
-                                    <option value="M">Month</option>
-                                    <option value="J">Year</option>                                    
+                                    <option value="d">1 day</option>
+                                    <option value="w">7 days</option>
+                                    <option value="m">30 days</option>
+                                    <option value="y">360 days</option>                                    
                                 </select>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -37,21 +36,14 @@
                                        class="name-input form-control" 
                                        ng-model="ticket.startDate" />                                
                             </div>
+                           
                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                <label for="inputStartTime" class="bold">Start Time:</label>
-                                <input id="inputStartTime"
-                                       type="time" 
-                                       step="3600000"
-                                       class="name-input form-control" 
-                                       ng-model="ticket.startTime" />                                
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                <label for="inputEndDateTime" class="bold">End date and time:</label>
+                                <label for="inputEndDateTime" class="bold">End date:</label>
                                 <input id="inputEndDateTime"
-                                       type="text" 
+                                       type="date" 
                                        readonly="readonly"
                                        class="name-input form-control" 
-                                       value="{{ticket.endDate}} - {{ticket.endTime}}" />                                
+                                       ng-model="ticket.endDate" />                                
                             </div>
                         </div>                                
                    </div>
@@ -69,27 +61,27 @@
 
         <!-- Header of ticket view -->
         <div>
-            <h1>
+            <h2>
 Overview of tickets for: {{settings.personalKey}}
-            </h1>
+            </h2>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <label for="inputToday" class="bold">Demo today/now:</label>
                     <input id="inputToday"
-                        type="datetime-local" 
+                        type="date" 
                         class="name-input form-control" 
                         ng-model="demoToday" />
                 </div>   
                 <div class="col-lg-3 col-md-6 col-sm-12"></div>
                 <div class="col-lg-3 col-md-6 col-sm-12"></div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    {{demoToday}}
+                    
                 </div>
             </div>
-        </div>
-        
+        </div>        
         
         <hr />
+        
         <!-- List of tickets -->
         <div ng-repeat="ticket in objNewArr">                                        
             <div class="row">
@@ -97,11 +89,11 @@ Overview of tickets for: {{settings.personalKey}}
                 <div class="col-lg-3 col-md-6 col-sm-12">Start date: {{ticket.startDate}}</div>
                 <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    End time: {{ticket.endTime}} 
-                    <span ng-show="isEdit(ticket.startDate, ticket.startTime)">
+                    price: {{ticket.price}} €
+                    <span ng-show="isEdit(ticket.startDate)">
                         <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
                         <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>
-                        <br />{{isEdit(ticket.startDate, ticket.startTime)}}
+                        <br />{{isEdit(ticket.startDate)}}
                     </span>
                 </div>
             </div>                    

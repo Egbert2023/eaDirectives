@@ -1,6 +1,6 @@
 'use strict';
 
-var eaDeTicket = function ($compile, $rootScope) {
+var eaDeTicket = function () {
     return {
         restrict: 'A',
         replace: false,
@@ -8,15 +8,16 @@ var eaDeTicket = function ($compile, $rootScope) {
 
         controller: function($scope) {
             // https://github.com/sweetalert2/sweetalert2/issues/374
-            //angular.element().fn.modal.Constructor.prototype.enforceFocus = function () {};
+            // Solve the problem with the editability of input fields
+            // angular.element().fn.modal.Constructor.prototype.enforceFocus = function () {};
                         
             $scope.ticket = {};
             $scope.actIdx = -1;
             $scope.showEditLevel = "";
             $scope.settings = {};
             $scope.demoToday = new Date();
-            
-            // new Date($scope.ticket.startDate+"T"+$scope.ticket.startTime);
+            $scope.defaultStartTime = "";
+            $scope.defaultEndTime = "";
             
             // local functions
             var cleanTicket = function() {
@@ -38,25 +39,42 @@ var eaDeTicket = function ($compile, $rootScope) {
                 return ret;
             };
             
+            var getLocalDatTime = function(sDate, sTime) {
+                let dt = new Date(sDate + sTime);
+                const myTimeOffset = dt.getTimezoneOffset();
+                dt.setMinutes(dt.getMinutes() +  myTimeOffset);
+                return dt;
+            };
+            
             var setDefaultingTicket = function(ticket) {
-                ticket.type = $scope.provideObj.settings.defaultType;   
-                let idx = $scope.provideObj.settings.types.map(function(o) {return o.key;}).indexOf(ticket.type);
+                // fill date from settings
+                //ticket.type = $scope.provideObj.settings.defaultType;   
+                ticket.type = $scope.settings.defaultType;   
+                ticket.initType = ticket.type;  
+                // get index for default ticket type and read the current price
+                //let idx = $scope.provideObj.settings.types.map(function(o) {return o.key;}).indexOf(ticket.type);
+                let idx = $scope.settings.types.map(function(o) {return o.key;}).indexOf(ticket.type);
                 ticket.price = $scope.provideObj.settings.types[idx].price;
                 
-                let tickets = $scope.provideObj.tickets;
+                // get all tickets from newTickets
+                //let tickets = $scope.provideObj.tickets;
+                let tickets = $scope.objNewArr;
                 
-                // compute max date and time
-                let maxDate = new Date(Math.max.apply(null, tickets.map(e => new Date(e.endDate + "T" + e.startTime + ":00.000Z"))));
+                // compute max date 
+                // max of all end dates + today + new start day
+                //let forMaxDate = tickets.endDate.push($scope.demoToday);
+                
+                
+                
+                let maxDate = new Date(Math.max.apply(null, tickets.map(e => new Date(e.endDate + $scope.defaultEndTime))));
                 const myTimeOffset = maxDate.getTimezoneOffset();
                 maxDate.setMinutes(maxDate.getMinutes() +  myTimeOffset);
                 ticket.startDate = $scope.getDateString(maxDate);
-                ticket.startTime = $scope.getTimeString(maxDate);
-                                
-                // compute end date and time
+                                                
+                // compute end date 
                 let eDate = computeEndDateTime(maxDate, ticket.type);
                 ticket.endDate = $scope.getDateString(eDate);
-                ticket.endTime = $scope.getTimeString(eDate);
-                
+                                
                 return ticket;
             };
             
@@ -69,10 +87,10 @@ var eaDeTicket = function ($compile, $rootScope) {
             };
             
             // Scope functions for using on html pages
-            $scope.isEdit = function(sD, sT) {
+            $scope.isEdit = function(sD) {
                let ret = false;
-               let td = $scope.getDateString($scope.demoToday) + $scope.getTimeString($scope.demoToday);
-               if(sD==="" || sT==="" || sD + sT >= td) {
+               let td = $scope.getDateString($scope.demoToday);
+               if(sD==="" || sD >= td) {
                    ret = true;
                }                
                return ret;
@@ -97,13 +115,14 @@ var eaDeTicket = function ($compile, $rootScope) {
                             
                     // fill data
                     $scope.ticket = $scope.cloneObj($scope.objNewArr[idx]);                    
-                    let sDate = new Date($scope.ticket.startDate+"T"+$scope.ticket.startTime);
-                    let eDate = new Date($scope.ticket.endDate+"T"+$scope.ticket.endTime);
+                    let sDate = getLocalDatTime($scope.ticket.startDate, $scope.defaultStartTime);
+                    let eDate = getLocalDatTime($scope.ticket.endDate, $scope.defaultEndTime);
                     $scope.ticket.startDate = sDate;
-                    $scope.ticket.startTime = sDate;
-                    
+                    $scope.ticket.endDate = eDate;                                        
+                                        
                     // https://github.com/sweetalert2/sweetalert2/issues/374
-                    // you can usually solve bootstrap modal focus issues by disabling the focus enforcement
+                    // you can usually solve bootstrap modal focus issues by 
+                    // disabling the focus enforcement
                     ele = angular.element(docModal);
                     if(ele) {
                         if(ele.fn) {
@@ -116,8 +135,7 @@ var eaDeTicket = function ($compile, $rootScope) {
                 let aDocModal = angular.element(docModal);
                 aDocModal.ready(function() {
                     aDocModal[0].focus();
-                });
-                
+                });                
                 return false;
             };
             
@@ -136,24 +154,14 @@ var eaDeTicket = function ($compile, $rootScope) {
                 if($scope.actIdx>-1) {
                     //$scope.objNewArr[$scope.actIdx] = $scope.cloneObj($scope.ticket);
                     $scope.objNewArr[$scope.actIdx].type = $scope.ticket.type;
+                    $scope.objNewArr[$scope.actIdx].initType = $scope.ticket.initType;
                     $scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString($scope.ticket.startDate);
-                    $scope.objNewArr[$scope.actIdx].startTime = $scope.getTimeString($scope.ticket.startTime);
-                    
+                                        
                     // compute endDate and endTime by type
-                    if($scope.objNewArr[$scope.actIdx].startTime) {                        
-//                        let sDate = $scope.ticket.startTime; 
-//                        let dif =  getPeriod($scope.ticket.type);
-//                        let eDate = new Date();
-//                        eDate.setTime(sDate.getTime() + dif*60*60*1000);
-//                        
-                        let eDate = computeEndDateTime($scope.ticket.startTime, $scope.ticket.type);
-                        
+                    if($scope.objNewArr[$scope.actIdx].startDate) {                        
+                        let eDate = computeEndDateTime($scope.ticket.startDate, $scope.ticket.type);
                         $scope.objNewArr[$scope.actIdx].endDate = $scope.getDateString(eDate);
-                        $scope.objNewArr[$scope.actIdx].endTime = $scope.getTimeString(eDate);
                     }        
-                    
-                    //$scope.demoToday = new Date($scope.settings.demoToday+"T"+$scope.ticket.startTime);
-                    //$scope.settings.demoToday = $scope.getDateString($scope.demoToday);
                     $scope.settings.demoToday = $scope.demoToday.toISOString();
                 }
                 cleanTicket();
@@ -164,15 +172,17 @@ var eaDeTicket = function ($compile, $rootScope) {
         link: function (scope, ele, attrs) {      
             scope.settings = scope.provideObj.settings;
             scope.demoToday = new Date(scope.settings.demoToday);          
-            
+            scope.defaultStartTime = scope.settings.defaultStartTime;
+            scope.defaultEndTime = scope.settings.defaultEndTime;
+
                         
-//            // Test EA
-//            console.log("scope");
-//            console.log(scope);
-//            console.log("ele");
-//            console.log(ele);
-//            console.log("attrs");
-//            console.log(attrs);
+            // Test EA
+            console.log("scope");
+            console.log(scope);
+            console.log("ele");
+            console.log(ele);
+            console.log("attrs");
+            console.log(attrs);
         }
     };
 };
