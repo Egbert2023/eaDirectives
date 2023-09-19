@@ -49,7 +49,7 @@
                    </div>
                     <div class="modal-footer" style="font-size: 1.6rem;">
                         <button type="button" class="btn btn-success" ng-click="saveModalTicket()">
-                            <i class="bi bi-save" color: white;"></i>
+                            <i class="bi bi-credit-card-2-front" color: white;"></i>
                         </button>
                         <button type="button" class="btn btn-danger" ng-click="closeModalTicket()">
                             <i class="bi bi-x-square" color: white;"></i>
@@ -65,14 +65,16 @@
 Overview of tickets for: {{settings.personalKey}}
             </h2>
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <label for="inputToday" class="bold">Demo today/now:</label>
+                    <i class="bi bi-arrow-left-square-fill" ng-click="addDays(demoToday, -1)" style="font-size: 1.6rem; color: green;"></i>                        
                     <input id="inputToday"
                         type="date" 
                         class="name-input form-control" 
+                        style="width: 40%"
                         ng-model="demoToday" />
+                    <span class="bi bi-arrow-right-square-fill" ng-click="addDays(demoToday, 1)" style="font-size: 1.6rem; color: green;"></span>                        
                 </div>   
-                <div class="col-lg-3 col-md-6 col-sm-12"></div>
                 <div class="col-lg-3 col-md-6 col-sm-12"></div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     
@@ -90,10 +92,12 @@ Overview of tickets for: {{settings.personalKey}}
                 <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     price: {{ticket.price}} €
+                    <span ng-show="isPaid($index)">
+                        <i class="bi bi-credit-card-2-front" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
+                    </span>
                     <span ng-show="isEdit(ticket.startDate)">
                         <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
-                        <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>
-                        <br />{{isEdit(ticket.startDate)}}
+                        <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>                        
                     </span>
                 </div>
             </div>                    

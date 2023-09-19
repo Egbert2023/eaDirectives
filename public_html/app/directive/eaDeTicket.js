@@ -48,25 +48,30 @@ var eaDeTicket = function () {
             
             var setDefaultingTicket = function(ticket) {
                 // fill date from settings
-                //ticket.type = $scope.provideObj.settings.defaultType;   
                 ticket.type = $scope.settings.defaultType;   
                 ticket.initType = ticket.type;  
+                ticket.paid = "false";
+                 
                 // get index for default ticket type and read the current price
                 //let idx = $scope.provideObj.settings.types.map(function(o) {return o.key;}).indexOf(ticket.type);
                 let idx = $scope.settings.types.map(function(o) {return o.key;}).indexOf(ticket.type);
                 ticket.price = $scope.provideObj.settings.types[idx].price;
                 
                 // get all tickets from newTickets
-                //let tickets = $scope.provideObj.tickets;
                 let tickets = $scope.objNewArr;
                 
                 // compute max date 
-                // max of all end dates + today + new start day
+                // max of all end dates + today 
                 //let forMaxDate = tickets.endDate.push($scope.demoToday);
+                let forMaxDate = [];
+                for(let i=0; i<tickets.length; i++) {
+                    forMaxDate.push(tickets[i].endDate);
+                }
+                let td = $scope.getDateString($scope.demoToday);
+                forMaxDate.push(td);
                 
-                
-                
-                let maxDate = new Date(Math.max.apply(null, tickets.map(e => new Date(e.endDate + $scope.defaultEndTime))));
+                //let maxDate = new Date(Math.max.apply(null, tickets.map(e => new Date(e.endDate + $scope.defaultEndTime))));
+                let maxDate = new Date(Math.max.apply(null, forMaxDate.map(e => new Date(e + $scope.defaultEndTime))));
                 const myTimeOffset = maxDate.getTimezoneOffset();
                 maxDate.setMinutes(maxDate.getMinutes() +  myTimeOffset);
                 ticket.startDate = $scope.getDateString(maxDate);
@@ -87,6 +92,11 @@ var eaDeTicket = function () {
             };
             
             // Scope functions for using on html pages
+            $scope.addDays = function(d, n) {
+                d = d.setTime(d.getTime() + (n*24*60*60*1000));
+                return false;
+            };
+            
             $scope.isEdit = function(sD) {
                let ret = false;
                let td = $scope.getDateString($scope.demoToday);
@@ -94,13 +104,21 @@ var eaDeTicket = function () {
                    ret = true;
                }                
                return ret;
-            };            
+            };      
+            
+            $scope.isPaid = function(idx) {
+                let ret = false;
+                if($scope.objNewArr[idx].paid === "true") {
+                    ret = true;
+                }                
+                return ret;
+            };
             
             $scope.addObjRow = function() {
                 let newTicket = $scope.cloneObj($scope.objZero);
                 newTicket = setDefaultingTicket(newTicket);
                 $scope.objNewArr.push(newTicket);
-                $scope.saveObj();
+                //$scope.saveObj();
                 
                 return false;
             };
@@ -156,6 +174,7 @@ var eaDeTicket = function () {
                     $scope.objNewArr[$scope.actIdx].type = $scope.ticket.type;
                     $scope.objNewArr[$scope.actIdx].initType = $scope.ticket.initType;
                     $scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString($scope.ticket.startDate);
+                    $scope.objNewArr[$scope.actIdx].paid = "true";                                        
                                         
                     // compute endDate and endTime by type
                     if($scope.objNewArr[$scope.actIdx].startDate) {                        
@@ -164,6 +183,7 @@ var eaDeTicket = function () {
                     }        
                     $scope.settings.demoToday = $scope.demoToday.toISOString();
                 }
+                
                 cleanTicket();
                 $scope.closeModalTicket();
             };
