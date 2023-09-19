@@ -47,7 +47,7 @@ var eaProvideObj = function ($rootScope) {
                 $scope.objNewArr.shift(); 
                 ($scope.objNewArr.length === 0)? $scope.objNewArr.push($scope.objZero) : "";
             }
-            $scope.saveObj();
+            //$scope.saveObj();
             return false;
         };
         
