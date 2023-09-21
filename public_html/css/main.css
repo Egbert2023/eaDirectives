@@ -100,6 +100,15 @@ textarea {
    Author's custom styles
    ========================================================================== */
 /* ea for Egbert Aleksander */
+.eaProcButton {
+    font-size: 2.0rem;
+    color: green;
+    /*display: inline;*/
+}
+.eaOneRow {
+    display: flex;
+    flex-flow: row;
+}
 
 /* extern links*/
 .eaExtern {

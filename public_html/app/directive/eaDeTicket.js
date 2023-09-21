@@ -18,6 +18,7 @@ var eaDeTicket = function () {
             $scope.demoToday = new Date();
             $scope.defaultStartTime = "";
             $scope.defaultEndTime = "";
+            $scope.checkArr = [];
             
             // local functions
             var cleanTicket = function() {
@@ -91,10 +92,29 @@ var eaDeTicket = function () {
                 return eDate;
             };
             
+            var checkForTicketType = function(ticket) {
+                // 1. get periods of all ticket type more than given ticket type
+                // 2. find out all the tickets you have already paid for
+                // 3. compute the total price of this tickets by type
+                // 4. compare this total with the price of the next ticket type
+                // 5. Present the results of the comparison if the next ticket type 
+                //    were cheaper or valid for longer
+                // 6. The user decides whether he wants to book the initially 
+                //    selected ticket or choose the next ticket type
+                
+                // 1. 
+                let actType = ticket.type;
+                $scope.checkArr = $scope.settings.types.forEach(o => {
+                    
+                }, ticket);
+                
+            };
+            
             // Scope functions for using on html pages
             $scope.addDays = function(d, n) {
-                d = d.setTime(d.getTime() + (n*24*60*60*1000));
-                return false;
+                let dt = new Date(d);
+                dt.setTime(dt.getTime() + (n*24*60*60*1000));
+                return dt;
             };
             
             $scope.isEdit = function(sD) {
@@ -196,13 +216,13 @@ var eaDeTicket = function () {
             scope.defaultEndTime = scope.settings.defaultEndTime;
 
                         
-            // Test EA
-            console.log("scope");
-            console.log(scope);
-            console.log("ele");
-            console.log(ele);
-            console.log("attrs");
-            console.log(attrs);
+//            // Test EA
+//            console.log("scope");
+//            console.log(scope);
+//            console.log("ele");
+//            console.log(ele);
+//            console.log("attrs");
+//            console.log(attrs);
         }
     };
 };

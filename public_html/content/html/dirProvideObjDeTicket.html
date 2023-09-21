@@ -49,9 +49,11 @@
                    </div>
                     <div class="modal-footer" style="font-size: 1.6rem;">
                         <button type="button" class="btn btn-success" ng-click="saveModalTicket()">
-                            <i class="bi bi-credit-card-2-front" color: white;"></i>
+                            <i class="bi bi-credit-card-2-front" color: white;"
+                               data-toggle="tooltip" data-placement="top" title="Pay and save the ticket"></i>
                         </button>
-                        <button type="button" class="btn btn-danger" ng-click="closeModalTicket()">
+                        <button type="button" class="btn btn-danger" ng-click="closeModalTicket()"
+                                data-toggle="tooltip" data-placement="top" title="Discard new ticket">
                             <i class="bi bi-x-square" color: white;"></i>
                         </button>                        
                     </div> 
@@ -65,16 +67,22 @@
 Overview of tickets for: {{settings.personalKey}}
             </h2>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <label for="inputToday" class="bold">Demo today/now:</label>
-                    <i class="bi bi-arrow-left-square-fill" ng-click="addDays(demoToday, -1)" style="font-size: 1.6rem; color: green;"></i>                        
-                    <input id="inputToday"
-                        type="date" 
-                        class="name-input form-control" 
-                        style="width: 40%"
-                        ng-model="demoToday" />
-                    <span class="bi bi-arrow-right-square-fill" ng-click="addDays(demoToday, 1)" style="font-size: 1.6rem; color: green;"></span>                        
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label for="inputToday" class="bold">Demo today:</label>
+                    <div class="eaOneRow">
+                        <span class="bi bi-arrow-left-square-fill eaProcButton" 
+                              ng-click="demoToday=addDays(demoToday, -1)"
+                              data-toggle="tooltip" data-placement="top" title="Subtract one day"></span>
+                        <input id="inputToday"
+                            type="date" 
+                            class="name-input form-control"                             
+                            ng-model="demoToday" />
+                        <span class="bi bi-arrow-right-square-fill eaProcButton" 
+                              ng-click="demoToday=addDays(demoToday, 1)"
+                              data-toggle="tooltip" data-placement="top" title="Add one day"></span>   
+                    </div>
                 </div>   
+                <div class="col-lg-3 col-md-6 col-sm-12"></div>
                 <div class="col-lg-3 col-md-6 col-sm-12"></div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     
@@ -93,11 +101,17 @@ Overview of tickets for: {{settings.personalKey}}
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     price: {{ticket.price}} €
                     <span ng-show="isPaid($index)">
-                        <i class="bi bi-credit-card-2-front" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
+                        <i class="bi bi-credit-card-2-front" ng-click="openModalTicket($index)" 
+                           style="font-size: 1.0rem; color: green;"
+                           data-toggle="tooltip" data-placement="top" title="ticket has been paid for"></i>
                     </span>
                     <span ng-show="isEdit(ticket.startDate)">
-                        <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" style="font-size: 1.0rem; color: green;"></i>
-                        <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" style="font-size: 1.0rem; color: red;"></i>                        
+                        <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" 
+                           style="font-size: 1.0rem; color: green;"
+                           data-toggle="tooltip" data-placement="top" title="Edit the tickjet"></i>
+                        <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" 
+                           style="font-size: 1.0rem; color: red;"
+                           data-toggle="tooltip" data-placement="top" title="Delete the tickjet"></i>                        
                     </span>
                 </div>
             </div>                    
@@ -105,10 +119,12 @@ Overview of tickets for: {{settings.personalKey}}
 
         </div>
         <button type="button" class="btn btn-success" ng-click="addObjRow()">
-            <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"></i>
+            <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"
+               data-toggle="tooltip" data-placement="top" title="Add a new tickjet"></i>
         </button>
         <button type="button" class="btn btn-success" ng-click="saveObj()">
-            <i class="bi bi-save" style="font-size: 1.6rem; color: white;"></i>
+            <i class="bi bi-save" style="font-size: 1.6rem; color: white;"
+               data-toggle="tooltip" data-placement="top" title="Save all changes"></i>
         </button>
     </ea-provide-obj>            
 </div>
