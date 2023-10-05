@@ -33,7 +33,7 @@ var eaDeTicket = function () {
                 
                 for(let i=0; i<types.length; i++) {
                     if(types[i]) {
-                        if(types[i].key === type) {
+                        if(types[i].type === type) {
                             ret = types[i].period; // have add as houers
                         }
                     }
@@ -44,7 +44,7 @@ var eaDeTicket = function () {
             var getLocalDateTime = function(sDate, sTime) {
                 let dt = new Date(sDate + sTime);
                 const myTimeOffset = dt.getTimezoneOffset();
-                dt.setMinutes(dt.getMinutes() +  myTimeOffset);
+                dt.setMinutes(dt.getMinutes() + myTimeOffset);
                 return dt;
             };
             
@@ -55,8 +55,8 @@ var eaDeTicket = function () {
                 ticket.paid = "false";
                  
                 // get index for default ticket type and read the current price
-                //let idx = $scope.provideObj.settings.types.map(function(o) {return o.key;}).indexOf(ticket.type);
-                let idx = $scope.settings.types.map(function(o) {return o.key;}).indexOf(ticket.type);
+                //let idx = $scope.provideObj.settings.types.map(function(o) {return o.type;}).indexOf(ticket.type);
+                let idx = $scope.settings.types.map(function(o) {return o.type;}).indexOf(ticket.type);
                 ticket.price = $scope.provideObj.settings.types[idx].price;
                 
                 // get all tickets from newTickets
@@ -92,7 +92,8 @@ var eaDeTicket = function () {
                 eDate.setTime(sDate.getTime() + dif*60*60*1000);
                 return eDate;
             };
-                       
+             
+            
             var checkForTickets = function(ticket) {
                 // 1. get periods of all ticket type more than given ticket type
                 // 2. find out all the tickets you have already paid for 
@@ -110,6 +111,7 @@ var eaDeTicket = function () {
                 let actPeriod = getPeriod(actType);
                 let checkArr = [];
                 let ticketsSuggestion = [];
+                ticketsSuggestion.push(ticket);
                 types.forEach(o => {
                     if(parseInt(o.period) > parseInt(actPeriod)) {
                         checkArr.push(o);
@@ -122,10 +124,11 @@ var eaDeTicket = function () {
                 let startDate = new Date();
                 let totalPrice = 0;
                 let getDateRange = function(lastStartDate, ck, retObj) {
+// retObj = {"initType": "", "type": "", "startDate": "", "endDate": "", "price": "", "paid" : "false"};                    
                     let tickets = $scope.objNewArr;
                     let firstStartDate = new Date();
                     let period = ck.period;
-                    let type = ck.key;
+                    let type = ck.type;
                     let ret = false;
                     firstStartDate.setTime(lastStartDate.getTime() - parseInt(period)*60*60*1000);
                     
@@ -143,8 +146,14 @@ var eaDeTicket = function () {
                         }                        
                     }        
                     if(ret) {
-                        retObj = {"isBetter" : "", "startDate" : startDate, 
-                        "totalPrice" : totalPrice, "type" : type};
+                        retObj.initType = ticket.initType;
+                        retObj.type = type;
+                        retObj.startDate = startDate;
+                        
+                        let startDateTime = new Date(startDate);                        
+                        retObj.endDate = computeEndDateTime(startDateTime, type);
+                        retObj.price = ticket.price;
+                        retObj.paid = "true";
                         return retObj;
                     }                    
                     return undefined;
@@ -152,18 +161,17 @@ var eaDeTicket = function () {
                 
                 for(let idx=0; idx<checkArr.length; idx++) {
                     // startDate, totalPrice in the range
-                    let retObj = {"isBetter" : "", "startDate" : "", "totalPrice" : "", "type" : "" };
+                    // {"initType": "d", "type": "d", "startDate": "2023-08-26", "endDate": "2023-08-27", "price": "3,00", "paid" : "true"}
+                    let retObj = {"initType": "", "type": "", "startDate": "", "endDate": "", "price": "", "paid" : "false"};
                     let lastStartDate = new Date();
                     lastStartDate = getLocalDateTime(ticket.startDate.toISOString().substring(0,10), $scope.defaultStartTime);
-                    //let isRetObj = getDateRange(lastStartDate, checkArr[idx].period, retObj);
                     retObj = getDateRange(ticket.startDate, checkArr[idx], retObj);
                     if(retObj) {
                         
                         // Test
                         // checkArr[idx].price --> number for compare
                         
-                        if(totalPrice > checkArr[idx].price) {
-                            retObj.isBetter = true;
+                        if(totalPrice > parseFloat(checkArr[idx].price)) {
                             let newObj = $scope.cloneObj(retObj);
                             ticketsSuggestion.push(newObj);
                         }
@@ -269,6 +277,8 @@ var eaDeTicket = function () {
                         $scope.objNewArr[$scope.actIdx].endDate = $scope.getDateString(eDate);
                     }        
                     $scope.settings.demoToday = $scope.demoToday.toISOString();
+                    
+                    
                 }
                 
                 cleanTicket();

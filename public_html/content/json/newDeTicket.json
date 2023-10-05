@@ -5,10 +5,10 @@
       "settings" : 
         {
             "types": [
-                {"key":"d", "period":"28", "price":"3,00"},
-                {"key":"w", "period":"172", "price":"14,00"},
-                {"key":"m", "period":"724", "price":"49,00"},
-                {"key":"y", "period":"8644", "price":"565,00"}
+                {"type":"d", "period":"28", "price":"3,00"},
+                {"type":"w", "period":"172", "price":"14,00"},
+                {"type":"m", "period":"724", "price":"49,00"},
+                {"type":"y", "period":"8644", "price":"565,00"}
             ],
             "personalKey":"Emma-Mustermann-2004-02-29",
             "demoToday" : "2023-08-30T04:00:00.000Z",
