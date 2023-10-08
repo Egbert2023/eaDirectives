@@ -46,7 +46,7 @@
                                        ng-model="ticket.endDate" />                                
                             </div>
                         </div>                                
-                   </div>
+                    </div>
                     <div class="modal-footer" style="font-size: 1.6rem;">
                         <button type="button" class="btn btn-success" ng-click="saveModalTicket()">
                             <i class="bi bi-credit-card-2-front" color: white;"
@@ -57,6 +57,24 @@
                             <i class="bi bi-x-square" color: white;"></i>
                         </button>                        
                     </div> 
+                    
+                    <div ng-show="ticketsSuggestion.length > 0">
+                    Which ticket would you like to choose?
+                    <div class="row" ng-repeat="ticket in ticketsSuggestion">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            Ticket type: {{ticket.type}}
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            Start date: {{ticket.startDate}}
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            End date: {{ticket.endDate}}
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <input type="radio" />
+                        </div>            
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,7 +86,7 @@ Overview of tickets for: {{settings.personalKey}}
             </h2>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <label for="inputToday" class="bold">Demo today:</label>
+                    <label for="inputToday" class="bold">Simulation today:</label>
                     <div class="eaOneRow">
                         <span class="bi bi-arrow-left-square-fill eaProcButton" 
                               ng-click="demoToday=addDays(demoToday, -1)"
@@ -93,7 +111,7 @@ Overview of tickets for: {{settings.personalKey}}
         <hr />
         
         <!-- List of tickets -->
-        <div ng-repeat="ticket in objNewArr">                                        
+        <div ng-repeat="ticket in objNewArr">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-12">Ticket type: {{ticket.type}}</div>
                 <div class="col-lg-3 col-md-6 col-sm-12">Start date: {{ticket.startDate}}</div>

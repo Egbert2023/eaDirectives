@@ -19,7 +19,6 @@ var eaDeTicket = function () {
             $scope.demoToday = new Date();
             $scope.defaultStartTime = "";
             $scope.defaultEndTime = "";
-            //$scope.checkArr = [];
             
             // local functions
             var cleanTicket = function() {
@@ -47,6 +46,23 @@ var eaDeTicket = function () {
                 dt.setMinutes(dt.getMinutes() + myTimeOffset);
                 return dt;
             };
+            
+            var strDateToDateObj = function(strDateObj) {
+                let dateObj = {};
+                
+                return dateObj;
+            };
+            
+            var dateToStrDateObj = function(dateObj) {
+                let strDateObj = {   initType  : dateObj.initType,
+                                    type      : dateObj.type,
+                                    startDate : dateObj.startDate.toISOString().substring(0,10),
+                                    endDate   : dateObj.endDate.toISOString().substring(0,10),
+                                    price     : dateObj.price,
+                                    paid      : dateObj.paid};
+                return strDateObj;
+            };
+            
             
             var setDefaultingTicket = function(ticket) {
                 // fill date from settings
@@ -111,7 +127,8 @@ var eaDeTicket = function () {
                 let actPeriod = getPeriod(actType);
                 let checkArr = [];
                 let ticketsSuggestion = [];
-                ticketsSuggestion.push(ticket);
+                let strTicket = dateToStrDateObj(ticket);
+                ticketsSuggestion.push(strTicket);
                 types.forEach(o => {
                     if(parseInt(o.period) > parseInt(actPeriod)) {
                         checkArr.push(o);
@@ -150,9 +167,10 @@ var eaDeTicket = function () {
                         retObj.type = type;
                         retObj.startDate = startDate;
                         
-                        let startDateTime = new Date(startDate);                        
-                        retObj.endDate = computeEndDateTime(startDateTime, type);
+                        let startDateTime = new Date(startDate + $scope.defaultStartTime);                        
+                        retObj.endDate = computeEndDateTime(startDateTime, type).toISOString().substring(0,10);
                         retObj.price = ticket.price;
+                        
                         retObj.paid = "true";
                         return retObj;
                     }                    
@@ -266,9 +284,9 @@ var eaDeTicket = function () {
                     $scope.objNewArr[$scope.actIdx].paid = "true";                                        
                            
                     // Test EA
+                    $scope.ticket.paid = "true";
                     $scope.ticketsSuggestion = checkForTickets($scope.ticket);
-                    
-                    
+                                        
                     
                     
                     // compute endDate and endTime by type

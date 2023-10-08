@@ -13,7 +13,7 @@
             "personalKey":"Emma-Mustermann-2004-02-29",
             "demoToday" : "2023-08-30T04:00:00.000Z",
             "defaultType" : "d",
-            "defaultStartTime" : "T00:00:00.000Z",
+            "defaultStartTime" : "T03:00:00.000Z",
             "defaultEndTime" : "T04:00:00.000Z"
         },
       "tickets" : [
