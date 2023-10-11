@@ -59,21 +59,26 @@
                     </div> 
                     
                     <div ng-show="ticketsSuggestion.length > 0">
-                    Which ticket would you like to choose?
-                    <div class="row" ng-repeat="ticket in ticketsSuggestion">
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            Ticket type: {{ticket.type}}
+                        Which ticket would you like to choose?
+                        <div class="row" ng-repeat="ticket in ticketsSuggestion">
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                Ticket type: {{ticket.type}}
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                Start date: {{ticket.startDate}}
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                End date: {{ticket.endDate}}
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <button type="button" class="btn btn-success" ng-click="selectModalTicket($index)">
+                                    <i class="bi bi-check2-circle" style="font-size: 1.0rem; color: white;"
+                                       data-toggle="tooltip" data-placement="top" title="Select ticket"></i>
+                                </button>
+                            </div>            
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            Start date: {{ticket.startDate}}
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            End date: {{ticket.endDate}}
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12">
-                            <input type="radio" />
-                        </div>            
-                    </div>
+                        
+                        
                     </div>
                 </div>
             </div>
