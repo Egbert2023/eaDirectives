@@ -23,6 +23,7 @@ var eaDeTicket = function () {
             // local functions
             var cleanTicket = function() {
                 $scope.ticket = {};
+                $scope.ticketsSuggestion = [];
                 $scope.actIdx = -1;
             };
             
@@ -282,12 +283,6 @@ var eaDeTicket = function () {
                     $scope.objNewArr[$scope.actIdx].initType = $scope.ticket.initType;
                     $scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString($scope.ticket.startDate);
                     $scope.objNewArr[$scope.actIdx].paid = "true";                                        
-                           
-                    // Test EA
-                    $scope.ticket.paid = "true";
-                    $scope.ticketsSuggestion = checkForTickets($scope.ticket);
-                                        
-                    
                     
                     // compute endDate and endTime by type
                     if($scope.objNewArr[$scope.actIdx].startDate) {                        
@@ -296,12 +291,49 @@ var eaDeTicket = function () {
                     }        
                     $scope.settings.demoToday = $scope.demoToday.toISOString();
                     
-                    
+                    // Test EA
+                    $scope.ticket.paid = "true";
+                    $scope.ticketsSuggestion = checkForTickets($scope.ticket);
                 }
                 
-                cleanTicket();
-                $scope.closeModalTicket();
+                if($scope.ticketsSuggestion) {
+                    if($scope.ticketsSuggestion.length > 1) {
+                        
+                        
+                    } else {
+//                        $scope.selectModalTicket(0);
+                        cleanTicket();
+                        $scope.closeModalTicket();        
+                    }
+                } else {
+//                    $scope.selectModalTicket(0);
+                    cleanTicket();
+                    $scope.closeModalTicket();    
+                }
             };
+            
+            $scope.selectModalTicket = function(idx) {
+                let ticket = $scope.ticketsSuggestion[idx];
+                $scope.objNewArr[$scope.actIdx].type = ticket.type;
+                $scope.objNewArr[$scope.actIdx].initType = ticket.initType;
+                //$scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString(ticket.startDate);
+                $scope.objNewArr[$scope.actIdx].startDate = ticket.startDate;
+                
+                //
+                //$scope.objNewArr[$scope.actIdx].price = 
+                //
+                
+                // compute endDate and endTime by type
+                if($scope.objNewArr[$scope.actIdx].startDate) {   
+                    let startDateTime = new Date(ticket.startDate + $scope.defaultStartTime);
+                    let eDate = computeEndDateTime(startDateTime, ticket.type);
+                    $scope.objNewArr[$scope.actIdx].endDate = $scope.getDateString(eDate);
+                }   
+                
+                cleanTicket();
+                $scope.closeModalTicket();    
+            };
+            
         },
         
         link: function (scope, ele, attrs) {      
