@@ -22,6 +22,7 @@
                                         id="inputType"
                                         class="name-input form-control" 
                                         ng-init="ticket.type || 'd'"
+                                        ng-change="setPriceByType(ticket.type)"
                                         ng-model="ticket.type">
                                     <option value="d">1 day</option>
                                     <option value="w">7 days</option>

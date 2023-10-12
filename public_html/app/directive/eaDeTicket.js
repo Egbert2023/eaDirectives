@@ -27,7 +27,7 @@ var eaDeTicket = function () {
                 $scope.actIdx = -1;
             };
             
-            var getPeriod = function(type) {
+            var getPeriodByType = function(type) {
                 let ret = "d";
                 let types = $scope.provideObj.settings.types;
                 
@@ -41,6 +41,19 @@ var eaDeTicket = function () {
                 return ret;
             };
             
+            var getPriceByType = function(type) {
+                let ret = 0.0;
+                let types = $scope.provideObj.settings.types;
+                for(let i=0; i<types.length; i++) {
+                    if(types[i]) {
+                        if(types[i].type === type) {
+                            ret = parseFloat(types[i].price); 
+                        }
+                    }
+                }   
+                return ret;
+            };
+            
             var getLocalDateTime = function(sDate, sTime) {
                 let dt = new Date(sDate + sTime);
                 const myTimeOffset = dt.getTimezoneOffset();
@@ -48,37 +61,36 @@ var eaDeTicket = function () {
                 return dt;
             };
             
-            var strDateToDateObj = function(strDateObj) {
-                let dateObj = {};
-                
-                return dateObj;
-            };
-            
             var dateToStrDateObj = function(dateObj) {
-                let strDateObj = {   initType  : dateObj.initType,
+                let strDateObj = {  initType  : dateObj.initType,
                                     type      : dateObj.type,
                                     startDate : dateObj.startDate.toISOString().substring(0,10),
                                     endDate   : dateObj.endDate.toISOString().substring(0,10),
                                     price     : dateObj.price,
                                     paid      : dateObj.paid};
                 return strDateObj;
-            };
-            
+            };            
             
             var setDefaultingTicket = function(ticket) {
                 // fill date from settings
                 ticket.type = $scope.settings.defaultType;   
-                ticket.initType = ticket.type;  
-                ticket.paid = "false";
-                 
-                // get index for default ticket type and read the current price
-                //let idx = $scope.provideObj.settings.types.map(function(o) {return o.type;}).indexOf(ticket.type);
-                let idx = $scope.settings.types.map(function(o) {return o.type;}).indexOf(ticket.type);
-                ticket.price = $scope.provideObj.settings.types[idx].price;
                 
                 // get all tickets from newTickets
                 let tickets = $scope.objNewArr;
                 
+                // reads the last type used
+                let lastType = tickets[tickets.length - 1].type;
+                if(lastType) {
+                    ticket.type = lastType;
+                }
+                ticket.initType = ticket.type;  
+                ticket.paid = "false";
+                                 
+                // get index for default ticket type and read the current price
+                //let idx = $scope.provideObj.settings.types.map(function(o) {return o.type;}).indexOf(ticket.type);
+                let idx = $scope.settings.types.map(function(o) {return o.type;}).indexOf(ticket.type);
+                ticket.price = $scope.provideObj.settings.types[idx].price;
+                                
                 // compute max date 
                 // max of all end dates + today 
                 //let forMaxDate = tickets.endDate.push($scope.demoToday);
@@ -104,12 +116,11 @@ var eaDeTicket = function () {
             
             var computeEndDateTime = function(startDateTime, type) {
                 let sDate = startDateTime; 
-                let dif =  getPeriod(type);
+                let dif =  getPeriodByType(type);
                 let eDate = new Date();
                 eDate.setTime(sDate.getTime() + dif*60*60*1000);
                 return eDate;
             };
-             
             
             var checkForTickets = function(ticket) {
                 // 1. get periods of all ticket type more than given ticket type
@@ -125,7 +136,7 @@ var eaDeTicket = function () {
                 // 1. --> checkArr[] all relevant types with period
                 let types = $scope.settings.types;
                 let actType = ticket.type;
-                let actPeriod = getPeriod(actType);
+                let actPeriod = getPeriodByType(actType);
                 let checkArr = [];
                 let ticketsSuggestion = [];
                 let strTicket = dateToStrDateObj(ticket);
@@ -138,7 +149,6 @@ var eaDeTicket = function () {
 
                 // 2. find out all the tickets you have already paid for 
                 //    (for every object in checkArr inner the data range)
-                // 3. compute the total price of this tickets by type
                 let startDate = new Date();
                 let totalPrice = 0;
                 let getDateRange = function(lastStartDate, ck, retObj) {
@@ -150,6 +160,7 @@ var eaDeTicket = function () {
                     let ret = false;
                     firstStartDate.setTime(lastStartDate.getTime() - parseInt(period)*60*60*1000);
                     
+                    // 3. compute the total price of this tickets by type
                     // fictional start date for the new ticket type  
                     for(let idx=0; idx<tickets.length; idx++) {
                         let localDateTime = getLocalDateTime(tickets[idx].startDate, $scope.defaultStartTime);
@@ -200,6 +211,11 @@ var eaDeTicket = function () {
             };
             
             // Scope functions for using on html pages
+            $scope.setPriceByType = function(type) {
+                $scope.ticket.price = getPriceByType(type).toString();
+                return false;
+            };            
+            
             $scope.addDays = function(d, n) {
                 let dt = new Date(d);
                 dt.setTime(dt.getTime() + (n*24*60*60*1000));
@@ -275,14 +291,14 @@ var eaDeTicket = function () {
                 return false;
             };
             
-            // Save and close the modal 
+            // Save and close the modal or call $scope.selectModalTicket()
             $scope.saveModalTicket = function() {
                 // $scope.actIdx
                 if($scope.actIdx>-1) {
                     $scope.objNewArr[$scope.actIdx].type = $scope.ticket.type;
                     $scope.objNewArr[$scope.actIdx].initType = $scope.ticket.initType;
                     $scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString($scope.ticket.startDate);
-                    $scope.objNewArr[$scope.actIdx].paid = "true";                                        
+                    $scope.objNewArr[$scope.actIdx].paid = "true";     
                     
                     // compute endDate and endTime by type
                     if($scope.objNewArr[$scope.actIdx].startDate) {                        
@@ -291,27 +307,27 @@ var eaDeTicket = function () {
                     }        
                     $scope.settings.demoToday = $scope.demoToday.toISOString();
                     
-                    // Test EA
+                    // This is a simulation for pay the ticket.
                     $scope.ticket.paid = "true";
                     $scope.ticketsSuggestion = checkForTickets($scope.ticket);
                 }
                 
+                // If there is more than one return value in the 
+                // array $scope.ticketsSuggestion, then the modal window will not close.
+                // Then select a ticket in the modal window and function 
+                // $scope.selectModalTicket() is used. 
                 if($scope.ticketsSuggestion) {
-                    if($scope.ticketsSuggestion.length > 1) {
-                        
-                        
-                    } else {
-//                        $scope.selectModalTicket(0);
+                    if($scope.ticketsSuggestion.length <= 1) {
                         cleanTicket();
                         $scope.closeModalTicket();        
                     }
                 } else {
-//                    $scope.selectModalTicket(0);
                     cleanTicket();
                     $scope.closeModalTicket();    
                 }
             };
             
+            // selects a ticket if more than one is possible
             $scope.selectModalTicket = function(idx) {
                 let ticket = $scope.ticketsSuggestion[idx];
                 $scope.objNewArr[$scope.actIdx].type = ticket.type;
@@ -319,8 +335,9 @@ var eaDeTicket = function () {
                 //$scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString(ticket.startDate);
                 $scope.objNewArr[$scope.actIdx].startDate = ticket.startDate;
                 
+                
                 //
-                //$scope.objNewArr[$scope.actIdx].price = 
+                //$scope.objNewArr[$scope.actIdx].price = getPriceByType(ticket.type);
                 //
                 
                 // compute endDate and endTime by type
