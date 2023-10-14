@@ -130,9 +130,7 @@ var eaDeTicket = function () {
                 // 4. compare this total with the price of the next ticket type
                 // 5. Present the results of the comparison if the next ticket type 
                 //    were cheaper or valid for longer
-                // 6. The user decides whether he wants to book the initially 
-                //    selected ticket or choose the next ticket type
-                
+                                
                 // 1. --> checkArr[] all relevant types with period
                 let types = $scope.settings.types;
                 let actType = ticket.type;
@@ -152,7 +150,6 @@ var eaDeTicket = function () {
                 let startDate = new Date();
                 let totalPrice = 0;
                 let getDateRange = function(lastStartDate, ck, retObj) {
-// retObj = {"initType": "", "type": "", "startDate": "", "endDate": "", "price": "", "paid" : "false"};                    
                     let tickets = $scope.objNewArr;
                     let firstStartDate = new Date();
                     let period = ck.period;
@@ -167,13 +164,15 @@ var eaDeTicket = function () {
                         if(localDateTime >= firstStartDate) {
                             if(tickets[idx].paid === "true") {
                                 if(!ret) {
-                                    startDate = tickets[idx].startDate;                                    
+                                    startDate = tickets[idx].startDate;
+                                    //startDate = ticket.startDate.toISOString().substring(0,10);
                                 }
                                 totalPrice = totalPrice + parseFloat(tickets[idx].price);
                                 ret = true;
                             }
                         }                        
-                    }        
+                    }    
+                    // 4. compare this total with the price of the next ticket type
                     if(ret) {
                         retObj.initType = ticket.initType;
                         retObj.type = type;
@@ -188,7 +187,8 @@ var eaDeTicket = function () {
                     }                    
                     return undefined;
                 };
-                
+                // 5. Present the results of the comparison if the next ticket type 
+                //    were cheaper or valid for longer -> ticketsSuggestion
                 for(let idx=0; idx<checkArr.length; idx++) {
                     // startDate, totalPrice in the range
                     // {"initType": "d", "type": "d", "startDate": "2023-08-26", "endDate": "2023-08-27", "price": "3,00", "paid" : "true"}
@@ -197,10 +197,6 @@ var eaDeTicket = function () {
                     lastStartDate = getLocalDateTime(ticket.startDate.toISOString().substring(0,10), $scope.defaultStartTime);
                     retObj = getDateRange(ticket.startDate, checkArr[idx], retObj);
                     if(retObj) {
-                        
-                        // Test
-                        // checkArr[idx].price --> number for compare
-                        
                         if(totalPrice > parseFloat(checkArr[idx].price)) {
                             let newObj = $scope.cloneObj(retObj);
                             ticketsSuggestion.push(newObj);
@@ -293,7 +289,7 @@ var eaDeTicket = function () {
             
             // Save and close the modal or call $scope.selectModalTicket()
             $scope.saveModalTicket = function() {
-                // $scope.actIdx
+                let initStartDateStr = $scope.objNewArr[$scope.objNewArr.length - 1].startDate;
                 if($scope.actIdx>-1) {
                     $scope.objNewArr[$scope.actIdx].type = $scope.ticket.type;
                     $scope.objNewArr[$scope.actIdx].initType = $scope.ticket.initType;
@@ -316,7 +312,12 @@ var eaDeTicket = function () {
                 // array $scope.ticketsSuggestion, then the modal window will not close.
                 // Then select a ticket in the modal window and function 
                 // $scope.selectModalTicket() is used. 
+                // The user decides whether he wants to book the initially 
+                // selected ticket or choose the next ticket type
                 if($scope.ticketsSuggestion) {
+                    for(let idx=0; idx<$scope.ticketsSuggestion.length; idx++) {
+                        $scope.ticketsSuggestion[idx].startDate = initStartDateStr;
+                    }
                     if($scope.ticketsSuggestion.length <= 1) {
                         cleanTicket();
                         $scope.closeModalTicket();        
@@ -327,30 +328,25 @@ var eaDeTicket = function () {
                 }
             };
             
-            // selects a ticket if more than one is possible
+            // selects a ticket if more than one is possible            
             $scope.selectModalTicket = function(idx) {
+                let startDateStr = $scope.ticketsSuggestion[0].startDate;
                 let ticket = $scope.ticketsSuggestion[idx];
                 $scope.objNewArr[$scope.actIdx].type = ticket.type;
                 $scope.objNewArr[$scope.actIdx].initType = ticket.initType;
-                //$scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString(ticket.startDate);
                 $scope.objNewArr[$scope.actIdx].startDate = ticket.startDate;
-                
-                
-                //
-                //$scope.objNewArr[$scope.actIdx].price = getPriceByType(ticket.type);
-                //
-                
+                                
                 // compute endDate and endTime by type
                 if($scope.objNewArr[$scope.actIdx].startDate) {   
                     let startDateTime = new Date(ticket.startDate + $scope.defaultStartTime);
                     let eDate = computeEndDateTime(startDateTime, ticket.type);
                     $scope.objNewArr[$scope.actIdx].endDate = $scope.getDateString(eDate);
+                    $scope.objNewArr[$scope.actIdx].startDate = startDateStr;
                 }   
                 
                 cleanTicket();
                 $scope.closeModalTicket();    
-            };
-            
+            };            
         },
         
         link: function (scope, ele, attrs) {      
