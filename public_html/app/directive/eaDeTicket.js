@@ -206,6 +206,20 @@ var eaDeTicket = function () {
                 return ticketsSuggestion;
             };
             
+            var payTicket = function(ticket) {
+                let pay = function(t,f) {
+                    // wrapper for pay
+                    f(t);
+                };
+                let callBack = function(ticket){
+                    ticket.paid = "true";
+                    return false;
+                };
+                pay(ticket, callBack);
+                return false;
+            };
+            
+            
             // Scope functions for using on html pages
             $scope.setPriceByType = function(type) {
                 $scope.ticket.price = getPriceByType(type).toString();
@@ -340,13 +354,33 @@ var eaDeTicket = function () {
                 if($scope.objNewArr[$scope.actIdx].startDate) {   
                     let startDateTime = new Date(ticket.startDate + $scope.defaultStartTime);
                     let eDate = computeEndDateTime(startDateTime, ticket.type);
+                    
+                    // paying is open now
+                    $scope.objNewArr[$scope.actIdx].paid = "false";
+                    
                     $scope.objNewArr[$scope.actIdx].endDate = $scope.getDateString(eDate);
                     $scope.objNewArr[$scope.actIdx].startDate = startDateStr;
-                }   
-                
+                    
+                    payTicket($scope.objNewArr[$scope.actIdx]);
+                }                   
                 cleanTicket();
                 $scope.closeModalTicket();    
-            };            
+            };      
+            
+            $scope.deleteUnPaid = function(f) {
+                let ar = [];
+                for(let idx = 0; idx<$scope.objNewArr.length; idx++) {
+                    if($scope.objNewArr[idx].paid === "false") {
+                        //$scope.objNewArr.splice(idx, 1);
+                        ar.push(idx);
+                    }                    
+                }
+                for(let idx=ar.length-1; idx>=0; idx--) {
+                    $scope.objNewArr.splice(ar[idx], 1);
+                }                
+                f();
+                return false;
+            };
         },
         
         link: function (scope, ele, attrs) {      

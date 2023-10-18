@@ -60,7 +60,8 @@
                     </div> 
                     
                     <div ng-show="ticketsSuggestion.length > 0">
-                        Which ticket would you like to choose?
+                        <h2>Which ticket would you like to choose?</h2>
+                        <hr />
                         <div class="row" ng-repeat="ticket in ticketsSuggestion">
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 Ticket type: {{ticket.type}}
@@ -73,10 +74,11 @@
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <button type="button" class="btn btn-success" ng-click="selectModalTicket($index)">
-                                    <i class="bi bi-check2-circle" style="font-size: 1.0rem; color: white;"
+                                    <i class="bi bi-check2-circle eaProcButton" style="font-size: 0.8rem; color: white;"
                                        data-toggle="tooltip" data-placement="top" title="Select ticket"></i>
                                 </button>
-                            </div>            
+                            </div> 
+                            <hr />
                         </div>
                         
                         
@@ -132,10 +134,10 @@ Overview of tickets for: {{settings.personalKey}}
                     <span ng-show="isEdit(ticket.startDate)">
                         <i class="bi bi-pencil-fill" ng-click="openModalTicket($index)" 
                            style="font-size: 1.0rem; color: green;"
-                           data-toggle="tooltip" data-placement="top" title="Edit the tickjet"></i>
+                           data-toggle="tooltip" data-placement="top" title="Edit the ticket"></i>
                         <i class="bi bi-trash3-fill" ng-click="deleteObjRow($index)" 
                            style="font-size: 1.0rem; color: red;"
-                           data-toggle="tooltip" data-placement="top" title="Delete the tickjet"></i>                        
+                           data-toggle="tooltip" data-placement="top" title="Delete the ticket"></i>                        
                     </span>
                 </div>
             </div>                    
@@ -144,9 +146,9 @@ Overview of tickets for: {{settings.personalKey}}
         </div>
         <button type="button" class="btn btn-success" ng-click="addObjRow()">
             <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"
-               data-toggle="tooltip" data-placement="top" title="Add a new tickjet"></i>
+               data-toggle="tooltip" data-placement="top" title="Add a new ticket"></i>
         </button>
-        <button type="button" class="btn btn-success" ng-click="saveObj()">
+        <button type="button" class="btn btn-success" ng-click="deleteUnPaid(saveObj);">
             <i class="bi bi-save" style="font-size: 1.6rem; color: white;"
                data-toggle="tooltip" data-placement="top" title="Save all changes"></i>
         </button>
