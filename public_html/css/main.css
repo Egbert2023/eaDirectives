@@ -103,6 +103,9 @@ textarea {
 .eaProcButton {
     font-size: 2.0rem;
     color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center
     /*display: inline;*/
 }
 .eaOneRow {
