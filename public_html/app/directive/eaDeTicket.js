@@ -198,8 +198,10 @@ var eaDeTicket = function () {
                     retObj = getDateRange(ticket.startDate, checkArr[idx], retObj);
                     if(retObj) {
                         if(totalPrice > parseFloat(checkArr[idx].price)) {
-                            let newObj = $scope.cloneObj(retObj);
-                            ticketsSuggestion.push(newObj);
+                            if(retObj.endDate >= ticketsSuggestion[0].endDate) {
+                                let newObj = $scope.cloneObj(retObj);
+                                ticketsSuggestion.push(newObj);
+                            }
                         }
                     }
                 }                
@@ -221,8 +223,9 @@ var eaDeTicket = function () {
             
             
             // Scope functions for using on html pages
-            $scope.setPriceByType = function(type) {
+            $scope.setPriceAndEndDateByType = function(type) {
                 $scope.ticket.price = getPriceByType(type).toString();
+                $scope.ticket.endDate = computeEndDateTime($scope.ticket.startDate, type);
                 return false;
             };            
             
@@ -306,6 +309,7 @@ var eaDeTicket = function () {
                 let initStartDateStr = $scope.objNewArr[$scope.objNewArr.length - 1].startDate;
                 if($scope.actIdx>-1) {
                     $scope.objNewArr[$scope.actIdx].type = $scope.ticket.type;
+                    $scope.objNewArr[$scope.actIdx].price = parseFloat($scope.ticket.price).toFixed(2);
                     $scope.objNewArr[$scope.actIdx].initType = $scope.ticket.initType;
                     $scope.objNewArr[$scope.actIdx].startDate = $scope.getDateString($scope.ticket.startDate);
                     $scope.objNewArr[$scope.actIdx].paid = "true";     

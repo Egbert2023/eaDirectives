@@ -22,12 +22,9 @@
                                         id="inputType"
                                         class="name-input form-control" 
                                         ng-init="ticket.type || 'd'"
-                                        ng-change="setPriceByType(ticket.type)"
+                                        ng-change="setPriceAndEndDateByType(ticket.type)"
                                         ng-model="ticket.type">
-                                    <option value="d">1 day</option>
-                                    <option value="w">7 days</option>
-                                    <option value="m">30 days</option>
-                                    <option value="y">360 days</option>                                    
+                                    <option ng-repeat="typeItem in settings.types" value="{{typeItem.type}}">{{typeItem.label}}</option>
                                 </select>
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6">
@@ -45,6 +42,14 @@
                                        readonly="readonly"
                                        class="name-input form-control" 
                                        ng-model="ticket.endDate" />                                
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <label for="inputEndDateTime" class="bold">Price in €:</label>
+                                <input id="inputEndDateTime"
+                                       type="text" 
+                                       readonly="readonly"
+                                       class="name-input form-control" 
+                                       ng-model="ticket.price" />                     
                             </div>
                         </div>                                
                     </div>
