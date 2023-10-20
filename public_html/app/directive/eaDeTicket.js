@@ -385,6 +385,23 @@ var eaDeTicket = function () {
                 f();
                 return false;
             };
+            
+            // eaClass00, eaClass01, ... eaClass10
+            $scope.getDynamicClass = function(idx) {
+                let lastIdx = $scope.objNewArr.length;
+                let maxIdx = 11;
+                let justIdx = lastIdx - maxIdx;
+                let diff = idx-justIdx;
+                let ret = "eaClass00";
+                if(diff > 0) {
+                    ret = "eaClass" + ("0" + diff.toString()).substr(-2);
+                }                
+                return ret;
+            };
+            $scope.isShowRow = function(e) {
+                let ret = (e.$$watchers[0].last === "eaClass00")? false: true;
+                return ret;
+            };
         },
         
         link: function (scope, ele, attrs) {      
