@@ -1,5 +1,9 @@
 'use strict';
 
+// This directive "eaDeTicket" is only used within the directive "eaProvideObj".
+// <ea-provide-obj data-provide-obj="newDeTicket" 
+//                    data-arr-name="tickets" 
+//                    ea-de-ticket="myDeTicket">
 var eaDeTicket = function () {
     return {
         restrict: 'A',
@@ -10,7 +14,11 @@ var eaDeTicket = function () {
             // https://github.com/sweetalert2/sweetalert2/issues/374
             // Solve the problem with the editability of input fields
             // angular.element().fn.modal.Constructor.prototype.enforceFocus = function () {};
-                        
+
+        // ------------------------------------------------------------
+        // Parameters for the current scope
+        // ------------------------------------------------------------
+            
             $scope.ticket = {};
             $scope.ticketsSuggestion = [];
             $scope.actIdx = -1;
@@ -19,8 +27,11 @@ var eaDeTicket = function () {
             $scope.demoToday = new Date();
             $scope.defaultStartTime = "";
             $scope.defaultEndTime = "";
+            $scope.idxOffset = 0;
             
-            // local functions
+        // ------------------------------------------------------------
+        // local functions
+        // ------------------------------------------------------------
             var cleanTicket = function() {
                 $scope.ticket = {};
                 $scope.ticketsSuggestion = [];
@@ -221,8 +232,9 @@ var eaDeTicket = function () {
                 return false;
             };
             
-            
-            // Scope functions for using on html pages
+        // ------------------------------------------------------------
+        // Scope functions for using on html pages
+        // ------------------------------------------------------------
             $scope.setPriceAndEndDateByType = function(type) {
                 $scope.ticket.price = getPriceByType(type).toString();
                 $scope.ticket.endDate = computeEndDateTime($scope.ticket.startDate, type);
@@ -256,7 +268,7 @@ var eaDeTicket = function () {
                 let newTicket = $scope.cloneObj($scope.objZero);
                 newTicket = setDefaultingTicket(newTicket);
                 $scope.objNewArr.push(newTicket);
-                //$scope.saveObj();
+                $scope.idxOffset = 0;
                 
                 return false;
             };
@@ -388,19 +400,35 @@ var eaDeTicket = function () {
             
             // eaClass00, eaClass01, ... eaClass10
             $scope.getDynamicClass = function(idx) {
-                let lastIdx = $scope.objNewArr.length;
-                let maxIdx = 11;
-                let justIdx = lastIdx - maxIdx;
+                let lastIdx = $scope.objNewArr.length - 1;
+                let defListLength = parseInt($scope.settings.defListLength);
+                let justIdx = (lastIdx - $scope.idxOffset) - defListLength;
                 let diff = idx-justIdx;
                 let ret = "eaClass00";
                 if(diff > 0) {
-                    ret = "eaClass" + ("0" + diff.toString()).substr(-2);
+                    if(diff>defListLength) {
+                        if(diff>2*defListLength) {
+                            ret = "eaClass00";
+                        } else {
+                            let bcn = defListLength - (diff - defListLength);
+                            bcn = (bcn<0)? 0 : bcn;
+                            ret = "eaClass" + ("0" + bcn.toString()).substr(-2);
+                        }
+                    } else {
+                        ret = "eaClass" + ("0" + diff.toString()).substr(-2);
+                    }
                 }                
                 return ret;
             };
-            $scope.isShowRow = function(e) {
+            $scope.isRowShown = function(e) {
                 let ret = (e.$$watchers[0].last === "eaClass00")? false: true;
                 return ret;
+            };
+            $scope.addIdxOffset = function(n) {
+                $scope.idxOffset = $scope.idxOffset + n;
+                $scope.idxOffset = ($scope.idxOffset<0)? 0 : $scope.idxOffset;
+                $scope.idxOffset = ($scope.idxOffset>$scope.objNewArr.length)? $scope.objNewArr.length : $scope.idxOffset;
+                return false;
             };
         },
         
@@ -409,15 +437,6 @@ var eaDeTicket = function () {
             scope.demoToday = new Date(scope.settings.demoToday);          
             scope.defaultStartTime = scope.settings.defaultStartTime;
             scope.defaultEndTime = scope.settings.defaultEndTime;
-
-                        
-//            // Test EA
-//            console.log("scope");
-//            console.log(scope);
-//            console.log("ele");
-//            console.log(ele);
-//            console.log("attrs");
-//            console.log(attrs);
         }
     };
 };

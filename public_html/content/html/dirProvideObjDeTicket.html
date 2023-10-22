@@ -104,7 +104,7 @@ Overview of tickets for: {{settings.personalKey}}
             </h2>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <label for="inputToday" class="bold">Simulation today:</label>
+                    <label for="inputToday" class="bold">Simulation - today:</label>
                     <div class="eaOneRow">
                         <span class="bi bi-arrow-left-square-fill eaProcButton" 
                               ng-click="demoToday=addDays(demoToday, -1)"
@@ -121,7 +121,10 @@ Overview of tickets for: {{settings.personalKey}}
                 <div class="col-lg-3 col-md-6 col-sm-12"></div>
                 <div class="col-lg-3 col-md-6 col-sm-12"></div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    
+                    <div>&nbsp;</div>
+                    <span class="bi bi-arrow-up-square-fill eaProcButton" 
+                              ng-click="addIdxOffset(1)"
+                              data-toggle="tooltip" data-placement="top" title="one scroll forward"></span>
                 </div>
             </div>
         </div>        
@@ -130,7 +133,7 @@ Overview of tickets for: {{settings.personalKey}}
         
         <!-- List of tickets -->
         <div ng-repeat="ticket in objNewArr">
-            <div class="row" ng-class="getDynamicClass($index)" ng-show="isShowRow(this);">
+            <div class="row" ng-class="getDynamicClass($index)" ng-show="isRowShown(this);">
                 <div class="col-lg-3 col-md-6 col-sm-12">Ticket type: {{ticket.type}}</div>
                 <div class="col-lg-3 col-md-6 col-sm-12">Start date: {{ticket.startDate}}</div>
                 <div class="col-lg-3 col-md-6 col-sm-12">End date: {{ticket.endDate}}</div>
@@ -151,17 +154,28 @@ Overview of tickets for: {{settings.personalKey}}
                     </span>
                 </div>
                 <hr style="margin: 5px; max-width: 95%"/>
-            </div>                    
-            
-
+            </div>   
         </div>
-        <button type="button" class="btn btn-success" ng-click="addObjRow()">
-            <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"
-               data-toggle="tooltip" data-placement="top" title="Add a new ticket"></i>
-        </button>
-        <button type="button" class="btn btn-success" ng-click="deleteUnPaid(saveObj);">
-            <i class="bi bi-save" style="font-size: 1.6rem; color: white;"
-               data-toggle="tooltip" data-placement="top" title="Save all changes"></i>
-        </button>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <button type="button" class="btn btn-success" ng-click="addObjRow()">
+                    <i class="bi bi-plus-lg" style="font-size: 1.6rem; color: white;"
+                       data-toggle="tooltip" data-placement="top" title="Add a new ticket"></i>
+                </button>
+                <button type="button" class="btn btn-success" ng-click="deleteUnPaid(saveObj);">
+                    <i class="bi bi-save" style="font-size: 1.6rem; color: white;"
+                       data-toggle="tooltip" data-placement="top" title="Save all changes"></i>
+                </button>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12"></div>
+            <div class="col-lg-3 col-md-6 col-sm-12"></div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <span class="bi bi-arrow-down-square-fill eaProcButton" 
+                              ng-click="addIdxOffset(-1)"
+                              data-toggle="tooltip" data-placement="top" title="one scroll back"></span>
+            </div>
+        </div>
+            
+            
     </ea-provide-obj>            
 </div>
