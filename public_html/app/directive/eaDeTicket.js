@@ -28,6 +28,7 @@ var eaDeTicket = function () {
             $scope.defaultStartTime = "";
             $scope.defaultEndTime = "";
             $scope.idxOffset = 0;
+            $scope.showSection = 0;
             
         // ------------------------------------------------------------
         // local functions
@@ -133,6 +134,7 @@ var eaDeTicket = function () {
                 return eDate;
             };
             
+            // Checks the possibility for the next tariff step
             var checkForTickets = function(ticket) {
                 // 1. get periods of all ticket type more than given ticket type
                 // 2. find out all the tickets you have already paid for 
@@ -219,6 +221,7 @@ var eaDeTicket = function () {
                 return ticketsSuggestion;
             };
             
+            // Only placeholder for realy pay
             var payTicket = function(ticket) {
                 let pay = function(t,f) {
                     // wrapper for pay
@@ -398,6 +401,7 @@ var eaDeTicket = function () {
                 return false;
             };
             
+            // Spherical representation of long lists
             // eaClass00, eaClass01, ... eaClass10
             $scope.getDynamicClass = function(idx) {
                 let lastIdx = $scope.objNewArr.length - 1;
@@ -425,11 +429,23 @@ var eaDeTicket = function () {
                 return ret;
             };
             $scope.addIdxOffset = function(n) {
+                // n=0 go to start of list
+                if(n===0) {
+                    $scope.idxOffset = $scope.objNewArr.length;
+                    return false;
+                }
                 $scope.idxOffset = $scope.idxOffset + n;
                 $scope.idxOffset = ($scope.idxOffset<0)? 0 : $scope.idxOffset;
                 $scope.idxOffset = ($scope.idxOffset>$scope.objNewArr.length)? $scope.objNewArr.length : $scope.idxOffset;
                 return false;
             };
+            
+            // Manage sections on application
+            $scope.setShowSection = function(n) {
+                $scope.showSection = n;
+            };
+            
+            
         },
         
         link: function (scope, ele, attrs) {      

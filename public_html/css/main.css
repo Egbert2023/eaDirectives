@@ -102,14 +102,22 @@ textarea {
 /* ea for Egbert Aleksander */
 .eaClass00 {line-height: 0.0; font-size: 0.0rem;}
 .eaClass01 {line-height: 0.1; font-size: 0.1rem;}
-.eaClass02 {line-height: 0.2; font-size: 0.2rem;}
-.eaClass03 {line-height: 0.3; font-size: 0.3rem;}
-.eaClass04 {line-height: 0.4; font-size: 0.4rem;}
-.eaClass05 {line-height: 0.5; font-size: 0.5rem;}
-.eaClass06 {line-height: 0.6; font-size: 0.6rem;}
-.eaClass07 {line-height: 0.7; font-size: 0.7rem;}
-.eaClass08 {line-height: 0.8; font-size: 0.8rem;}
-.eaClass09 {line-height: 0.9; font-size: 0.9rem;}
+/*.eaClass02 {line-height: 0.2; font-size: 0.2rem;}*/
+.eaClass02 {line-height: 0.4; font-size: 0.4rem;}
+/*.eaClass03 {line-height: 0.3; font-size: 0.3rem;}*/
+.eaClass03 {line-height: 0.6; font-size: 0.6rem;}
+/*.eaClass04 {line-height: 0.4; font-size: 0.4rem;}*/
+.eaClass04 {line-height: 0.7; font-size: 0.7rem;}
+/*.eaClass05 {line-height: 0.5; font-size: 0.5rem;}*/
+.eaClass05 {line-height: 0.8; font-size: 0.8rem;}
+/*.eaClass06 {line-height: 0.6; font-size: 0.6rem;}*/
+.eaClass06 {line-height: 0.9; font-size: 0.9rem;}
+/*.eaClass07 {line-height: 0.7; font-size: 0.7rem;}*/
+.eaClass07 {line-height: 0.9; font-size: 0.9rem;}
+/*.eaClass08 {line-height: 0.8; font-size: 0.8rem;}*/
+.eaClass08 {line-height: 1.0; font-size: 1.0rem;}
+/*.eaClass09 {line-height: 0.9; font-size: 0.9rem;}*/
+.eaClass09 {line-height: 1.0; font-size: 1.0rem;}
 .eaClass10 {line-height: 1.0; font-size: 1.0rem;}
 
 .eaProcButton {
