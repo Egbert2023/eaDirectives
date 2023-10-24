@@ -37,13 +37,22 @@ ausgezeichneten Zugang zum ÖPNV darstellt. Also kann es nur einen Weg geben,
 der den ÖPNV zum Erfolg führt. 
 <strong>Keinen Tarifdschungel mehr</strong>
 <br />
-<strong >Einen Deutschlandtarif für den gesamten ÖPNV in Deutschland.</strong>
+<strong>Einen Deutschlandtarif für den gesamten ÖPNV in Deutschland.</strong>
 <br />
 Der Weg dahin muss politisch gewollt, geregelt und organisatorisch begleitet werden. Aber es führt kein Weg daran vorbei, wenn man es ehrlich will.
 <br />
-Wie so ein <a href="#!/dirc/po/det" ng-click="setShowSection(1)">Ticket</a> aussehen kann habe ich mit der kleinen Applikation vorgeschlagen.
-
-Es gibt ein Tages-, ein 7 Tage-, ein 30 Tage- und ein 360 Tage-Ticket. 
+Wie so ein Ticket aussehen kann habe ich mit der kleinen Applikation vorgeschlagen.
+<br />
+Damit der Deutschlandtarif auch im ländlichen Raum oder durch Toutisten genutzt werden kann, 
+muss es mehr als einen Monatstarif geben.
+<div><strong><a href="#!/dirc/po/det" ng-click="setShowSection(1)">DE Tarif:</a></strong>
+    <ul>
+        <li>1 Tag z.B. {{settings.types[0].price}}€</li>
+        <li>7 Tage z.B. {{settings.types[1].price}}€</li>
+        <li>30 Tage z.B. {{settings.types[2].price}}€</li>
+        <li>360 Tage z.B. {{settings.types[3].price}}€</li>
+    </ul>
+</div>
 Die einzigen Sonderregelungen könnten für Kinder und ermäßigungsberechtigte Personen durch einen Preisnachlass erfolgen. 
 Fahrräder und Haustiere können den normalen oder ermäßigten Tarif zahlen. 
 <br />
@@ -53,7 +62,9 @@ Fahrräder und Haustiere können den normalen oder ermäßigten Tarif zahlen.
                 
                 <ea-acc-key data-title="Der Weg dahin"
                             data-txt-len="100">
-                    Der ÖPNV muss auskömmlich durchfinanziert werden und das darf nicht von der Kassenlage abhängig sein.
+Der ÖPNV muss auskömmlich durchfinanziert werden und das darf nicht von der Kassenlage abhängig sein.
+Vielleicht braucht es ein "Grundrecht auf Transport im öffentlichen Raum"?
+<br />Was ist zu tun?
 <ul>
     <li>Zunächst die Pendlerströme erfassen und angepasste ÖPNV-Angebote erarbeiten.</li>
     <li>Fehlstellen im ÖPNV ermitteln und ÖPNV-Angebote schrittweise erweitern.</li>
@@ -61,7 +72,8 @@ Fahrräder und Haustiere können den normalen oder ermäßigten Tarif zahlen.
     <li>Der ÖPNV muss Angebote machen, dass der Individualverkehr Alternativen bekommt. Zunächst da, wo es viel Individualverkehr gibt, dann überall.</li>
     <li>Neue Angebote müssen erarbeitet, getestet und umgesetzt werden. (z.B. On Demand in den Rand- oder Nachtzeite bzw. auf wenig frequentierten Strecken.)</li>
 </ul>
-Das Kriterium "Es rechnet sich nicht" Darf nicht der einzige Maßstab von Entscheidungen sein.
+Das Kriterium "Es rechnet sich nicht" Darf nicht der einzige Maßstab von Entscheidungen sein. 
+<div><strong>Die Verkehrswende ist ein Marathon mit vielen Beteiligten.</strong></div>
                 </ea-acc-key>
                 
             </ea-acc-coat>            
@@ -262,15 +274,30 @@ Das Kriterium "Es rechnet sich nicht" Darf nicht der einzige Maßstab von Entsch
                 <h2>
     Settings for: {{settings.personalKey}}
                 </h2>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        Types
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
-                        
-                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
-                    <div class="col-lg-3 col-md-6 col-sm-12"></div>
-                </div>
+                
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Period</th>
+                            <th scope="col">Price</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="type in settings.types">
+                            <td>{{settings.types[$index].label}}</td>
+                            <td>{{settings.types[$index].period}} Hours</td>                        
+                            <td class="eaOneRow" style="width: 100px">
+                                <input type="text" 
+                                    class="name-input form-control" 
+                                    pattern="[0-9]+,[0-9]{2}"
+                                    ng-model="settings.types[$index].price" />€ 
+                            </td>                    
+                        </tr>
+                    </tbody>                    
+                </table>
+                
             </div>
         </div>
         
