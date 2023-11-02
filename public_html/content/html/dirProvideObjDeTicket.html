@@ -111,6 +111,7 @@ Das Kriterium "Es rechnet sich nicht" Darf nicht der einzige Maßstab von Entsch
                                     <label for="inputStartDate" class="bold">Start Date:</label>
                                     <input id="inputStartDate"
                                            type="date" 
+                                           ng-change="setPriceAndEndDateByType(ticket.type)"
                                            class="name-input form-control" 
                                            ng-model="ticket.startDate" />                                
                                 </div>
