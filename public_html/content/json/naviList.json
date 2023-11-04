@@ -20,6 +20,7 @@
                 "subm": [ {"label": "DE Tariff", "href": "#!/dirc/po/det", "url": "content/html/dirProvideObjDeTicket.html", "imgKey": ""}, 
                           {"label": "Pension", "href": "#!/dirc/po/pen", "url": "content/html/dirProvideObjPension.html", "imgKey": ""}
                         ]},
+                {"label": "eaRegTest", "href": "#!/dirc/rx", "url": "content/html/dirRegTest.html", "imgKey": ""},   
                 {"label": "eaCookies", "href": "#!/dirc/cc", "url": "content/html/dirCookies.html", "imgKey": ""},
                 {"label": "eaFooter", "href": "#!/dirc/ft", "url": "content/html/dirFooter.html", "imgKey": ""}
             ]},
