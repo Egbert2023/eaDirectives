@@ -1,0 +1,74 @@
+<div>    
+    <ea-acc-coat data-acc-title="Regexpression Tester">
+        <ea-acc-key data-title="Summary" data-txt-len="40">
+The RegEx Tester can be used to test reg expressions before you have to try them out in your own coding.
+        </ea-acc-key>
+        
+        <ea-acc-key data-title="Use the functionality" data-txt-len="20">
+Call regEx.exec(Text) with modyfier 'g'
+            <ea-reg-test data-modyfier="g"></ea-reg-test>
+Call regEx.exec(Text) with modyfier 'i'            
+            <ea-reg-test data-modyfier="i"></ea-reg-test>
+Call regEx.exec(Text) with modyfier 'm'            
+            <ea-reg-test data-modyfier="m"></ea-reg-test>
+        </ea-acc-key>
+        
+        <ea-acc-key data-title="Applay the functionality" data-txt-len="60">
+To use the functionality, the following call is required. The parameter data-modyfier can take the values g, i or m.
+            <ea-mask-code ea-mask-html>
+<!-- data-modyfier="g" | "i" | "m" -->
+&lt;div ea-reg-test  data-modyfier="g">&lt;/div>
+            </ea-mask-code>
+The directive uses the following code.
+            <ea-mask-code ea-mask-js>
+'use strict';
+
+var eaRegTest = function () {
+  return {
+    restrict: 'E',
+    scope: true,
+    template: '<div class="row">' +
+              ' <hr />' +
+              '  <div class="col-lg-4 col-md-6 col-sm-12">' +
+              '      <label for="inputRegPattern" class="bold">regEx:</label>' +
+              '      /<input type="text" id="inputRegPattern" ng-change="setResult()" ng-model="regPattern"/>/&lang;{regModyfier}}' +
+              '  </div>' +
+              '  <div class="col-lg-4 col-md-6 col-sm-12">' +
+              '      <label for="inputRegText" class="bold">Text:</label>' +
+              '      <input type="text" id = "inputRegText" ng-change="setResult()" ng-model="regTxt"/>' +
+              '  </div>' +
+              '  <div class="col-lg-4 col-md-12 col-sm-12">' +
+              '      <label for="result" class="bold">Result:</label>' +
+              '      <span id="result" class="bold">    ' +
+              '         -&lang;{regResult}}-' +
+              '      </span>' +
+              '  </div>' +
+              ' <hr />' +
+              '</div>',
+    
+    controller: function($scope) {
+        $scope.regModyfierArray = ["g", "i", "m"];
+        $scope.regModyfier = "g";
+        $scope.regResult = "";
+        $scope.regTxt = "";
+        $scope.regPattern = "";
+        
+        $scope.setResult = function() {
+            let res = "";
+            let regEx = RegExp($scope.regPattern, $scope.regModyfier);
+            $scope.regResult = regEx.exec($scope.regTxt);
+            $scope.regResult = ($scope.regResult)? $scope.regResult.toString() : "";
+        };
+    },
+    
+    link: function (scope, ele, attrs) {
+        scope.regModyfier = attrs.modyfier;
+        
+    }       
+  };
+};
+            </ea-mask-code>
+            
+        </ea-acc-key>            
+    </ea-acc-coat>
+</div>
