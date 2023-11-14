@@ -270,9 +270,11 @@ var eaDeTicket = function () {
             $scope.addObjRow = function() {
                 let newTicket = $scope.cloneObj($scope.objZero);
                 newTicket = setDefaultingTicket(newTicket);
+                let idx = $scope.objNewArr.length;
                 $scope.objNewArr.push(newTicket);
-                $scope.idxOffset = 0;
-                
+                $scope.idxOffset = 0;                
+                $scope.openModalTicket(idx);
+                                
                 return false;
             };
             
