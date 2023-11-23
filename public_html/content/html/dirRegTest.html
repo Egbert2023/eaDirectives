@@ -27,8 +27,8 @@ var eaRegTest = function () {
   return {
     restrict: 'E',
     scope: true,
-    template: '<div class="row">' +
-              ' <hr />' +
+    template: "<div class='row'>" +
+              " <hr style='width: 95%' />" +
               '  <div class="col-lg-4 col-md-6 col-sm-12">' +
               '      <label for="inputRegPattern" class="bold">regEx:</label>' +
               '      /<input type="text" id="inputRegPattern" ng-change="setResult()" ng-model="regPattern"/>/&lang;{regModyfier}}' +
@@ -40,10 +40,11 @@ var eaRegTest = function () {
               '  <div class="col-lg-4 col-md-12 col-sm-12">' +
               '      <label for="result" class="bold">Result:</label>' +
               '      <span id="result" class="bold">    ' +
+              '         <span class="bold" style="text-shadow: lightgrey 0em 1.0em 0.5em">xxx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> ' +     
               '         -&lang;{regResult}}-' +
               '      </span>' +
               '  </div>' +
-              ' <hr />' +
+              ' <hr style="width: 95%" />' +
               '</div>',
     
     controller: function($scope) {
