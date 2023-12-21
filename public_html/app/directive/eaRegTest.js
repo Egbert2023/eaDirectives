@@ -17,6 +17,7 @@ var eaRegTest = function () {
         $scope.regPattern = "";
         
         $scope.setResult = function() {
+//            $scope.regTxt = $scope.regTxt.replace(" ", "&nbsp;");
             $scope.regResult = [];
             $scope.regGap = [];
             let res = "";
@@ -34,6 +35,18 @@ var eaRegTest = function () {
             //let idxOff = $scope.regTxt.indexOf($scope.regResult);
             //$scope.regGap = $scope.regTxt.substring(0, idxOff);
         };
+        
+        $scope.encodeSpace = function(inStr) {
+            let ret = inStr.replaceAll(" ", "&nbsp;");
+
+            // Am ANfang und am Ende eines Strings werden die Spacec weggetrimmt.
+            // Entweder muss dies gezählt werden und ein addGap Array eingefügt werden oder
+            // Eine ander Darstellungsform (nicht übereinander4 schreiben) gewählt werden.
+
+            ret = inStr;
+            return ret;
+        };
+        
     },
     
     link: function (scope, ele, attrs) {
