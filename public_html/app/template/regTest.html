@@ -2,6 +2,7 @@
     .eaMark {opacity: 0.5; font-weight:  bold; background-color: chartreuse; display: inline-flex; } 
     .eaNoMark {opacity: 0.5; font-weight:  bold; display: block; position: absolute;} 
     .eaGap {opacity: 0.5; font-weight: bold; display: inline-flex; } 
+    .eaFlex {display: flex; flex-flow: row wrap; align-content: flex-start}
 </style>
 <div class="row">
     <hr style="width: 95%" />
@@ -45,8 +46,16 @@
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12"  >
         <div ng-repeat="res in regResult" >
-            <div class="eaNoMark">{{encodeSpace(regTxt)}}</div>
-            <div class="eaGap" >{{encodeSpace(regGap[$index])}}</div><div class="eaMark">{{encodeSpace(res)}}</div>
+            <!--<div class="eaNoMark">{{regTxt}}</div>-->
+            <div class="eaGap" >{{regGap[$index]}}</div><div class="eaMark">{{res}}</div>
+        </div>
+    </div>
+    <hr style="width: 95%"/>
+    <div class="col-lg-12 col-md-12 col-sm-12"  >
+        <div ng-repeat="res in regResult" >
+            <div class="eaGap" >{{regGap[$index]}}</div>
+            <div class="eaMark">{{res}}</div>
+            <div class="eaGap">{{regRest[$index]}}</div>
         </div>
     </div>
     <!--<hr style="width: 95%"/>-->
