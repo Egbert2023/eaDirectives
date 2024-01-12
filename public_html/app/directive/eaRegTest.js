@@ -16,23 +16,47 @@ var eaRegTest = function () {
         $scope.regTxt = "";
         $scope.regPattern = "";
         
-        $scope.setResult = function() {
-            $scope.regResult = [];
-            $scope.regGap = [];
-            let res = "";
-            let regEx = RegExp($scope.regPattern, $scope.regModyfier);
-            let regResult = regEx.exec($scope.regTxt);  // this is an array
-            $scope.regResult = regResult;
+        var distributeResult = function(regResult) {
             for(let idx = 0; idx < regResult.length; idx++) {
                 let regGap = "";
+                let regRest = "";
                 let res = (regResult[idx])? regResult[idx] : "";
                 let idxOff = $scope.regTxt.indexOf(res);
                 regGap = (idxOff>0)? $scope.regTxt.substring(0, idxOff) : "";
+                let idxRest = regGap.length + res.length;
+                regRest = (idxRest < $scope.regTxt.length)? $scope.regTxt.substring(idxRest) : "";
+
                 $scope.regGap.push(regGap);
-            };
-            //$scope.regResult = ($scope.regResult)? $scope.regResult.toString() : "";
-            //let idxOff = $scope.regTxt.indexOf($scope.regResult);
-            //$scope.regGap = $scope.regTxt.substring(0, idxOff);
+                $scope.regRest.push(regRest);
+            };      
+        };        
+        
+        $scope.setResult = function() {
+            $scope.regResult = [];
+            $scope.regGap = [];
+            $scope.regRest = [];
+            let regEx = RegExp($scope.regPattern, $scope.regModyfier);
+            let regResult = "";
+            switch($scope.regFunction) {
+                case "test()":
+                    regResult = regEx.test($scope.regTxt);  // this is true or false
+                    $scope.regResult.push(regResult);
+                    break;
+                case "exec()":
+                    regResult = regEx.exec($scope.regTxt);  // this is an array
+                    distributeResult(regResult);
+                    $scope.regResult = regResult;
+                    break;
+                case "match()":
+                    regResult = $scope.regTxt.match(regEx);  // this is an array
+                    distributeResult(regResult);
+                    $scope.regResult = regResult;
+                    break;
+                case "search()":
+                    regResult = $scope.regTxt.search(regEx);  // Start position of the matched substring
+                    $scope.regResult.push(regResult);
+                    break;
+            }
         };
     },
     

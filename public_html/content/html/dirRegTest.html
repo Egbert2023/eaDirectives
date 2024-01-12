@@ -12,7 +12,7 @@ Call regEx.exec(Text) with modyfier 'i'
         <ea-acc-key data-title="Applay the functionality" data-txt-len="60">
 To use the functionality, the following call is required. The parameter data-modyfier can take the values g, i or m.
             <ea-mask-code ea-mask-html>
-<!-- data-modyfier="g" | "i" | "m" -->
+<!-- data-modyfier="g" | "i" | "m" | "gi" -->
 &lt;div ea-reg-test  data-modyfier="g">&lt;/div>
             </ea-mask-code>
 The directive uses the following code.
@@ -24,29 +24,58 @@ var eaRegTest = function () {
     restrict: 'E',
     scope: true,
     templateUrl: "app/template/regTest.html",
-
+    
     controller: function($scope) {
-        $scope.regModyfierArray = ["g", "i", "m"];
+        $scope.regModyfierArray = ["g", "i", "m", "gi"];
+        $scope.regFunctionArray = ["test()", "exec()", "match()", "search()"];
         $scope.regModyfier = "g";
+        $scope.regFunction = "test()";
         $scope.regResult = [];
         $scope.regGap = [];
         $scope.regTxt = "";
         $scope.regPattern = "";
         
-        $scope.setResult = function() {
-            $scope.regResult = [];
-            $scope.regGap = [];
-            let res = "";
-            let regEx = RegExp($scope.regPattern, $scope.regModyfier);
-            let regResult = regEx.exec($scope.regTxt);  // this is an array
-            $scope.regResult = regResult;
+        var distributeResult = function(regResult) {
             for(let idx = 0; idx < regResult.length; idx++) {
                 let regGap = "";
+                let regRest = "";
                 let res = (regResult[idx])? regResult[idx] : "";
                 let idxOff = $scope.regTxt.indexOf(res);
                 regGap = (idxOff>0)? $scope.regTxt.substring(0, idxOff) : "";
+                let idxRest = regGap.length + res.length;
+                regRest = (idxRest < $scope.regTxt.length)? $scope.regTxt.substring(idxRest) : "";
+
                 $scope.regGap.push(regGap);
-            };
+                $scope.regRest.push(regRest);
+            };      
+        };        
+        
+        $scope.setResult = function() {
+            $scope.regResult = [];
+            $scope.regGap = [];
+            $scope.regRest = [];
+            let regEx = RegExp($scope.regPattern, $scope.regModyfier);
+            let regResult = "";
+            switch($scope.regFunction) {
+                case "test()":
+                    regResult = regEx.test($scope.regTxt);  // this is true or false
+                    $scope.regResult.push(regResult);
+                    break;
+                case "exec()":
+                    regResult = regEx.exec($scope.regTxt);  // this is an array
+                    distributeResult(regResult);
+                    $scope.regResult = regResult;
+                    break;
+                case "match()":
+                    regResult = $scope.regTxt.match(regEx);  // this is an array
+                    distributeResult(regResult);
+                    $scope.regResult = regResult;
+                    break;
+                case "search()":
+                    regResult = $scope.regTxt.search(regEx);  // Start position of the matched substring
+                    $scope.regResult.push(regResult);
+                    break;
+            }
         };
     },
     

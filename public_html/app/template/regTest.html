@@ -1,13 +1,12 @@
 <style>
-    .eaMark {opacity: 0.5; font-weight:  bold; background-color: chartreuse; display: inline-flex; } 
-    .eaNoMark {opacity: 0.5; font-weight:  bold; display: block; position: absolute;} 
-    .eaGap {opacity: 0.5; font-weight: bold; display: inline-flex; } 
+    .eaMark {font-weight:  bold; background-color: chartreuse; display: inline-flex; } 
+    .eaGap {font-weight: bold; display: inline-flex; } 
 </style>
 <div class="row">
-    <hr style="width: 95%" />
     <div class="col-lg-6 col-md-6 col-sm-12">
         <label for="regFunction" class="bold">Function:</label>
-        <select name="regFunction"
+        <select class="form-control"
+                name="regFunction"
                 id="regFunction"
                 ng-change="setResult()"
                 ng-init="g"
@@ -18,7 +17,8 @@
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12">
         <label for="regModyfier" class="bold">Modyfier:</label>
-        <select name="regModyfier"
+        <select class="form-control"
+                name="regModyfier"
                 id="regModyfier"
                 ng-change="setResult()"
                 ng-init="g"
@@ -30,7 +30,8 @@
     <div class="col-lg-6 col-md-6 col-sm-12">
         <label for="inputRegPattern" class="bold">Expression:</label>
         /
-        <input  type="text" 
+        <input  class="form-control"
+                type="text" 
                 id = "inputRegPattern"
                 ng-change="setResult()"
                 ng-model="regPattern"/>
@@ -38,16 +39,18 @@
     </div>
     <div class="col-lg-6 col-md-12 col-sm-12">
         <label for="inputRegText" class="bold">Text:</label>
-        <input  type="text" 
+        <input  class="form-control"
+                type="text" 
                 id = "inputRegText"
                 ng-change="setResult()"
                 ng-model="regTxt"/>
     </div>
+
     <div class="col-lg-12 col-md-12 col-sm-12"  >
-        <div ng-repeat="res in regResult">
-            <div class="eaNoMark">{{regTxt}}</div>
-            <div class="eaGap" >{{regGap[$index]}}</div><div class="eaMark">{{res}}</div>
+        <div class="alert alert-info" ng-repeat="res in regResult" >
+            <div class="eaGap" >{{regGap[$index]}}</div>
+            <div class="eaMark">{{res}}</div>
+            <div class="eaGap">{{regRest[$index]}}</div>
         </div>
     </div>
-    <hr style="width: 95%"/>
 </div>
