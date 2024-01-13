@@ -31,13 +31,14 @@ eaDir.directive('eaMaskHtml', [eaMaskHtml]); //.$inject = ['$scope'];
 eaDir.directive('eaMaskCss', [eaMaskCss]); //.$inject = ['$scope'];
 eaDir.directive('eaMaskJs', [eaMaskJs]); //.$inject = ['$scope'];
 eaDir.directive('eaMaskJson', [eaMaskJson]); //.$inject = ['$scope'];
+eaDir.directive('eaMaskNo', [eaMaskNo]); 
 eaDir.directive('eaVideo', ['$rootScope', eaVideo]); //.$inject = ['$scope'];
 eaDir.directive('eaRegTest', [eaRegTest]); 
 
 eaDir.directive('eaProvideObj', ['$rootScope', eaProvideObj]);
 eaDir.directive('eaDeTicket',  [eaDeTicket]);
+eaDir.directive('eaNews', ['$rootScope', eaNews]);
 
-//eaDir.directive('eaNews', ['$rootScope', eaNews]).$inject = ['$scope'];
 //eaDir.directive('eaCookies', ['$rootScope', '$cookies', '$compile', eaCookiesDirektive]).$inject = ['$scope'];
 
 // $compile, $rootScope

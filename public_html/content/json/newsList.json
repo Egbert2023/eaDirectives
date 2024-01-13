@@ -23,17 +23,17 @@
 
         {
             "newFrom": "2023-03-15",
-            "newTo": "2023-12-31",
+            "newTo": "2024-12-31",
             "title": "Der neue Brutkasten wird bezogen", 
             "body": ["Wir liegen fast täglich mit dem Fotoapparat auf der Lauer. Jetzt haben wir eine relative Gewißheit, dass der Nistkasten angenommen wird. Es geht im Munutentakt rein und raus. Da wir wohl ein Nest gebaut?"], 
             "img": [],
             "imgBody": [],
-            "href": "content/aleks/html/news/Nistkasten-2023.html"
+            "href": "content/html/Nistkasten-2023.html"
         },
         
         {
             "newFrom": "2023-01-01",
-            "newTo": "2023-12-31",
+            "newTo": "2024-12-31",
             "title": "Unsere nächste Reise", 
             "body": ["Wir planen wieder eine Kurzreise. Diesmal soll es auf die Nordseeinsel Norderney gehen."], 
             "img": [],
@@ -46,7 +46,7 @@
             "newTo": "2022-09-30",
             "title": "Wir wollen nach Lissabon", 
             "body": ["Corona hatte uns einen Strich durch die Rechnung gemacht. Jetzt planen wir endlich den Trip nach Lissabon. Im Oktober 2022 war es endlich soweit."], 
-            "img": ["content/aleks/pictures/travel/Lissabon/Lissabon-Praca-do-Comercio-vom-Wasser.jpg"],
+            "img": ["content/pictures/Lissabon-Praca-do-Comercio-vom-Wasser.jpg"],
             "imgBody": ["Ein Blick auf die Alfama, ein Teil der Altstadt von Lissabon vom Wasser aus"],
             "href": ""
         }

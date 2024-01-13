@@ -50,40 +50,57 @@ is selected.
             <div>
 The JSON file <strong>"newsList.json"</strong> has the following structure:
                 <ea-mask-code ea-mask-json>
-{"entries":   
+{"_comment": 
+   ["By default all News params are strings.",
+    "img, body and imgBody are string arrays with the same length in one object (new).",
+    "default is length===1)",
+    "newTo:      The last day when this new will be show in 'news' but can show in 'new/archiv'.",
+    "--------------------------------------------------------------------------",
+    "title:      Title of new (large letters)",
+    "newFrom:    The first day when this new is shown. (little letters)",
+    "---------------------------------------------------------------------------",
+    "img: (0ptional) ohne picture    |   body: (optional) Body text",
+    "imgBody: Labeling of picture    |   the following special characters can be used",
+    "---------------------------------------------------------------------------",
+    "href:       Any HTML page can be integrated ",
+    "---------------------------------------------------------------------------",
+    "Hints:",
+    "All texts are continuous texts without the possibility of inserting line breaks.",
+    "The arrays of the 'body' and 'img' parameters must have the same number of elements. ",
+    "If the texts in some 'body' parameters remain empty, they MUST BE DEFINED IN ",
+    "A DIFFERENT WAY (e.g. different number of spaces)"],
+        
+"entries":   
     [
         {
             "newFrom": "2023-03-15",
-            "newTo": "2023-12-31",
-            "title": "A visit to Lisbon", 
-            "body": ["Finally we could start our trip to Lisbon after Corona."], 
-            "img": ["content/pictures/Lisbon-2023.jpg"],
-            "imgBody": ["A view of the Alfama"],
-            "href": "content/html/news/Lisbon-2023.html",
-            "imgKey": "PT"
-        },
-        {
-            "newFrom": "2023-06-15",
-            "newTo": "2023-12-31",
-            "title": "New Info 2", 
-            "body": [], 
+            "newTo": "2024-12-31",
+            "title": "Der neue Brutkasten wird bezogen", 
+            "body": ["Wir liegen fast täglich mit dem Fotoapparat auf der Lauer. Jetzt haben wir eine relative Gewißheit, dass der Nistkasten angenommen wird. Es geht im Munutentakt rein und raus. Da wir wohl ein Nest gebaut?"], 
             "img": [],
             "imgBody": [],
-            "href": "content/html/news/Schwerin-2023.html",
-            "imgKey": "DE"
+            "href": "content/html/Nistkasten-2023.html"
         },
         {
-            "newFrom": "2023-07-12",
-            "newTo": "2023-12-31",
-            "title": "A newspaper article about my club", 
-            "body": [""], 
-            "img": ["content/pictures/newspaper-article-2023.jpg"],
+            "newFrom": "2023-01-01",
+            "newTo": "2024-12-31",
+            "title": "Unsere nächste Reise", 
+            "body": ["Wir planen wieder eine Kurzreise. Diesmal soll es auf die Nordseeinsel Norderney gehen."], 
+            "img": [],
             "imgBody": [],
-            "href": "",
-            "imgKey": ""
+            "href": ""
+        },
+        {
+            "newFrom": "2022-07-30",
+            "newTo": "2022-09-30",
+            "title": "Wir wollen nach Lissabon", 
+            "body": ["Corona hatte uns einen Strich durch die Rechnung gemacht. Jetzt planen wir endlich den Trip nach Lissabon. Im Oktober 2022 war es endlich soweit."], 
+            "img": ["content/pictures/Lissabon-Praca-do-Comercio-vom-Wasser.jpg"],
+            "imgBody": ["Ein Blick auf die Alfama, ein Teil der Altstadt von Lissabon vom Wasser aus"],
+            "href": ""
         }
     ]
- }
+}
                 </ea-mask-code>
 
 The values ​​from the JSON file are processed according to the following rule:
@@ -102,6 +119,25 @@ The values ​​from the JSON file are processed according to the following rul
                 </ul>
 
             </div>
+        </ea-acc-key>
+        <ea-acc-key data-title="Example for 'News' and 'Archiv'" data-txt-len="0">
+
+            <ea-mask-code ea-mask-no>
+<ea-news data-news-title="This are the news" 
+         data-news-mode="new"
+         data-news-txt-len="200"
+         data-news-init-idx = "0">
+</ea-news>
+            </ea-mask-code>
+
+            <ea-mask-code ea-mask-no>                
+<ea-news data-news-title="This is the news-archiv" 
+         data-news-mode="arc"
+         data-news-txt-len="200"
+         data-news-init-idx = "0">
+</ea-news>
+            </ea-mask-code>
+            
         </ea-acc-key>
     </ea-acc-coat>            
 </div>

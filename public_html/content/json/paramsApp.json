@@ -1,12 +1,12 @@
 {  
-    "_comment": ["The parameters 'baseDoman' and 'startFile' used in SioteMap process.", 
+    "_comment": ["The parameters 'baseDoman' and 'startFile' used in SiteMap process.", 
                 "'vdoNo' is a message for problems with show a video.",
                 "The parameter 'cookies' are used for compilation the cookie banner."
                ],
     "entries": 
     {  "baseDoman": "www.aleksander.de",
        "startFile" : "index.html",
-       "vdoNo" : "Your browser cannot play this video.",
+       "vdoNo" : "Your browser can not play this video.",
        "cookies" : 
             { "title": "Ihre Cookie Einstellungen",
               "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
