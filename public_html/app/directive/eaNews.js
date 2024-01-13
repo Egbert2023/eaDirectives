@@ -11,8 +11,7 @@ var eaNews = function ( $rootScope ) {
 
         controller: function($scope) {
             // get al params
-            $scope.newsAll = $rootScope.newsList;
-         
+            $scope.newsAll = $rootScope.newsList;         
             var varName = "vis_";
                      
             $scope.setVisible = function(t) {
@@ -27,11 +26,7 @@ var eaNews = function ( $rootScope ) {
                 $scope[varName + idx]=(av)? false: true; 
 
                 return false;
-            };   
-            
-            
-            
-            
+            };               
         },   // controller
         
         // <ea-news data-news-title="News" 
