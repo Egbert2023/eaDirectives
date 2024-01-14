@@ -12,6 +12,9 @@ var getHtml4Id = function(rootScope, loc, paramSrv){
             ret = getEntry("", naviList, "subm", "href", '#!' + loc, "url");
         });
     }   
+    if(!ret.startsWith("app")) {
+        ret = rootScope.contentFolder + "/" + ret;
+    }        
     return ret;
 };
 
