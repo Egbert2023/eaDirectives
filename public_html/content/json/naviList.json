@@ -3,34 +3,34 @@
                 ],
     "entries":
     [
-        {"id":"navStart", "label": "Home", "href": "#!/home", "url": "content/html/home.html", "imgKey": "",
+        {"id":"navStart", "label": "Home", "href": "#!/home", "url": "html/home.html", "imgKey": "",
             "subm": []},
  
-        {"id":"navDir", "label": "Directives", "href": "#!/dirc",  "url": "content/html/dirAll.html", "imgKey": "",
-            "subm": [ {"label": "eaMaskCode", "href": "#!/dirc/mc", "url": "content/html/dirMaskCode.html", "imgKey": ""},
-                {"label": "eaAccording", "href": "#!/dirc/ac", "url": "content/html/dirAcc.html", "imgKey": ""},
-                {"label": "eaPathLink", "href": "#!/dirc/pl", "url": "content/html/dirPathLink.html", "imgKey": ""},
-                {"label": "eaNavi", "href": "#!/dirc/nv", "url": "content/html/dirNavi.html", "imgKey": ""},
-                {"label": "eaAddHtml", "href": "#!/dirc/ah", "url": "content/html/dirAddHtml.html", "imgKey": ""},
-                {"label": "eaLoadJson", "href": "#!/dirc/lj", "url": "content/html/dirLoadJson.html", "imgKey": ""},
-                {"label": "eaImgBox", "href": "#!/dirc/ib", "url": "content/html/dirImgBox.html", "imgKey": "DE"},
-                {"label": "eaNews", "href": "#!/dirc/ne", "url": "content/html/dirNews.html", "imgKey": ""},
-                {"label": "eaVideo", "href": "#!/dirc/vd", "url": "content/html/dirVideo.html", "imgKey": ""},
-                {"label": "eaProvideObj", "href": "#!/dirc/po", "url": "content/html/dirProvideObj.html", "imgKey": "",
-                "subm": [ {"label": "DE Tariff", "href": "#!/dirc/po/det", "url": "content/html/dirProvideObjDeTicket.html", "imgKey": ""}, 
-                          {"label": "Pension", "href": "#!/dirc/po/pen", "url": "content/html/dirProvideObjPension.html", "imgKey": ""}
+        {"id":"navDir", "label": "Directives", "href": "#!/dirc",  "url": "html/dirAll.html", "imgKey": "",
+            "subm": [ {"label": "eaMaskCode", "href": "#!/dirc/mc", "url": "html/dirMaskCode.html", "imgKey": ""},
+                {"label": "eaAccording", "href": "#!/dirc/ac", "url": "html/dirAcc.html", "imgKey": ""},
+                {"label": "eaPathLink", "href": "#!/dirc/pl", "url": "html/dirPathLink.html", "imgKey": ""},
+                {"label": "eaNavi", "href": "#!/dirc/nv", "url": "html/dirNavi.html", "imgKey": ""},
+                {"label": "eaAddHtml", "href": "#!/dirc/ah", "url": "html/dirAddHtml.html", "imgKey": ""},
+                {"label": "eaLoadJson", "href": "#!/dirc/lj", "url": "html/dirLoadJson.html", "imgKey": ""},
+                {"label": "eaImgBox", "href": "#!/dirc/ib", "url": "html/dirImgBox.html", "imgKey": "DE"},
+                {"label": "eaNews", "href": "#!/dirc/ne", "url": "html/dirNews.html", "imgKey": ""},
+                {"label": "eaVideo", "href": "#!/dirc/vd", "url": "html/dirVideo.html", "imgKey": ""},
+                {"label": "eaProvideObj", "href": "#!/dirc/po", "url": "html/dirProvideObj.html", "imgKey": "",
+                "subm": [ {"label": "DE Tariff", "href": "#!/dirc/po/det", "url": "html/dirProvideObjDeTicket.html", "imgKey": ""}, 
+                          {"label": "Pension", "href": "#!/dirc/po/pen", "url": "html/dirProvideObjPension.html", "imgKey": ""}
                         ]},
-                {"label": "eaRegTest", "href": "#!/dirc/rx", "url": "content/html/dirRegTest.html", "imgKey": ""},   
-                {"label": "eaCookies", "href": "#!/dirc/cc", "url": "content/html/dirCookies.html", "imgKey": ""},
-                {"label": "eaFooter", "href": "#!/dirc/ft", "url": "content/html/dirFooter.html", "imgKey": ""}
+                {"label": "eaRegTest", "href": "#!/dirc/rx", "url": "html/dirRegTest.html", "imgKey": ""},   
+                {"label": "eaCookies", "href": "#!/dirc/cc", "url": "html/dirCookies.html", "imgKey": ""},
+                {"label": "eaFooter", "href": "#!/dirc/ft", "url": "html/dirFooter.html", "imgKey": ""}
             ]},
         
-        {"id":"navService", "label": "Service", "href": "#!/srv", "url": "content/html/service.html", "imgKey": "",
+        {"id":"navService", "label": "Service", "href": "#!/srv", "url": "html/service.html", "imgKey": "",
             "subm": [ {"label": "SiteMap", "href": "#!/srv/smap", "url": "app/template/siteMap2.html", "imgKey": ""}, 
-                    {"label": "Cookie Policy", "href": "#!/srv/cookies", "url": "content/html/CookiesNotRequired.html", "imgKey": ""}, 
-                    {"label": "Imprint", "href": "#!/srv/imp", "url": "content/html/impressum.html", "imgKey": ""}, 
-                    {"label": "Data protection", "href": "#!/srv/ds", "url": "content/html/datenschutz2.html", "imgKey": ""}, 
-                    {"label": "License", "href": "#!/srv/license", "url": "LICENSE.html", "imgKey": ""}
+                    {"label": "Cookie Policy", "href": "#!/srv/cookies", "url": "html/CookiesNotRequired.html", "imgKey": ""}, 
+                    {"label": "Imprint", "href": "#!/srv/imp", "url": "html/impressum.html", "imgKey": ""}, 
+                    {"label": "Data protection", "href": "#!/srv/ds", "url": "html/datenschutz2.html", "imgKey": ""}, 
+                    {"label": "License", "href": "#!/srv/license", "url": "app/../LICENSE.html", "imgKey": ""}
             ]}                                              
     ]
 }
