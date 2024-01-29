@@ -22,7 +22,7 @@ var eaImgBox = function ($compile, $rootScope) {
                 // when opt.key is undefined then do not show scroll icons
                 $scope.canScroll = (opt.key)? true : false;
                 
-                // compute modal inner HTML 
+                // comput modal inner HTML 
                 let iHtml = $scope.getInnerHtml(opt);
                 
                 // init values
@@ -142,7 +142,7 @@ var eaImgBox = function ($compile, $rootScope) {
                 for(let i = 0; i<len; i++) {
                     let idx = i+1;
                     let ht = '<div id="imgNumber' + idx.toString() + '" class="numbertext eaImgBoxItem">' + idx.toString() + ' / ' + len.toString() + '</div>' + 
-                            '<img id="imgPicture' + idx.toString() + '" ng-src="' + imgArr[i] + '" class="eaImgBoxItem img-fluid mx-auto" >';    
+                            '<img id="imgPicture' + idx.toString() + '" ng-src="' + $rootScope.contentFolder + imgArr[i] + '" class="eaImgBoxItem img-fluid mx-auto" >';    
                     
                     let htt = "";
                     if(imgBodyArr[i]) {
@@ -181,13 +181,15 @@ var eaImgBox = function ($compile, $rootScope) {
                 scope.imgBoxArr = obj.imgList;
                 scope.imgBodyArr = obj.imgBodyList;
                 scope.imgBoxIdx = attrs.imgBoxIdx;
-                scope.imgBoxImg = scope.imgBoxArr[scope.imgBoxIdx-1];
+                //scope.imgBoxImg = scope.imgBoxArr[scope.imgBoxIdx-1];
+                scope.imgBoxImg = $rootScope.contentFolder + scope.imgBoxArr[scope.imgBoxIdx-1];
             } else {
                 scope.imgBoxArr = [];
                 scope.imgBoxArr.push(attrs.imgArr);
                 scope.imgBoxIdx = 1;
                 scope.imgBodyArr = [""];
-                scope.imgBoxImg = scope.imgBoxArr[0];
+                //scope.imgBoxImg = scope.imgBoxArr[0];
+                scope.imgBoxImg = $rootScope.contentFolder + scope.imgBoxArr[0];
             } // if(scope.imgBoxKey !== undefined)
         }  // link
     };  // return

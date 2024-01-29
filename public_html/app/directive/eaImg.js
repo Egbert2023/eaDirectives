@@ -32,14 +32,14 @@ var eaImg = function ( $rootScope ) {
                 scope.imgBodyArr = [];
                 scope.imgBodyArr.push(attrs.alt);
                 scope.imgBoxIdx = 1;
-                scope.imgBoxImg = scope.imgArr[0];
+                scope.imgBoxImg = $rootScope.contentFolder + scope.imgArr[0];
                 scope.imgBoxBody = "";
             } else {
                 var obj = scope.imgBoxList.find(o => o.imgKey === scope.imgBoxKey); 
                 scope.imgArr = obj.imgList;
                 scope.imgBodyArr = obj.imgBodyList;
                 scope.imgBoxIdx = attrs.imgBoxIdx;            
-                scope.imgBoxImg = scope.imgArr[scope.imgBoxIdx-1];
+                scope.imgBoxImg = $rootScope.contentFolder + scope.imgArr[scope.imgBoxIdx-1];
                 scope.imgBoxBody = scope.imgBodyArr[scope.imgBoxIdx-1];
             }
         }

@@ -1,7 +1,5 @@
 'use strict';
 
-// <ea-footer data-footer-url="content/html/footer.html"></ea-footer>
-
 var eaFooterDirective = function ($rootScope) {
   return {
     restrict: 'E',
@@ -10,7 +8,7 @@ var eaFooterDirective = function ($rootScope) {
     link: function (scope, ele, attrs) {
         let inputFooterUrl = attrs.footerUrl;
         let contentFolder = scope.$root.contentFolder;
-        scope.footerUrl = contentFolder + "/" + inputFooterUrl;
+        scope.footerUrl = contentFolder + inputFooterUrl;
     }       
   };
 };
