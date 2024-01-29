@@ -23,23 +23,40 @@ var eaLoadJson = function ( $rootScope, $http ) {
                 };
                 let newObject = rootScope[paramName];
                 if(newObject === undefined 
-                   || (newObject.constructor === Object && Object.entries(newObject).length === 0)) {
-
-                    http({
-                        url: url,
-                        method: 'GET'
-                    }).then(function(response){
-                        newObject = callback(paramName, rootScope, response.data);
+                   || (newObject.constructor === Object && Object.entries(newObject).length === 0)) 
+                {
+                    
+//                    http({
+//                        url: url,
+//                        method: 'GET'
+//                    }).then(function(response){
+//                        newObject = callback(paramName, rootScope, response.data);
+//                        var opt = {
+//                            paramName: paramName,
+//                            paramObj: newObject
+//                        };
+//                        rootScope.$emit("LoadJsonFile-" + paramName, opt);
+//
+//                    }, function(errResp){
+//                            console.log("Error in $http get.");
+//                            console.log(errResp);
+//                    });
+                    
+                    
+                    fetch (url).then (function (response) {
+                        return response.json();
+                    }).then (function(response){
+                        newObject = callback(paramName, rootScope, response);
                         var opt = {
                             paramName: paramName,
                             paramObj: newObject
                         };
                         rootScope.$emit("LoadJsonFile-" + paramName, opt);
+                    }).catch (function (error) {
+                            console.log ("Fehler: " + error);
+                        }); 
+                        
 
-                    }, function(errResp){
-                            console.log("Error in $http get.");
-                            console.log(errResp);
-                    });
                 };
                 
                 return false;
@@ -52,7 +69,7 @@ var eaLoadJson = function ( $rootScope, $http ) {
             let jsonFolder = attrs.jsonFolder;
             let jsonFiles = attrs.jsonFiles;
             jsonFiles = jsonFiles.split(",");
-            jsonFiles.forEach(o => {scope.getParamObject(cf + "/" + jsonFolder + "/", o.trim(), $rootScope, $http);});
+            jsonFiles.forEach(o => {scope.getParamObject(cf + jsonFolder + "/", o.trim(), $rootScope, $http);});
         }
     };  // return
 };   // eaLoadJson()
