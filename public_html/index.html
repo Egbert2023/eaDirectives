@@ -27,9 +27,10 @@
     <![endif]-->
     
     <!-- Add your site or application content here -->    
-        <ea-load-json data-content-folder="content" 
-                      data-json-folder="json" 
-                      data-json-files="naviList, paramsApp, objBg, imgBoxList, newDeTicket, newsList">
+        <ea-load-json 
+            data-content-folder="content/drt/" 
+            data-json-folder="json" 
+            data-json-files="naviList, paramsApp, objBg, imgBoxList, newDeTicket, newsList">
         </ea-load-json>
         <div ea-img-box></div>
         <ea-navi data-nav-logo="pictures/navLogo.jpg" data-nav-mode="menu"></ea-navi>
@@ -43,41 +44,40 @@
         </div>        
                 
         <ea-footer data-footer-url="html/footer.html"></ea-footer>
-                
-        <script src="fw/boilerPlate/js/plugins.js"></script>        
+        
+        <script src="fw/boilerPlate/js/plugins.js" type="text/javascript"></script>
         <script src="fw/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>        
         <script src="fw/angularJs/angular.min.js" type="text/javascript"></script>
         <script src="fw/angularJs/angular-route.min.js" type="text/javascript"></script>
-        <script src="app/service/eaConfigSrv.js" type="text/javascript"></script>
-        <script src="app/service/eaNavSrv.js" type="text/javascript"></script>
-        <script src="app/directive/eaLoadJson.js" type="text/javascript"></script>
-        <script src="app/directive/eaNav.js" type="text/javascript"></script>        
-        <script src="app/directive/eaAddHtml.js" type="text/javascript"></script>
-        <script src="app/directive/eaPathLink.js" type="text/javascript"></script>
-        <script src="app/directive/eaAccordeon.js" type="text/javascript"></script>
-        <script src="app/directive/eaMaskCode.js" type="text/javascript"></script>
-        <script src="app/directive/eaMaskHtml.js" type="text/javascript"></script>
-        <script src="app/directive/eaMaskCss.js" type="text/javascript"></script>
-        <script src="app/directive/eaMaskJs.js" type="text/javascript"></script>
-        <script src="app/directive/eaMaskJson.js" type="text/javascript"></script>
-        <script src="app/directive/eaMaskNo.js" type="text/javascript"></script>
-        <script src="app/directive/eaImgBox.js" type="text/javascript"></script>
-        <script src="app/directive/eaImg.js" type="text/javascript"></script>
-        <script src="app/directive/eaVideo.js" type="text/javascript"></script>
-        <script src="app/directive/eaFooter.js" type="text/javascript"></script>
-        <script src="app/directive/eaProvideObj.js" type="text/javascript"></script>
-        <script src="app/directive/eaDeTicket.js" type="text/javascript"></script>
-        <script src="app/directive/eaRegTest.js" type="text/javascript"></script>
-        <script src="app/directive/eaNews.js" type="text/javascript"></script>
-        
-        <!--
         <script src="fw/angularJs/angular-cookies.min.js" type="text/javascript"></script>
-        <script src="app/directive/eaCookies.js" type="text/javascript"></script>        
-        -->
         
-        <script src="app/controller/eaDirController.js" type="text/javascript"></script>
-        <script src="app/controller/eaNaviController.js" type="text/javascript"></script>
-        <script src="app/app.js" type="text/javascript"></script>
+        <script src="app/service/eaConfigSrv.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/service/eaNavSrv.js?Release=1.0" type="text/javascript"></script>
+        
+        <script src="app/directive/eaLoadJson.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaNav.js?Release=1.0" type="text/javascript"></script>        
+        <script src="app/directive/eaAddHtml.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaPathLink.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaAccordeon.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaMaskCode.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaMaskHtml.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaMaskCss.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaMaskJs.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaMaskJson.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaMaskNo.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaImgBox.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaImg.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaVideo.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaFooter.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaProvideObj.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaDeTicket.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaRegTest.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaNews.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/directive/eaCookies.js" type="text/javascript"></script>        
+        
+        <script src="app/controller/eaDirController.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/controller/eaNaviController.js?Release=1.0" type="text/javascript"></script>
+        <script src="app/appDrt.js?Release=1.0" type="text/javascript"></script>
 
     </body>
 </html>

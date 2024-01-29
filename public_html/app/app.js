@@ -1,47 +1,38 @@
 'use strict';
 
-//var eaDir = angular.module("eaDir", ["ngRoute", "ngCookies"]);
-var eaDir = angular.module("eaDir", ["ngRoute"]);
+var eaDir = angular.module("eaDir", ["ngRoute", "ngCookies"]);
 
-var configSrv = eaDir.service('eaConfigSrv', [function($routeProvider){
-    this.eaNavConfig = eaNavConfig;      
-}]);
-configSrv.$inject = ['$scope'];
-
-var navSrv = eaDir.service('eaNavSrv', ['$q', function () {
+var navSrv = eaDir.service('eaNavSrv', [function () {
     var vm = this;
-    vm.getHtml4Id = getHtml4Id;
-    vm.getHtml = getHtml;
     vm.getCurrentLink = getCurrentLink;
     vm.computeSiteMaps = computeSiteMaps;
 }]);
 navSrv.$inject = ['$scope', '$rootScope'];
 
-eaDir.directive('eaLoadJson', ['$rootScope', '$http', eaLoadJson]); //.$inject = ['$scope'];
-eaDir.directive('eaNavi', ['$rootScope', '$http', '$location', '$compile', eaNavDynDirektive]); //.$inject = ['$scope'];
-eaDir.directive('eaAddHtml', ['$rootScope', '$compile', '$http', eaAddHtmlDirective]); //.$inject = ['$scope'];
-eaDir.directive('eaPathLink', ['$rootScope', '$location', 'eaNavSrv', eaPathLinkDirective]); //.$inject = ['$scope'];
-eaDir.directive('eaFooter', ['$rootScope', eaFooterDirective]); //.$inject = ['$scope'];
-eaDir.directive('eaImgBox', ['$compile', '$rootScope', eaImgBox]); //.$inject = ['$scope'];
-eaDir.directive('eaImg', ['$rootScope', eaImg]); //.$inject = ['$scope'];
-eaDir.directive('eaAccCoat', ['$rootScope', eaAccCoat]); //.$inject = ['$scope'];
-eaDir.directive('eaAccKey', ['$compile', '$rootScope', eaAccKey]); //.$inject = ['$scope'];
-eaDir.directive('eaMaskCode', ['$compile', eaMaskCode]); //.$inject = ['$scope'];
-eaDir.directive('eaMaskHtml', [eaMaskHtml]); //.$inject = ['$scope'];
-eaDir.directive('eaMaskCss', [eaMaskCss]); //.$inject = ['$scope'];
-eaDir.directive('eaMaskJs', [eaMaskJs]); //.$inject = ['$scope'];
-eaDir.directive('eaMaskJson', [eaMaskJson]); //.$inject = ['$scope'];
+eaDir.directive('eaLoadJson', ['$rootScope', '$http', eaLoadJson]); 
+eaDir.directive('eaNavi', ['$rootScope', '$http', '$location', '$compile', eaNavDynDirektive]); 
+eaDir.directive('eaAddHtml', ['$rootScope', '$compile', '$http', eaAddHtmlDirective]); 
+eaDir.directive('eaPathLink', ['$rootScope', '$location', 'eaNavSrv', eaPathLinkDirective]);
+eaDir.directive('eaFooter', ['$rootScope', eaFooterDirective]); 
+eaDir.directive('eaImgBox', ['$compile', '$rootScope', eaImgBox]);
+eaDir.directive('eaImg', ['$rootScope', eaImg]); 
+eaDir.directive('eaAccCoat', ['$rootScope', eaAccCoat]); 
+eaDir.directive('eaAccKey', ['$compile', '$rootScope', eaAccKey]);
+eaDir.directive('eaMaskCode', ['$compile', eaMaskCode]); 
+eaDir.directive('eaMaskHtml', [eaMaskHtml]); 
+eaDir.directive('eaMaskCss', [eaMaskCss]); 
+eaDir.directive('eaMaskJs', [eaMaskJs]); 
+eaDir.directive('eaMaskJson', [eaMaskJson]); 
 eaDir.directive('eaMaskNo', [eaMaskNo]); 
-eaDir.directive('eaVideo', ['$rootScope', eaVideo]); //.$inject = ['$scope'];
+eaDir.directive('eaVideo', ['$rootScope', eaVideo]); 
 eaDir.directive('eaRegTest', [eaRegTest]); 
 
 eaDir.directive('eaProvideObj', ['$rootScope', eaProvideObj]);
 eaDir.directive('eaDeTicket',  [eaDeTicket]);
 eaDir.directive('eaNews', ['$rootScope', eaNews]);
+eaDir.directive('eaCookies', ['$rootScope', '$cookies', '$compile', eaCookiesDirektive]);
 
-//eaDir.directive('eaCookies', ['$rootScope', '$cookies', '$compile', eaCookiesDirektive]).$inject = ['$scope'];
-
-// $compile, $rootScope
+// eaConfigSrv.js is in eaNavConfig.js
 eaDir.config(['$routeProvider', eaNavConfig]);
 
 eaDir.controller('eaDirController', ['$rootScope', '$scope', 'eaNavSrv', eaDirController])
