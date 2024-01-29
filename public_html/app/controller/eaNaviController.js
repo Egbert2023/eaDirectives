@@ -2,16 +2,55 @@
 
 var eaNaviController =  function($rootScope, $scope, $location, eaNavSrv) {
     
+    // get the url from naviList by href (loc)
+    var getUrlById = function(rootScope, loc, paramSrv){
+        //var naviList = paramSrv.getNaviList();
+        let naviList = rootScope.naviList;
+        let ret = "";
+
+        if(rootScope.isLoaded_naviList) {
+            ret = getEntry("", naviList, "subm", "href", '#!' + loc, "url");
+        } else {
+            rootScope.$watch(rootScope.isLoaded_naviList, function() {
+                ret = getEntry("", naviList, "subm", "href", '#!' + loc, "url");
+            });
+        }   
+        if(!ret.startsWith("app")) {
+            ret = rootScope.contentFolder + ret;
+        }    
+        return ret;
+    };
+    var getEntry = function(inRt, objArr, sub, key, val, ret) {
+        // https://stackoverflow.com/questions/2641347/short-circuit-array-foreach-like-calling-break
+        let rt = inRt;
+        let BreakException = {};
+        try{objArr.forEach(o => {
+            if(rt !== "") {throw BreakException;};
+            if(o[sub] !== undefined && o[sub].length>0) {
+                rt = getEntry(rt, o[sub], sub, key, val, ret);
+            };
+            if(o[key] === val) {
+                rt = o[ret];
+                throw BreakException;
+            }});
+        } catch(e){
+            if (e !== BreakException) throw e;
+        };
+        return rt;
+    };
+    
     // prepare navagation menu, site map and HTML call
     if($rootScope.isLoaded_naviList) {
         $scope.naviList = $rootScope.naviList;
         $scope.currLink = getCurrentLink($rootScope, $location.path());
-        $scope.url = $scope.navSrv.getHtml4Id($rootScope, $location.path(), eaNavSrv);
+        //$scope.url = $scope.navSrv.getUrlById($rootScope, $location.path(), eaNavSrv);
+        $scope.url = getUrlById($rootScope, $location.path(), eaNavSrv);
     } else {  $scope.naviList = {};};
     $rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
         $scope.naviList = $rootScope.naviList;
         $scope.currLink = getCurrentLink($rootScope, $location.path());
-        $scope.url = $scope.navSrv.getHtml4Id($rootScope, $location.path(), eaNavSrv);
+        //$scope.url = $scope.navSrv.getUrlById($rootScope, $location.path(), eaNavSrv);
+        $scope.url = getUrlById($rootScope, $location.path(), eaNavSrv);
     });
     
     // prepare the news list
@@ -35,7 +74,7 @@ var eaNaviController =  function($rootScope, $scope, $location, eaNavSrv) {
                     ngView.style.backgroundColor = bg;
                     ngView.style.backgroundImage = "";
                 } else {
-                    ngView.style.backgroundImage = bg;
+                    ngView.style.backgroundImage = "url(" + $rootScope.contentFolder + bg + ")";
                 }
             }
         }
@@ -60,6 +99,9 @@ var eaNaviController =  function($rootScope, $scope, $location, eaNavSrv) {
     $scope.htm = "";
     $scope.scope_eaNaviController = $scope.url;
 
+    //Test
+    //console.log("eaNaviController-$scope");
+    //console.log($scope);
+
     return false;
 };
-

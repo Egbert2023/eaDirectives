@@ -45,7 +45,8 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile) {
                 } catch(e){
                     if (e !== BreakException) throw e;
                 };
-                return rt;
+                let r = (rt.startsWith("app") || rt.startsWith($rootScope.contentFolder))? rt : $rootScope.contentFolder + rt;
+                return r;
             };
             
             // wait until the JSON file "naviList.json" has finished reading
@@ -55,7 +56,8 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile) {
                 html = $scope.addMenu("nav", $rootScope.naviList, html);
                 $scope.setMenuToTemplate('navbar-nav', html);                
             });
-            // Helper function
+            
+            // Helper functions
             $scope.getMenuItem = function(cls, naItem, addToogle) {
                 let cl = (cls + '-link ' + addToogle).trim();
                 let cc = (addToogle==='')? ' ng-click="toggleMenu()"':'';
@@ -101,12 +103,11 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile) {
             }; // addMenu()            
         },     // controller 
                 
-        link: function (scope, element, attr) {
-            
+        link: function (scope, element, attr) {            
             // manage Logo
             let navLogo = attr.navLogo;
             if(navLogo) {
-                navLogo = scope.$parent.contentFolder + "/" + navLogo;
+                navLogo = scope.$parent.contentFolder + navLogo;
             } else {
                 navLogo = '';
             }
@@ -127,4 +128,3 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile) {
         }            
      };
 };
-

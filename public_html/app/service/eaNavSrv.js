@@ -1,58 +1,5 @@
 'use strict';
 
-var getHtml4Id = function(rootScope, loc, paramSrv){
-    //var naviList = paramSrv.getNaviList();
-    let naviList = rootScope.naviList;
-    let ret = "";
-    
-    if(rootScope.isLoaded_naviList) {
-        ret = getEntry("", naviList, "subm", "href", '#!' + loc, "url");
-    } else {
-        rootScope.$watch(rootScope.isLoaded_naviList, function() {
-            ret = getEntry("", naviList, "subm", "href", '#!' + loc, "url");
-        });
-    }   
-    if(!ret.startsWith("app")) {
-        ret = rootScope.contentFolder + "/" + ret;
-    }        
-    return ret;
-};
-
-var getHtml = function($http, $compile, scope, ele, url, callback) {
-    let htm = "";
-    
-    $http({
-        url: url,
-        method: 'GET'
-    }).then( function(response, status, headers, config) {
-        htm = callback($http, $compile, scope, ele, response.data);
-    }),
-    function(errResp) {
-        console.log("Error in $http get.");
-    };
-    return htm;
-};
-
-// recursive call of the function getEntry() to generate HTML code for menu or sitemap
-var getEntry = function(inRt, objArr, sub, key, val, ret) {
-// https://stackoverflow.com/questions/2641347/short-circuit-array-foreach-like-calling-break
-    let rt = inRt;
-    let BreakException = {};
-    try{objArr.forEach(o => {
-        if(rt !== "") {throw BreakException;};
-        if(o[sub] !== undefined && o[sub].length>0) {
-            rt = getEntry(rt, o[sub], sub, key, val, ret);
-        };
-        if(o[key] === val) {
-            rt = o[ret];
-            throw BreakException;
-        }});
-    } catch(e){
-        if (e !== BreakException) throw e;
-    };
-    return rt;
-};
-
 var getCurrentLink = function(rootScope, path) {
     //var naviList = getNaviList();
     //var naviList = rootScope.naviList;
@@ -88,6 +35,7 @@ var getCurrentLink = function(rootScope, path) {
 // read the imgBoxList.json file and creat a sitemapimage.xml into a variable siteMapImageXML.
 // exported to console.log().
 // put this files to site root
+
 var computeSiteMaps = function(rootScope) {
 // Exampel of sitemap with images
 //    <?xml version="1.0" encoding="UTF-8"?>
@@ -110,7 +58,7 @@ var computeSiteMaps = function(rootScope) {
         ob.forEach(o => {
             let oImgKey = {};
             sm = sm + '\n\t<url>';
-            sm = sm + '\n\t\t<loc>' + baseDoman + "/" + o.url + '</loc>';
+            sm = sm + '\n\t\t<loc>' + baseDoman + "/" + ((o.url==="" || o.url.startsWith("app"))? o.url : rootScope.contentFolder + o.url) + '</loc>';
             sm = sm + '\n\t\t<changefreq>weekly</changefreq>';
             sm = sm + '\n\t</url>';
             oImgKey.imgKey = o.imgKey;
@@ -140,7 +88,8 @@ var computeSiteMaps = function(rootScope) {
                             si = si + '\n\t<url>';
                             si = si + '\n\t\t<loc>' + href + '</loc>';
                             si = si + '\n\t\t<image:image>';
-                            si = si + '\n\t\t\t<image:loc>' + baseDoman + "/" + o.imgList[i] +'</image:loc>';
+                            si = si + '\n\t\t\t<image:loc>' + baseDoman + "/" + 
+                                 rootScope.contentFolder +  o.imgList[i] +'</image:loc>';
                             if(o.imgBodyList[i]){
                                 si = si + '\n\t\t\t<image:title>' + o.imgBodyList[i] +'</image:title>';
                             };
@@ -154,10 +103,24 @@ var computeSiteMaps = function(rootScope) {
         return si;
     };
 
+    let addNewToNaviList = function(nw) {
+        nw.forEach(o => {
+            let oEntr = {};
+            oEntr.url = o.href;
+            oEntr.imgKey = o.imgKey;
+            oEntr.href = newUrl;
+            if(o.href !== "") {
+                naviList.push(oEntr);
+            }
+        });        
+    };
+
     let contentFolder = rootScope.contentFolder;
     
     let siteMaps = {"siteMap":"", "siteMapImg": ""};
     let naviList = rootScope.naviList;
+    let newUrl = rootScope.paramsApp.newUrl;
+    addNewToNaviList(rootScope.newsList);
     let imgBoxList = rootScope.imgBoxList;
     
     // get params from naviList
@@ -180,4 +143,4 @@ var computeSiteMaps = function(rootScope) {
     siteMaps.siteMap = sm;
     siteMaps.siteMapImg = smi;
     return siteMaps;
-};  // computeSiteMaps
+};
