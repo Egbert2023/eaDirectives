@@ -12,9 +12,15 @@
             <hr />
             
             <div class="d-grid gap-2 d-md-block">
-                <button type="button" class="btn btn-outline-success" ng-click="saveCurrentCookies('delete')">Alle abwählen</button>
-                <button type="button" class="btn btn-outline-success" ng-click="saveCurrentCookies('current')">Auswahl bestätigen</button>
-                <button type="button" class="btn btn-success" ng-click="saveCurrentCookies('all')">Alle Bestätigen</button>
+                <button type="button" 
+                        class="btn btn-outline-success" 
+                        ng-click="saveCurrentCookies('delete')">Deselect all</button>
+                <button type="button" 
+                        class="btn btn-outline-success" 
+                        ng-click="saveCurrentCookies('current')">Confirm selection</button>
+                <button type="button" 
+                        class="btn btn-success" 
+                        ng-click="saveCurrentCookies('all')">All confirm</button>
             </div>
             
             <div class="row" id="eaInnerCookiesLinks"></div>

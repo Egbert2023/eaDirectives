@@ -31,6 +31,7 @@ eaDir.directive('eaProvideObj', ['$rootScope', eaProvideObj]);
 eaDir.directive('eaDeTicket',  [eaDeTicket]);
 eaDir.directive('eaNews', ['$rootScope', eaNews]);
 eaDir.directive('eaCookies', ['$rootScope', '$cookies', '$compile', eaCookiesDirektive]);
+eaDir.directive('eaCookiesDemo', ['$rootScope', '$cookies', eaCookiesDemoDirektive]);
 
 // eaConfigSrv.js is in eaNavConfig.js
 eaDir.config(['$routeProvider', eaNavConfig]);

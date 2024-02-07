@@ -43,25 +43,25 @@ var eaNaviController =  function($rootScope, $scope, $location, eaNavSrv) {
     if($rootScope.isLoaded_naviList) {
         $scope.naviList = $rootScope.naviList;
         $scope.currLink = getCurrentLink($rootScope, $location.path());
-        //$scope.url = $scope.navSrv.getUrlById($rootScope, $location.path(), eaNavSrv);
         $scope.url = getUrlById($rootScope, $location.path(), eaNavSrv);
-    } else {  $scope.naviList = {};};
-    $rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
-        $scope.naviList = $rootScope.naviList;
-        $scope.currLink = getCurrentLink($rootScope, $location.path());
-        //$scope.url = $scope.navSrv.getUrlById($rootScope, $location.path(), eaNavSrv);
-        $scope.url = getUrlById($rootScope, $location.path(), eaNavSrv);
-    });
-    
+    } else {  
+        $scope.naviList === {};
+        $rootScope.$on("LoadJsonFile-naviList", function(evt, opt) {
+            $scope.naviList = $rootScope.naviList;
+            $scope.currLink = getCurrentLink($rootScope, $location.path());
+            $scope.url = getUrlById($rootScope, $location.path(), eaNavSrv);
+        });
+    };
     // prepare the news list
     //$scope.newsList = $scope.$parent.newsList;
     if($rootScope.isLoaded_newsList) {
         $scope.newsList = $rootScope.newsList;
-    } else {  $scope.newsList = {};};
-    $rootScope.$on("LoadJsonFile-newsList", function(evt, opt) {
-        $scope.newsList = $rootScope.newsList;
-    });
-
+    } else {  
+        $scope.newsList = {};
+        $rootScope.$on("LoadJsonFile-newsList", function(evt, opt) {
+            $scope.newsList = $rootScope.newsList;
+        });
+    };
     // prepare background pictures
     var setBg = function(objBg) {
         let pathArr = $location.path().split("/");
@@ -82,26 +82,24 @@ var eaNaviController =  function($rootScope, $scope, $location, eaNavSrv) {
     if($rootScope.isLoaded_objBg) {
         $scope.objBg = $rootScope.objBg;
         setBg($scope.objBg);
-    } else { $scope.objBg = {};}
-    $rootScope.$on("LoadJsonFile-objBg", function(evt, opt) {
-        $scope.objBg = $rootScope.objBg;
-        setBg($scope.objBg);
-    });
-    
+    } else { 
+        $scope.objBg = {};
+        $rootScope.$on("LoadJsonFile-objBg", function(evt, opt) {
+            $scope.objBg = $rootScope.objBg;
+            setBg($scope.objBg);
+        });
+    };
     // prepare the Image box handlingw
     if($rootScope.isLoaded_imgBoxList) {
         $scope.imgBoxList = $rootScope.imgBoxList;
-    } else { $scope.imgBoxList = {};}
-    $rootScope.$on("LoadJsonFile-imgBoxList", function(evt, opt) {
-        $scope.imgBoxList = $rootScope.imgBoxList;
-    });
-
+    } else { 
+        $scope.imgBoxList = {};
+        $rootScope.$on("LoadJsonFile-imgBoxList", function(evt, opt) {
+            $scope.imgBoxList = $rootScope.imgBoxList;
+        });
+    };
     $scope.htm = "";
     $scope.scope_eaNaviController = $scope.url;
-
-    //Test
-    //console.log("eaNaviController-$scope");
-    //console.log($scope);
 
     return false;
 };
