@@ -8,32 +8,33 @@
        "startFile" : "index.html",
        "vdoNo" : "Your browser can not play this video.",
        "cookies" : 
-            { "title": "Ihre Cookie Einstellungen",
-              "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
+            { "title": "Your cookie settings",
+              "body": "The cookies are used to ensure the functionality of the website. In addition, analysis cookies and marketing cookies are used to optimize the website for users and to provide personalized advertising.",
+              "cookiesDemo": false,
               "types": 
                     [{  "id": "ess", 
                         "def": "true", 
                         "dis": "true", 
                         "title": "Essentiell", 
-                        "body": "Essentielle Cookies sind für das Funktionieren der Webanwendung erforderlich."},
+                        "body": "Essential cookies are necessary for the web application to function."},
                     {   "id": "ana", 
                         "def": "false", 
                         "dis": "false", 
-                        "title": "Analyse", 
-                        "body": "Analyse Cookies dienen der Auswertung des Verhaltens der Nutzer. Mit ihrer Hilfe kann die Applikation anwenderfreundlicher gestaltet werden. So können z.B. Suchhilfen oder Querversweise in der Anwendung ergänzt werden, wenn Nutzer bestimmte Seiten überproportional häufig aufrufen."},
+                        "title": "Analysis", 
+                        "body": "Analysis cookies are used to evaluate user behavior. With their help, the application can be made more user-friendly. For example, search aids or cross-references can be added to the application if users access certain pages disproportionately often."},
                     {   "id": "ext", 
                         "def": "false",
                         "dis": "false", 
                         "title": "Marketing", 
-                        "body": "Externe Cookies entstehen, wenn man z.B. die Buttons von Facebook, Instagrm u.ä. einsetzt. Diese setzen Ihrerseits Cookies um personalisierte Werbung bereitzustellen." }
+                        "body": "External cookies are created when you use the buttons from Facebook, Instagram, etc. used. They set cookies to provide personalized advertising." }
                     ],
               "links": 
-                    [{  "title": "Impressum", 
+                    [{  "title": "imprint", 
                         "key": "imp", 
-                        "url": "content/aleks/html/impressum.html"},
-                     {  "title": "Datenschutzerklärung", 
+                        "url": "html/impressum.html"},
+                     {  "title": "Data protection", 
                         "key": "ds", 
-                        "url": "content/aleks/html/Datenschutz2.html"}
+                        "url": "html/Datenschutz2.html"}
                     ]
             }
     }

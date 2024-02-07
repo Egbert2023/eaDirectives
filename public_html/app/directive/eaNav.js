@@ -45,7 +45,7 @@ var eaNavDynDirektive = function($rootScope, $http, $location, $compile) {
                 } catch(e){
                     if (e !== BreakException) throw e;
                 };
-                let r = (rt.startsWith("app") || rt.startsWith($rootScope.contentFolder))? rt : $rootScope.contentFolder + rt;
+                let r = (rt === "" || rt.startsWith("app") || rt.startsWith($rootScope.contentFolder))? rt : $rootScope.contentFolder + rt;
                 return r;
             };
             

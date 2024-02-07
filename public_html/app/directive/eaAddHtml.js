@@ -41,7 +41,7 @@ var eaAddHtmlDirective = function ($rootScope, $compile, $http) {
                 return htm;
             };
 
-            if(url!=="") {         
+            if(url!=="" && url!==$rootScope.contentFolder) {         
                 scope.getHtml($http, $compile, scope, ele, url, callback);
             } else {
                 // event 'ReadUrlIsReady' is fired when url is ready.

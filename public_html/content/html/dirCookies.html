@@ -1,3 +1,217 @@
 <div>
-    eaCookies
+    <ea-acc-coat data-acc-title="eaCookies directtive">
+        <ea-acc-key data-title="Summary"
+                    data-txt-len="200">
+This directive is intended to support the use of cookies. The
+The use of cookies can be activated by calling up 'index.html'.
+The user is then asked to accept the corresponding cookies.
+The number and description of the cookie types is determined by the JSON file
+'paramsApp.json' set. In this example, 3 cookies are provided and
+can be used immediately. 
+<br />
+If cookies are activated, you can read using the functions provided
+and writing cookies the desired functionality with your own cookies
+will be realized.
+        </ea-acc-key>
+        <ea-acc-key data-title="Applay the functionality"
+                    data-txt-len="100">
+The following HTML code allows the use of cookies in the web application
+be activated in the 'index.html'.
+            <ea-mask-code ea-mask-html>
+&lt;ea-cookies data-cookies-used="true">&lt;/ea-cookies> 
+            </ea-mask-code>            
+The following functions are defined for use in your own application:
+            <ea-mask-code ea-mask-js>
+cookieGet(key); // key is the Name of the Cookie
+cookiePut(key, o); // key is the Name of the Cookie, o is the value (can be an object)
+cookieGetAll();
+cookieRemove(key); // key is the Name of the Cookie
+            </ea-mask-code>
+For this demo I created an additional directive 'eaCookiesDemo',
+which provides all the functions required for this demo. The call
+is done through an additional attribute in the 'eaCookies' directive.
+            <ea-mask-code ea-mask-html>
+    &lt;ea-cookies data-cookies-used="false" ea-cookies-demo="cookiesDemo">&lt;/ea-cookies>                
+            </ea-mask-code>
+This directive overrides the disabled cookie functionality (see 'index.html')
+and turns it on. The cookies written during the demo are protected by the
+Delete user again. The red button 'Turn off demo' is available for this purpose.
+Otherwise the cookies remain in the system.<br />
+The following JSON file contains the current version of the
+Cookie banners set. This can be changed in the demo and used as your own
+Cookies are stored.
+            <ea-mask-code ea-mask-json>
+{"entries": 
+    { "cookies" : 
+        { "title": "Ihre Cookie Einstellungen",
+          "body": "Die Cookies werden verwendet, um die Funktion der Webseite sicherzustellen. Darüberhinaus werden Analyse-Cookies und Marketing-Cookies benutzt, um die Webseite für Anwender zu optimieren und personalisierte Werbung bereitzustellen.",
+          "cookiesDemo": false,
+          "types": 
+                [{  "id": "ess", 
+                    "def": "true", 
+                    "dis": "true", 
+                    "title": "Essentiell", 
+                    "body": "Essentielle Cookies sind für das Funktionieren der Webanwendung erforderlich."},
+                {   "id": "ana", 
+                    "def": "false", 
+                    "dis": "false", 
+                    "title": "Analyse", 
+                    "body": "Analyse Cookies dienen der Auswertung des Verhaltens der Nutzer. Mit ihrer Hilfe kann die Applikation anwenderfreundlicher gestaltet werden. So können z.B. Suchhilfen oder Querversweise in der Anwendung ergänzt werden, wenn Nutzer bestimmte Seiten überproportional häufig aufrufen."},
+                {   "id": "ext", 
+                    "def": "false",
+                    "dis": "false", 
+                    "title": "Marketing", 
+                    "body": "Externe Cookies entstehen, wenn man z.B. die Buttons von Facebook, Instagrm u.ä. einsetzt. Diese setzen Ihrerseits Cookies um personalisierte Werbung bereitzustellen." }
+                ],
+          "links": 
+                [{  "title": "Impressum", 
+                    "key": "imp", 
+                    "url": "html/impressum.html"},
+                 {  "title": "Datenschutzerklärung", 
+                    "key": "ds", 
+                    "url": "html/Datenschutz2.html"}
+                ]
+        }
+    }
+}    
+            </ea-mask-code>
+        </ea-acc-key>
+        <ea-acc-key data-title="Demonstrate the functionality"
+                    data-txt-len="255">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+The demo can be started and ended using the following buttons.
+For illustration, the active cookies are green and the deactivated or
+deleted cookies highlighted in red.                
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <button type="button" 
+                        class="btn btn-outline-success" 
+                        ng-click="startCookies()">Turn on demo/Edit
+                    </button>
+                    <button type="button" 
+                        class="btn btn-outline-danger" 
+                        ng-click="removeAllCookies()">Turn off demo
+                    </button>                    
+                </div>       
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <a class="btn btn-outline-success" 
+                       style="float: right;"
+                       ng-href="#!/srv/cookies">
+                        Info for Cookies
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12" style="color: #ffffff">
+                    <div style="background-color: {{getCoolorByCtype('cookiesDemo')}}">
+        cookiesDemo
+                    </div>  
+                </div>      
+                <div class="col-lg-3 col-md-6 col-sm-12" style="color: #ffffff">
+                    <div style="background-color: {{getCoolorByCtype('ess')}}">
+        WebInfo_Cookie_ess
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12" style="color: #ffffff">
+                    <div style="background-color: {{getCoolorByCtype('ana')}}">                
+        WebInfo_Cookie_ana
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12" style="color: #ffffff">
+                    <div style="background-color: {{getCoolorByCtype('ext')}}">
+        WebInfo_Cookie_ext
+                    </div>
+                </div>     
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <br />                    
+This is an example of the further use of cookies for programmatic purposes.
+The texts displayed on the cookie banner page can be changed as desired
+These changes are then saved as an additional cookie 'cookiesParam'
+stored and used again when the program is started again.                    
+                    <p><strong>Probier es aus!</strong></p>
+The following test scenario is recommended for the demo:
+<ul>
+    <li>Press the “Turn on/Edit” button</li>
+    <li>In the window that appears, the cookies must be selected and confirmed</li>
+    <li>The offered description texts of the CookieBanner can be changed as desired</li>
+    <li>Press the “Save as cookie” button</li>
+    <li>Restart the web application. (Refresh in the browser e.g. with F5)</li>
+    <li>To check, press the “Turn on/Edit” button again</li>
+    <li>In addition, the cookies can now be controlled in the browser in the DevTool (see button “Info for Cookies”)</li>
+</ul>
+                    <div>
+When the application is restarted, all internal parameters are discarded and the
+Application is started again in its original state. However, the cookie is
+'cookiesDemo' = true will be the current setting for use
+of cookies (false) from the 'index.html' overrides the cookies
+read and used to change the display of the cookie banner.
+                    </div>
+                </div>
+                
+                <div class="col-12" ng-show="cookiesUsed===true">
+                    <hr />
+                    <p><strong>Cookie Banner</strong></p>   
+                    
+                    <div style="color: #ffffff">
+                        <div style="background-color: {{getCoolorByValue('cookiesParam')}}">
+        cookiesParam
+                        </div>
+                    </div>
+                    
+                    
+                    <label for="inputTitle" class="bold">Title:</label>
+                    <input id="inputTitle"
+                           type="text" 
+                           class="name-input form-control" 
+                           ng-change="updateCookies()" 
+                           ng-model="cookiesParam.title" />                                
+                    <label for="inputBody" class="bold">Body:</label>
+                    <input id="inputBody"
+                           type="text" 
+                           class="name-input form-control" 
+                           ng-change="updateCookies()" 
+                           ng-model="cookiesParam.body" />  
+                </div>
+
+                <div class="col-12" ng-repeat="type in cookiesParam.types"  ng-show="cookiesUsed===true">
+                    <p><strong>Types of cookies</strong></p>   
+                    
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6">
+                            <label for="inputType{{$index}}" class="bold">Type:</label>
+                            <input id="inputType{{$index}}"
+                                   type="text" 
+                                   readonly="readonly"
+                                   class="name-input form-control" 
+                                   ng-model="type.id" />                                
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6">
+                            <label for="inputTitle{{$index}}" class="bold">Title:</label>
+                            <input id="inputTitle{{$index}}"
+                                   type="text" 
+                                   class="name-input form-control" 
+                                   ng-change="updateCookies()" 
+                                   ng-model="type.title" />                                
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label for="inputBody{{$index}}" class="bold">Body:</label>
+                            <input id="inputBody{{$index}}"
+                                   type="text" 
+                                   maxlength="500" 
+                                   class="name-input form-control" 
+                                   ng-change="updateCookies()" 
+                                   ng-model="type.body" />                                
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" ng-show="cookiesUsed===true">
+                    <button type="button" 
+                        class="btn btn-outline-success" 
+                        ng-click="setCookiesParam()">Save as Cookie
+                    </button>
+
+                </div>
+            </div>            
+        </ea-acc-key>
+    </ea-acc-coat>
 </div>
